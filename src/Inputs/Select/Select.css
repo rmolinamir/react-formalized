@@ -1,0 +1,181 @@
+.Wrapper {
+    position: relative;
+    width: 100%;
+    cursor: pointer;
+}
+
+.Container {
+    display: table;
+    margin: 12px 0;
+    margin-bottom: -1px;
+    margin-right: -1px;
+    table-layout: fixed;
+    white-space: nowrap;
+    border: 1px solid #EBEBEB;
+    border-radius: 4px;
+    background-color: #FFF;
+    width: 100%;
+    height: 54px;
+    transition: box-shadow 200ms ease-in, border 0.2s ease;
+}
+
+.InputSelect {
+    display: table-cell;
+    pointer-events:none;
+    user-select: none;
+    padding-left: 10px;
+    width: 100%;
+    height: 52px;
+    vertical-align: middle;
+    padding-right: 12px;
+    appearance: none;
+    border-radius: 4px;
+    background: #FFF;
+    color: #484848;
+    border: 0 !important;
+    outline: 0 !important;
+}
+
+.ValidSelectLabel {
+    display: none;
+}
+
+.InputSelectType {
+    color: #686868;
+    margin: 6px 0;
+}
+
+.Container:hover,
+.Container:focus-within {
+    border: 1px solid rgba(255, 112, 67);
+}
+
+.Container:focus-within {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.Container:focus-within .Arrow {
+    margin-bottom: 0;
+    margin-top: 4px;
+    transform: rotate(-45deg);
+}
+
+.Container:hover .ArrowWrapper,
+.Container:focus-within .ArrowWrapper {
+    background-color: rgba(255, 112, 67);
+    border-left: 1px solid rgba(255, 112, 67);
+}
+
+@media (min-width: 1024px) {
+    .Container:hover .Arrow,
+    .Container:focus-within .Arrow {
+        border-top: 2px solid #FFF;
+        border-right: 2px solid #FFF;
+    }
+}
+
+.ArrowWrapper {
+    display: table-cell;
+    box-sizing: border-box;
+    border-left: 1px solid rgba(26, 26, 29, 0.08);
+    cursor: pointer;
+    vertical-align: middle;
+    transition: all 0.2s ease;
+    width: 50px;
+}
+
+.ArrowContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    padding: 6px;
+    margin: 0 auto;
+}
+
+.Arrow {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 4px;
+    border-top: 2px solid #484848;
+    border-right: 2px solid #484848;
+    margin-bottom: 4px;
+    transform: rotate(135deg);
+    transition: all ease 0.25s;
+}
+
+.List {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    background-color: #FFF;
+    color: #484848;
+    box-shadow: 0px 3px 5px rgb(229,229,229);
+    margin: 0 auto;
+    padding: 0;
+    top: 100%;
+    left: 0;
+    overflow-y: auto;
+    z-index: 5;
+    list-style-type: none;
+    /* opacity: 0; */
+    transition: all ease 200ms;
+}
+
+.Open {
+    border: 1px solid rgba(255, 112, 67);
+}
+
+.List li {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    transform: all ease 200ms;
+}
+
+.List button {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 18px 24px; 
+    margin: 0;
+    text-align: left;
+
+}
+
+.List li:hover {
+    color: #FF7043;
+}
+
+input.InputSelect::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #999; 
+}
+
+input.InputSelect::-moz-placeholder { /* Firefox 19+ */
+    color: #999; 
+}
+
+input.InputSelect:-ms-input-placeholder { /* IE 10+ */
+    color: #999; 
+}
+
+input.InputSelect:-moz-placeholder { /* Firefox 18- */
+    color: #999; 
+}
+
+input:disabled.InputSelect {
+    color: #484848 !important;
+    opacity: 1 !important;
+}
+
+@media only screen and (max-width: 744px)  {
+    input:disabled.InputSelect {
+        color: #282828 !important;
+        font-weight: 600;
+    }
+}

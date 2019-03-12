@@ -1,0 +1,167 @@
+.Input {
+  width: 100%;
+  padding: 10px 0;
+  margin: 15px 0;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.Label {
+  text-transform: uppercase;
+  color: #a4a4a4; 
+  font-weight: 600;
+  font-size: 13px;
+  font-weight: bold;
+  position: absolute;
+  pointer-events: none;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: 150ms ease-in-out all; 
+}
+
+.TextAreaLabel {
+  top: 25px;
+  transform: translateY(-15px);
+}
+
+.Input input:focus ~ .Label, .Input input:hover ~ .Label, .ActiveLabel {
+  top: 18px;
+  left: 6px;
+  font-size: 9px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+/* 
+-----------------
+------INPUT------
+-----------------
+*/
+
+.InputElement {
+  display: block;
+  width: 100%;
+  height: 48px;
+  font: inherit;
+  font-size: 17px;
+  border: 1px solid #EBEBEB;
+  border-radius: 5px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #FAFBFC;
+  padding: 10px;
+  padding-bottom: 0;
+  box-sizing: border-box;
+  transition: all 250ms ease; 
+}
+
+.InputElement:hover, .InputElement:focus {
+  background-color: #FFF;
+}
+
+.TextAreaElement {
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 125px;
+}
+
+input.InputElement::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: transparent;
+}
+
+input.InputElement::-moz-placeholder { /* Firefox 19+ */
+  color: transparent;
+}
+
+input.InputElement:-ms-input-placeholder { /* IE 10+ */
+  color: transparent;
+}
+
+input.InputElement:-moz-placeholder { /* Firefox 18- */
+  color: transparent;
+}
+
+/* 
+------------------
+------BORDER------
+------------------
+*/
+
+.InputElement:focus {
+  outline: none;
+  border-color: #1ea3cc;
+}
+
+.Bar  { 
+  position: relative; 
+  display: block; 
+  width: 100%; 
+}
+
+.Bar:before, .Bar:after   {
+  content: '';
+  height: 1.5px;
+  width: 0;
+  bottom: 0px;
+  position: absolute;
+  background: #1ea3cc;
+  transition: 0.2s ease all;
+}
+.Bar:before {
+  left: 50%;
+}
+.Bar:after {
+  right: 50%; 
+}
+
+.Input input:focus ~ .Bar:before, .Input input:focus ~ .Bar:after {
+  width: calc(50% - 2.5px);
+}
+
+/* 
+--------------------
+------VALIDITY------
+--------------------
+*/
+
+.Valid ~ .Bar::after, .Valid ~ .Bar::before {
+  background: #28a745;
+}
+
+.Invalid ~ .Bar::after, .Invalid ~ .Bar::before {
+  background: #dc3545;
+}
+
+.Feedback {
+  width: 100%;
+  margin-top: .25rem;
+  font-size: 80%;
+  color: #dc3545;
+  position: absolute;
+  left: 0;
+  text-align: right;
+}
+
+.Feedback::first-letter {
+  text-transform: capitalize;
+}
+
+.Invalid {
+  border-color: #dc3545 !important;
+}
+
+.Valid {
+  border-color: #28a745 !important;
+}
+
+.InvalidFeedback {
+  color: #dc3545;
+}
+
+.ValidFeedback {
+  color: #28a745;
+}
