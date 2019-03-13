@@ -1,44 +1,33 @@
 import * as React from 'react'
+// JSX
+import Icon from '../../Icon/Icon'
 
-const defaultConfig = {
-    type: 'text',
-    placeholder: 'Enter text',
-    autoComplete: 'off',
-    autoCorrect:"off",
-    autoCapitalize:"off",
-    spellCheck:"false"
+const defaultConfig: IInputConfig = {
+  autoComplete: 'off',
+  autoCorrect: 'off',
+  autoCapitalize: 'off',
+  spellCheck: false
 }
 
-const text = (props: any) => {
-  // console.log('text', props)
+const text = (props: IInputElementProps): JSX.Element => {
   return (
-    <input
-      type='text'
-    // autoCapitalize
-    // autoComplete
-    // autoCorrect
-    // autoFocus
-    // autoSave
-    // disabled
-    // form
-    // list
-    // name
-    // readOnly
-    // required
-    // tabIndex
-    // type
-    // defaultValue
-    // value
-      className={props.className} 
-      // style={props.elementConfig.disabled ? { cursor: 'not-allowed' } : null}
-      {...{ 
-        ...defaultConfig, 
-        ...props.elementConfig 
-      }} 
-      required={props.required}
-      valid={props.valid.toString()}
-      value={props.value}
-      onChange={props.onChange} />
+    <React.Fragment>
+      <input
+        type='text'
+        className={props.className} 
+        {...{ 
+          ...defaultConfig, 
+          ...props.elementConfig 
+        }} 
+        required={props.required}
+        value={props.value}
+        onChange={props.onChangeHandler} />
+        {props.shouldValidate ?
+          <Icon
+            valid={props.valid || false}
+            touched={props.touched || false} />
+          : null}
+    </React.Fragment>
   )
 }
 

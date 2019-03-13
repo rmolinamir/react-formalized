@@ -3,7 +3,10 @@ import { checkValidity } from './checkValidity'
 // CSS
 import classes from './Input.module.css'
 // JSX
-import Text from './Inputs/Text/Text'
+import Text from './Text/Text'
+// import Email from './Email/Email'
+import Password from './Password/Password'
+import Textarea from './Textarea/Textarea'
 
 interface IReducerAction extends IInputState {
   handler: EOnChangeHandler
@@ -43,22 +46,20 @@ export const Input = (props: IInputProps) => {
   const initialState: IInputState = {
     value: props.value || '',
     validationMessage: '',
-    valueType: props.valueType || props.placeholder ? props.placeholder.toLowerCase() : 'text',
-    placeholder: props.placeholder || 'Text',
+    valueType: props.valueType || props.placeholder ? props.placeholder.toLowerCase() : undefined,
+    placeholder: props.placeholder,
     validation: {
       required: props.required || true,
+      email: props.type === 'email' ? true : false, 
       ...props.validation
     },
     required: props.required || true,
-    shouldValidate: props.shouldValidate || true,
+    shouldValidate: props.validation ? true : false,
     valid: props.valid || false,
     touched: props.touched || false
   }
   
-  const [state, dispatch] = React.useReducer(reducer, initialState);
-
-  console.log('props', props)
-  console.log('state', state)
+  const [state, dispatch] = React.useReducer(reducer, initialState)
 
   let validationMessage:JSX.Element | null = null
 
@@ -70,10 +71,10 @@ export const Input = (props: IInputProps) => {
     validationMessage = <p className={[classes.Feedback, classes.InvalidFeedback].join(' ')}>{state.validationMessage}</p>
   } else if (state.valid && state.shouldValidate && state.touched) {
     inputClasses.push(classes.Valid)
-    validationMessage = <p className={[classes.Feedback, classes.ValidFeedback].join(' ')}>Looks good!</p>
+    validationMessage = null
   }
 
-  if (state.value && state.value !== '') {
+  if (state.touched) {
     labelClasses.push(classes.ActiveLabel)
   }
   
@@ -106,18 +107,47 @@ export const Input = (props: IInputProps) => {
     }
   }
 
+  const inputProps: IInputElementProps = {
+    className: inputClasses.join(' '),
+    elementConfig: props.elementConfig,
+    required: props.required || true,
+    value: state.value,
+    valid: state.valid,
+    touched: state.touched,
+    shouldValidate: state.shouldValidate,
+    onChangeHandler: onChangeHandler
+    // style={props.elementConfig.disabled ? { cursor: 'not-allowed' } : null}
+  }
+
+  let element: JSX.Element
+  if (props.type) {
+    const type: string = props.type.toLowerCase()
+    switch (type) {
+      case 'text' || 'email': 
+        element = <Text {...inputProps} />
+        break
+      case 'password':
+        element = <Password {...inputProps} />
+        break
+      case 'textarea':
+        labelClasses.push(classes.TextAreaLabel)
+        element = <Textarea {...inputProps} />
+        break
+      default:
+        console.warn('No prop types match your query, this results in a fallback to the Text input.')
+        element = <Text {...inputProps} />
+        break
+    }
+  } else {
+    element = <Text {...inputProps} />
+  }
+
   const inputElement = (
     <React.Suspense fallback={null}>
-      <Text 
-        className={inputClasses.join(' ')} 
-        // style={props.elementConfig.disabled ? { cursor: 'not-allowed' } : null}
-        elementConfig={props.elementConfig} 
-        value={props.value}
-        required={props.required || true}
-        valid={props.valid || false}
-        onChange={onChangeHandler} />
+      {element}
     </React.Suspense>
   )
+
   return (
       <div style={props.style}
           className={classes.Input}>

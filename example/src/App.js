@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Input } from 'react-png-input'
+import { Input, Slider } from 'react-png-input'
 
 export default class App extends Component {
   render () {
@@ -19,8 +19,25 @@ export default class App extends Component {
             maxLength: 10
           }}
           placeholder='Username' />
-        {/* <Select />
-        <Slider /> */}
+        <Input
+          type='email'
+          validation={{
+            required: true,
+            minLength: 3
+          }}
+          placeholder='Email' />
+        <Input
+          type='password'
+          validation={{
+            required: true,
+            minLength: 4,
+            maxLength: 10
+          }}
+          placeholder='Password' />
+        <Input
+          type='textarea'
+          placeholder='Username' />
+        <Slider />
       </div>
     )
   }

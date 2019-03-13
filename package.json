@@ -21,7 +21,9 @@
     "predeploy": "cd example && npm install && npm run build",
     "deploy": "gh-pages -d example/build"
   },
-  "dependencies": {},
+  "dependencies": {
+    "react-svg-library": "^1.1.0"
+  },
   "peerDependencies": {
     "prop-types": "^15.5.4",
     "react": "^16.8.0",

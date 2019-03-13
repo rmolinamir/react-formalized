@@ -30,6 +30,7 @@ export const checkValidity = (value: string | number | string[] | undefined, rul
           if (!validation.status) { return validation }
         }
         if (rules.email) {
+          validation.message = `Please enter a valid email address.`
           validation.status = value.includes('@') && value.includes('.')
           if (!validation.status) { return validation }
         }

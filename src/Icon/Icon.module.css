@@ -1,0 +1,51 @@
+.Icon {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  right: 12px;
+}
+
+.Valid {
+  animation: valid-in ease forwards 300ms;
+}
+
+.Invalid {
+  animation: invalid-in ease forwards 300ms;
+}
+
+.FadeOut {
+  animation: fade-out ease forwards 300ms;
+}
+
+@keyframes valid-in {
+  0% {
+    opacity: 0;
+    transform: translate(10px, -50%)
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, -50%)
+  }
+}
+
+@keyframes invalid-in {
+  0% {
+    opacity: 0;
+    transform: translate(10px, -50%)
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, -50%)
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+    transform: translate(0, -50%)
+  }
+  100% {
+    opacity: 0;
+    transform: translate(10px, -50%)
+  }
+}

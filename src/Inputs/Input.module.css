@@ -1,10 +1,23 @@
+/* 
+-------------------
+------WRAPPER------
+-------------------
+*/
+
 .Input {
+  position: relative;
   width: 100%;
   padding: 10px 0;
-  margin: 15px 0;
+  margin: 8px 0;
+  height: 68px;
   box-sizing: border-box;
-  position: relative;
 }
+
+/* 
+-----------------
+------LABEL------
+-----------------
+*/
 
 .Label {
   text-transform: uppercase;
@@ -20,13 +33,25 @@
   transition: 150ms ease-in-out all; 
 }
 
-.TextAreaLabel {
-  top: 25px;
-  transform: translateY(-15px);
-}
-
 .Input input:focus ~ .Label, .Input input:hover ~ .Label, .ActiveLabel {
   top: 18px;
+  left: 6px;
+  font-size: 9px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+/* TextArea */
+
+.TextAreaLabel {
+  top: 24px;
+  transform: translateY(0px);
+}
+
+.Input textarea:focus ~ .TextAreaLabel, .Input textarea:hover ~ .TextAreaLabel, .TextAreaLabel.ActiveLabel {
+  top: 14px;
   left: 6px;
   font-size: 9px;
   white-space: nowrap;
@@ -48,25 +73,25 @@
   font: inherit;
   font-size: 17px;
   border: 1px solid #EBEBEB;
-  border-radius: 5px;
+  border-radius: 4px;
+  background-color: #FAFBFC;
+  padding: 12px 10px 36px;
+  padding-bottom: 0;
+  box-sizing: border-box;
+  transition: all 250ms ease;
+  /* Disabling iOS and other native CSS. */
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background-color: #FAFBFC;
-  padding: 10px;
-  padding-bottom: 0;
-  box-sizing: border-box;
-  transition: all 250ms ease; 
 }
 
 .InputElement:hover, .InputElement:focus {
-  background-color: #FFF;
+  background-color: inherit;
 }
 
-.TextAreaElement {
-  min-width: 100%;
-  max-width: 100%;
-  min-height: 125px;
+.InputElement:focus {
+  outline: none;
+  border-color: #1ea3cc;
 }
 
 input.InputElement::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -91,11 +116,6 @@ input.InputElement:-moz-placeholder { /* Firefox 18- */
 ------------------
 */
 
-.InputElement:focus {
-  outline: none;
-  border-color: #1ea3cc;
-}
-
 .Bar  { 
   position: relative; 
   display: block; 
@@ -106,7 +126,7 @@ input.InputElement:-moz-placeholder { /* Firefox 18- */
   content: '';
   height: 1.5px;
   width: 0;
-  bottom: 0px;
+  bottom: -1px;
   position: absolute;
   background: #1ea3cc;
   transition: 0.2s ease all;
@@ -119,7 +139,18 @@ input.InputElement:-moz-placeholder { /* Firefox 18- */
 }
 
 .Input input:focus ~ .Bar:before, .Input input:focus ~ .Bar:after {
-  width: calc(50% - 2.5px);
+  width: calc(50% - 4px);
+}
+
+/* TextArea */
+
+.Input textarea ~ .Bar:before, .Input textarea ~ .Bar:after   {
+  content: '';
+  bottom: -0.5px;
+}
+
+.Input textarea:focus ~ .Bar:before, .Input textarea:focus ~ .Bar:after {
+  width: calc(50% - 4px);
 }
 
 /* 
@@ -137,12 +168,11 @@ input.InputElement:-moz-placeholder { /* Firefox 18- */
 }
 
 .Feedback {
-  width: 100%;
   margin-top: .25rem;
   font-size: 80%;
   color: #dc3545;
   position: absolute;
-  left: 0;
+  right: 0;
   text-align: right;
 }
 

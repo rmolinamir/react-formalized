@@ -1,55 +1,65 @@
 import * as React from 'react'
+import * as ReactDOM from 'react-dom'
 // CSS
-import classes from './Text.module.css'
+import classes from './Password.module.css'
+// JSX
+import { Icon as LibraryIcon } from 'react-svg-library'
+import Icon from '../../Icon/Icon'
 
-export const Input = (props: any) => {
-  let inputElement
-  let validationMessage = null
-  const inputClasses = [classes.InputElement]
-  const labelClasses = [classes.Label]
-  if (props.invalid && props.shouldValidate && props.touched) {
-      inputClasses.push(classes.Invalid)
-      validationMessage = <p className={classes.InvalidFeedback}>Please enter a valid {props.valueType}.</p>
-  } else if (!props.invalid && props.shouldValidate && props.touched) {
-      inputClasses.push(classes.Valid)
-      validationMessage = <p className={classes.ValidFeedback}>Looks good!</p>
+const defaultConfig: IInputConfig = {
+  autoComplete: 'off',
+  autoCorrect: 'off',
+  autoCapitalize: 'off',
+}
+
+const password = (props: IInputElementProps): JSX.Element => {
+  const [bShowPassword, setShowPassword] = React.useState(false)
+
+  const togglePassword = () => {
+    setShowPassword(!bShowPassword)
   }
-  switch (props.elementType) {
-      case('input' || 'text' || 'email' || 'number'):
-          inputElement = <input 
-              className={inputClasses.join(' ')} 
-              // style={props.elementConfig.disabled ? { cursor: 'not-allowed' } : null}
-              {...props.elementConfig} 
-              required
-              value={props.value}
-              onChange={props.changed}
-              />
-          break
-      case('textarea'):
-          labelClasses.push(classes.TextAreaLabel)
-          inputClasses.push(classes.TextAreaElement)
-          inputElement = <textarea 
-              className={inputClasses.join(' ')} 
-              // style={props.elementConfig.disabled ? { cursor: 'not-allowed' } : null}
-              {...props.elementConfig} 
-              required
-              value={props.value}
-              onChange={props.changed}
-              />
-          break
-  }
+
+  const passwordIcon = (
+    <LibraryIcon icon={bShowPassword ? 'show' : 'hide'} />
+  )
+
+  const utilContainerEl = document.getElementById('react-png-inputs-util-container')
+
+  const passwordHandler = (
+    <div className={[classes.Container, bShowPassword ? classes.Show : classes.Hide].join(' ')}>
+      <button type="button"
+        onClick={togglePassword}
+        className={classes.Button} 
+        aria-busy="false">{passwordIcon}<span style={{ marginLeft: '.5ch' }}>{bShowPassword ? 'Hide password' : 'Show password'}</span></button>
+    </div>
+  )
+
   return (
-      <div style={props.style}
-          className={classes.Input}>
-          {inputElement}
-          {validationMessage}
-          {props.elementType === 'select' ? 
-              null :
-              <>
-                  <span className={classes.Bar}></span>
-                  <label className={labelClasses.join(' ')}>{props.elementConfig.placeholder}</label>
-              </>
-          }
-      </div>
+    <React.Fragment>
+      <input
+        type={bShowPassword ? 'text' : 'password'}
+        className={props.className} 
+        {...{ 
+          ...defaultConfig, 
+          ...props.elementConfig 
+        }} 
+        required={props.required}
+        value={props.value}
+        onChange={props.onChangeHandler} />
+        {props.shouldValidate ?
+          <Icon
+            valid={props.valid || false}
+            touched={props.touched || false} />
+          : null}
+        {utilContainerEl ? 
+          ReactDOM.createPortal(passwordHandler,utilContainerEl) 
+          : (
+            <div className={classes.Wrapper}>
+              {passwordHandler}
+            </div>
+          )}
+    </React.Fragment>
   )
 }
+
+export default password

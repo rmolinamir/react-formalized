@@ -16,6 +16,11 @@ declare module '*.svg' {
   export { svgComponent as ReactComponent }
 }
 
+declare module 'react-svg-library' {
+  export const Icon: React.ReactType
+  export const Underline: React.ReactType
+}
+
 interface IInputValidation {
   required?: boolean
   email?: boolean
@@ -27,13 +32,14 @@ interface IInputValidation {
 interface IInputState {
   value: any
   validationMessage: string
+  className?: string
   valueType?: string
   validation?: IInputValidation
   style?: React.CSSProperties
   placeholder?: string
   elementConfig?: IInputConfig
   required?: boolean
-  valid?: boolean
+  valid: boolean
   shouldValidate?: boolean
   touched?: boolean
 }
@@ -42,23 +48,33 @@ interface IInputProps extends IInputState {
   type: string
   placeholder: string
   valueType: string
-  onChange: (value: any, valid: boolean) => {}
+  onChange: (value: any, valid: boolean) => void
 }
 
 interface IInputConfig {
-  autoCapitalize: string | undefined
-  autoComplete: string | undefined
-  autoCorrect: string | undefined
-  autoFocus: boolean | undefined
-  autoSave: string | undefined
-  disabled: boolean | undefined
-  form: string | undefined
-  list: string | undefined
-  name: string | undefined
-  readOnly: boolean | undefined
-  required: boolean | undefined
-  tabIndex: number | undefined
-  type: string | undefined
-  defaultValue: string | string[] | undefined
-  value: string | number | string[] | undefined
+  autoCapitalize?: string
+  autoComplete?: string
+  autoCorrect?: string
+  autoFocus?: boolean
+  autoSave?: string
+  disabled?: boolean
+  form?: string
+  list?: string
+  name?: string
+  readOnly?: boolean
+  tabIndex?: number
+  type?: string
+  defaultValue?: string | string[]
+  /**
+   * Global HTML Props
+   */
+  spellCheck?: boolean
+}
+
+interface IInputElementProps extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement>, HTMLInputElement | HTMLTextAreaElement> {
+  elementConfig?: IInputConfig
+  valid?: boolean
+  shouldValidate?: boolean
+  touched?: boolean
+  onChangeHandler?: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
 }

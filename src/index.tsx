@@ -1,4 +1,4 @@
-export { Input } from './Input'
+export { Input } from './Inputs/Input'
 
 // /**
 //  * @function Select
@@ -8,4 +8,4 @@ export { Input } from './Input'
 // /**
 //  * @function Slider
 //  */
-// export { Slider } from './Inputs/Slider/Slider'
+export { Slider } from './Inputs/Slider/Slider'
