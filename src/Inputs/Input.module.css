@@ -4,13 +4,21 @@
 -------------------
 */
 
-.Input {
+.Wrapper {
   position: relative;
   width: 100%;
-  padding: 8px 0;
-  margin: 8px 0;
-  min-height: 68px;
+  /* padding: 8px 0;
+  margin: 8px 0; */
+  max-height: 500px;
+  transition: max-height 300ms ease-in;
   box-sizing: border-box;
+  /* Fieldset */
+  border: none;
+}
+
+.Aesthetics {
+  margin: 0;
+  padding: 0;
 }
 
 .TextAreaInput {
@@ -38,8 +46,8 @@
   transition: 150ms ease-in-out all; 
 }
 
-.Input input:focus ~ .Label, .Input input:hover ~ .Label, .ActiveLabel {
-  top: 18px;
+.Wrapper input:focus ~ .Label, .Wrapper input:hover ~ .Label, .ActiveLabel {
+  top: 9px;
   left: 6px;
   font-size: 9px;
   white-space: nowrap;
@@ -55,8 +63,8 @@
   transform: translateY(0px);
 }
 
-.Input textarea:focus ~ .TextAreaLabel, .Input textarea:hover ~ .TextAreaLabel, .TextAreaLabel.ActiveLabel {
-  top: 14px;
+.Wrapper textarea:focus ~ .TextAreaLabel, .Wrapper textarea:hover ~ .TextAreaLabel, .TextAreaLabel.ActiveLabel {
+  top: 4px;
   left: 6px;
   font-size: 9px;
   white-space: nowrap;
@@ -70,6 +78,11 @@
 ------INPUT------
 -----------------
 */
+
+.Container {
+  position: relative;
+  width: 100%;
+}
 
 .InputElement {
   display: block;
@@ -115,6 +128,20 @@ input.InputElement:-moz-placeholder { /* Firefox 18- */
   color: transparent;
 }
 
+/* Firefox */
+
+.InputElement:invalid {
+  box-shadow: none;
+}
+
+.InputElement:-moz-submit-invalid {
+  box-shadow: none;
+}
+
+.InputElement:-moz-ui-invalid {
+  box-shadow:none;
+}
+
 /* 
 ------------------
 ------BORDER------
@@ -143,18 +170,18 @@ input.InputElement:-moz-placeholder { /* Firefox 18- */
   right: 50%; 
 }
 
-.Input input:focus ~ .Bar:before, .Input input:focus ~ .Bar:after {
+.Wrapper input:focus ~ .Bar:before, .Wrapper input:focus ~ .Bar:after {
   width: calc(50% - 4px);
 }
 
 /* TextArea */
 
-.Input textarea ~ .Bar:before, .Input textarea ~ .Bar:after   {
+.Wrapper textarea ~ .Bar:before, .Wrapper textarea ~ .Bar:after   {
   content: '';
   bottom: -0.5px;
 }
 
-.Input textarea:focus ~ .Bar:before, .Input textarea:focus ~ .Bar:after {
+.Wrapper textarea:focus ~ .Bar:before, .Wrapper textarea:focus ~ .Bar:after {
   width: calc(50% - 4px);
 }
 
@@ -164,27 +191,7 @@ input.InputElement:-moz-placeholder { /* Firefox 18- */
 --------------------
 */
 
-.Valid ~ .Bar::after, .Valid ~ .Bar::before {
-  background: #28a745;
-}
-
-.Invalid ~ .Bar::after, .Invalid ~ .Bar::before {
-  background: #dc3545;
-}
-
-.Feedback {
-  margin-top: .25rem;
-  font-size: 80%;
-  color: #dc3545;
-  position: absolute;
-  right: 0;
-  text-align: right;
-}
-
-.Feedback::first-letter {
-  text-transform: capitalize;
-}
-
+/* Input borders */
 .Invalid {
   border-color: #dc3545 !important;
 }
@@ -193,10 +200,61 @@ input.InputElement:-moz-placeholder { /* Firefox 18- */
   border-color: #28a745 !important;
 }
 
-.InvalidFeedback {
+/* Bar */
+.Valid ~ .Bar::after, .Valid ~ .Bar::before {
+  background: #28a745;
+}
+
+.Invalid ~ .Bar::after, .Invalid ~ .Bar::before {
+  background: #dc3545;
+}
+
+/* Feedback */
+.Feedback {
+  display: block;
+  float: right;
+  font-size: 0.8em;
   color: #dc3545;
+  text-align: right;
+  max-height: 0px;
+  transition: all 300ms ease;
+  transform-origin: left top;
+}
+
+.Feedback::first-letter {
+  text-transform: capitalize;
+}
+
+.InvalidFeedback {
+  margin: 3px 0;
+  color: #dc3545;
+  animation: slide-in ease forwards 300ms;
+  max-height: 1000px;
 }
 
 .ValidFeedback {
-  color: #28a745;
+  margin: 0;
+  animation: slide-out ease forwards 300ms;
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translateY(-4px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-out {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-4px);
+    opacity: 0;
+  }
 }

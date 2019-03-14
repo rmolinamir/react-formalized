@@ -51,13 +51,15 @@ const password = (props: IInputElementProps): JSX.Element => {
             valid={props.valid || false}
             touched={props.touched || false} />
           : null}
-        {utilContainerEl ? 
-          ReactDOM.createPortal(passwordHandler,utilContainerEl) 
-          : (
-            <div className={classes.Wrapper}>
-              {passwordHandler}
-            </div>
-          )}
+        {props.passwordHandler || props.passwordHandlerClassName ? 
+          utilContainerEl ? 
+            ReactDOM.createPortal(passwordHandler,utilContainerEl) 
+            : (
+              <div className={classes.Wrapper}>
+                {passwordHandler}
+              </div>
+            )
+          : null}
     </React.Fragment>
   )
 }

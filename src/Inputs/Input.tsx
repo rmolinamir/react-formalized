@@ -49,7 +49,7 @@ export const Input = (props: IInputProps) => {
     valueType: props.valueType || props.placeholder ? props.placeholder.toLowerCase() : undefined,
     placeholder: props.placeholder,
     validation: {
-      required: props.required || true,
+      required: props.required || false,
       email: props.type === 'email' ? true : false, 
       ...props.validation
     },
@@ -61,22 +61,23 @@ export const Input = (props: IInputProps) => {
   
   const [state, dispatch] = React.useReducer(reducer, initialState)
 
-  let validationMessage:JSX.Element | null = null
-
-  const labelClasses: string[] = [classes.Label]
+  const wrapperClasses: string[] = [props.className || classes.Aesthetics, classes.Wrapper]
   const inputClasses: string[] = [classes.InputElement]
-  const wrapperClasses: string[] = [classes.Input]
+  const labelClasses: string[] = [classes.Label]
+  const validationMessageClasses:string[] = [classes.Feedback]
 
   if (!state.valid && state.shouldValidate && state.touched) {
     inputClasses.push(classes.Invalid)
-    validationMessage = <p className={[classes.Feedback, classes.InvalidFeedback].join(' ')}>{state.validationMessage}</p>
+    validationMessageClasses.push(classes.InvalidFeedback)
   } else if (state.valid && state.shouldValidate && state.touched) {
     inputClasses.push(classes.Valid)
-    validationMessage = null
+    validationMessageClasses.push(classes.ValidFeedback)
   }
 
   if (state.touched) {
     labelClasses.push(classes.ActiveLabel)
+  } else {
+    validationMessageClasses.push(classes.ValidFeedback)
   }
   
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -90,7 +91,7 @@ export const Input = (props: IInputProps) => {
     const validation = checkValidity(value, state.validation, state.valueType || '')
     const action: IReducerAction = {
       valid: validation.status,
-      validationMessage: validation.message,
+      validationMessage: validation.message || state.validationMessage,
       handler: EOnChangeHandler.STATE,
       value: value,
       touched: value && value !== '' ? true : false
@@ -128,7 +129,12 @@ export const Input = (props: IInputProps) => {
         element = <Text {...inputProps} />
         break
       case 'password':
-        element = <Password {...inputProps} />
+        element = (
+          <Password
+            passwordHandler={props.passwordHandler}
+            passwordHandlerClassName={props.passwordHandlerClassName}
+            {...inputProps} />
+        )
         break
       case 'textarea':
         wrapperClasses.push(classes.TextAreaInput)
@@ -151,12 +157,17 @@ export const Input = (props: IInputProps) => {
   )
 
   return (
-      <div style={props.style}
+      <fieldset style={props.style}
           className={wrapperClasses.join(' ')}>
-          {inputElement}
-          {validationMessage}
-          <span className={classes.Bar}></span>
-          <label className={labelClasses.join(' ')}>{props.placeholder}</label>
-      </div>
+          <div className={classes.Container}>
+            {inputElement}
+            <span className={classes.Bar}></span>
+            <label className={labelClasses.join(' ')}>{props.placeholder}</label>
+          </div>
+          {props.validation ? (
+            <div className={validationMessageClasses.join(' ')}>{state.validationMessage}</div>
+          ) 
+          : null}
+      </fieldset>
   )
 }

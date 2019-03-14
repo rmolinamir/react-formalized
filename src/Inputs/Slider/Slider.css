@@ -5,6 +5,10 @@
   position: relative;
   height: 28px;
   width: 100%; /* Width of the outside container */
+  /* Fieldset */
+  border: none;
+  margin: 0;
+  padding: 0;
 }
 
 /* Value Indicator */

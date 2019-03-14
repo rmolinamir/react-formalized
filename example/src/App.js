@@ -22,7 +22,6 @@ export default class App extends Component {
         <Input
           type='email'
           validation={{
-            required: true,
             minLength: 3
           }}
           placeholder='Email' />
@@ -40,7 +39,6 @@ export default class App extends Component {
         {/* <Slider /> */}
         <Slider
           indicator
-          step={43}
           // value='325'
           minValue='100'
           maxValue='350' />
@@ -52,7 +50,6 @@ export default class App extends Component {
           maxValue='350' />
         <Slider
           indicator
-          step={65}
           value='325'
           minValue='200'
           maxValue='350' />

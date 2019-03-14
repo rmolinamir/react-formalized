@@ -48,7 +48,13 @@ interface IInputProps extends IInputState {
   type: string
   placeholder: string
   valueType: string
+  className: string
   onChange: (value: any, valid: boolean) => void
+  /**
+   * Password element input.
+   */
+  passwordHandler?: string
+  passwordHandlerClassName?: string
 }
 
 interface IInputConfig {
@@ -77,6 +83,11 @@ interface IInputElementProps extends React.DetailedHTMLProps<React.InputHTMLAttr
   shouldValidate?: boolean
   touched?: boolean
   onChangeHandler?: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
+  /**
+   * Password element input.
+   */
+  passwordHandler?: string
+  passwordHandlerClassName?: string
 }
 
 type sliderValue = string | number | undefined;

@@ -1,12 +1,15 @@
 interface IValidation { 
   status: boolean, 
-  message: string 
+  message?: string 
 }
+
+// const evaluate = (status, message) => {
+
+// }
 
 export const checkValidity = (value: string | number | string[] | undefined, rules: IInputValidation | undefined, valueType: string): IValidation => {
   const validation: IValidation = {
-    status: false,
-    message: `Please enter valid a ${valueType}.`
+    status: false
   }
   if (rules && value) {
       if (typeof value === 'string') {

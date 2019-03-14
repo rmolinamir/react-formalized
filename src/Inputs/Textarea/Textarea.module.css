@@ -1,11 +1,9 @@
 .TextAreaElement {
-  padding-top: 21px;
+  padding-top: 12px;
   width: 100%;
   height: auto;
   min-height: 48px;
-  /* Max & min width set to 100%, in order to limit the textarea X axis movement. */
-  min-width: 100%;
-  max-width: 100%;
+  resize: vertical;
 }
 
 /* Firefox */

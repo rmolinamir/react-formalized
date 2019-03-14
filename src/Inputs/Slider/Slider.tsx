@@ -6,7 +6,6 @@ export const Slider = (props: ISliderProps) => {
   const minValue:number = Number(props.minValue || 0)
   const maxValue:number = Number(props.maxValue || 100)
   const step:number = Number(props.step || 0)
-  console.log('step', step)
   let defaultValue:number
   if (!props.step) {
     defaultValue = Number(props.value || (maxValue - minValue)/2 + minValue)
@@ -14,29 +13,13 @@ export const Slider = (props: ISliderProps) => {
     const value = Number(props.value)
     const amountOfSteps = Math.floor((maxValue - minValue)/step)
     if (value) {
-      
       const closestStepFromValue = Math.round((value - minValue)/step)
-      console.log('closestStepFromValue', closestStepFromValue)
       defaultValue = minValue + closestStepFromValue * step
-      // if (value % step === 0) {
-      //   defaultValue = value
-      // } else {
-      //   defaultValue = minValue
-      // }
     } else {
       defaultValue = minValue + step * Math.ceil(amountOfSteps/2)
     }
-    // defaultValue = Math.floor(amountOfSteps/2) * step * minValue
-    console.log('amount of steps', amountOfSteps)
   }
   const initialProgressBar:number = (((defaultValue - minValue)/(maxValue - minValue))*100)
-
-
-  console.log('minValue', minValue)
-  console.log('maxValue', maxValue)
-  console.log('defaultValue', defaultValue)
-  console.log('initialProgressBar', initialProgressBar)
-  console.log('-----------------------------------------')
   
   const [progressBar, setProgressBar] = React.useState<number>(initialProgressBar)
   const [value, setValue] = React.useState<number>(defaultValue)
@@ -44,13 +27,9 @@ export const Slider = (props: ISliderProps) => {
   const containerRef = React.useRef<HTMLDivElement>(null)
   const sliderRef = React.useRef<HTMLInputElement>(null)
 
-
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
     const progress = (((Number(value) - minValue)/(maxValue - minValue))*100)
-    console.log('value', value)
-    console.log('maxValue', maxValue)
-    console.log('progress', progress)
     setProgressBar(progress)
     setValue(Number(value))
     if (props.onChange) {
@@ -82,7 +61,7 @@ export const Slider = (props: ISliderProps) => {
   }, [progressBar])
 
   return (
-    <div className={classes.Wrapper}>
+    <fieldset className={classes.Wrapper}>
       <div 
         ref={containerRef}
         className={classes.Container}>
@@ -100,6 +79,6 @@ export const Slider = (props: ISliderProps) => {
         <span className={props.indicatorClassName || classes.Indicator}>{value}</span>
       )
       : null}
-    </div>
+    </fieldset>
   )
 }
