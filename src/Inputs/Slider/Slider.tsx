@@ -3,13 +3,40 @@ import * as React from 'react'
 import classes from './Slider.css'
 
 export const Slider = (props: ISliderProps) => {
-  const minValue = Number(props.minValue || 0)
-  const maxValue = Number(props.maxValue || 100)
-  const defaultValue = Number(props.value || (maxValue - minValue)/2 + minValue)
-  const initialProgressBar = (((defaultValue - minValue + Number(props.step)/2)/(maxValue - minValue))*100)
+  const minValue:number = Number(props.minValue || 0)
+  const maxValue:number = Number(props.maxValue || 100)
+  const step:number = Number(props.step || 0)
+  console.log('step', step)
+  let defaultValue:number
+  if (!props.step) {
+    defaultValue = Number(props.value || (maxValue - minValue)/2 + minValue)
+  } else {
+    const value = Number(props.value)
+    const amountOfSteps = Math.floor((maxValue - minValue)/step)
+    if (value) {
+      
+      const closestStepFromValue = Math.round((value - minValue)/step)
+      console.log('closestStepFromValue', closestStepFromValue)
+      defaultValue = minValue + closestStepFromValue * step
+      // if (value % step === 0) {
+      //   defaultValue = value
+      // } else {
+      //   defaultValue = minValue
+      // }
+    } else {
+      defaultValue = minValue + step * Math.ceil(amountOfSteps/2)
+    }
+    // defaultValue = Math.floor(amountOfSteps/2) * step * minValue
+    console.log('amount of steps', amountOfSteps)
+  }
+  const initialProgressBar:number = (((defaultValue - minValue)/(maxValue - minValue))*100)
 
+
+  console.log('minValue', minValue)
+  console.log('maxValue', maxValue)
   console.log('defaultValue', defaultValue)
   console.log('initialProgressBar', initialProgressBar)
+  console.log('-----------------------------------------')
   
   const [progressBar, setProgressBar] = React.useState<number>(initialProgressBar)
   const [value, setValue] = React.useState<number>(defaultValue)
@@ -53,9 +80,6 @@ export const Slider = (props: ISliderProps) => {
       }
     }
   }, [progressBar])
-
-  console.log('value', value)
-  console.log('progressBar', progressBar)
 
   return (
     <div className={classes.Wrapper}>

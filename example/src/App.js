@@ -40,9 +40,26 @@ export default class App extends Component {
         {/* <Slider /> */}
         <Slider
           indicator
-          step={5}
+          step={43}
+          // value='325'
           minValue='100'
           maxValue='350' />
+        <Slider
+          indicator
+          step={65}
+          // value='325'
+          minValue='125'
+          maxValue='350' />
+        <Slider
+          indicator
+          step={65}
+          value='325'
+          minValue='200'
+          maxValue='350' />
+        <Slider
+          indicator
+          step={25}
+          value='99' />
       </div>
     )
   }
