@@ -78,3 +78,17 @@ interface IInputElementProps extends React.DetailedHTMLProps<React.InputHTMLAttr
   touched?: boolean
   onChangeHandler?: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
 }
+
+type sliderValue = string | number | undefined;
+
+interface ISliderProps extends IInputConfig {
+  backgroundColor: string
+  progressBackgroundColor: string
+  indicator: boolean
+  indicatorClassName: string
+  step: string
+  value: sliderValue
+  minValue: sliderValue
+  maxValue: sliderValue
+  onChange: (value: sliderValue, valid: boolean) => void
+}

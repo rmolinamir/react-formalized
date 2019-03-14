@@ -7,3 +7,17 @@
   min-width: 100%;
   max-width: 100%;
 }
+
+/* Firefox */
+
+.TextAreaElement:invalid {
+  box-shadow: none;
+}
+
+.TextAreaElement:-moz-submit-invalid {
+  box-shadow: none;
+}
+
+.TextAreaElement:-moz-ui-invalid {
+  box-shadow:none;
+}

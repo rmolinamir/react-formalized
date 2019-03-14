@@ -65,6 +65,7 @@ export const Input = (props: IInputProps) => {
 
   const labelClasses: string[] = [classes.Label]
   const inputClasses: string[] = [classes.InputElement]
+  const wrapperClasses: string[] = [classes.Input]
 
   if (!state.valid && state.shouldValidate && state.touched) {
     inputClasses.push(classes.Invalid)
@@ -130,6 +131,7 @@ export const Input = (props: IInputProps) => {
         element = <Password {...inputProps} />
         break
       case 'textarea':
+        wrapperClasses.push(classes.TextAreaInput)
         labelClasses.push(classes.TextAreaLabel)
         element = <Textarea {...inputProps} />
         break
@@ -150,7 +152,7 @@ export const Input = (props: IInputProps) => {
 
   return (
       <div style={props.style}
-          className={classes.Input}>
+          className={wrapperClasses.join(' ')}>
           {inputElement}
           {validationMessage}
           <span className={classes.Bar}></span>

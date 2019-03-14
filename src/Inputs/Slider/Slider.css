@@ -1,39 +1,129 @@
+.Wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 28px;
+  width: 100%; /* Width of the outside container */
+}
+
+/* Value Indicator */
+
+.Indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 48px;
+  height: 100%;
+  color: #FFF;
+  text-align: center;
+  border-radius: 4px;
+  background: #484848;
+  margin-left: 8px;
+  /* Text overflow. */
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.Indicator::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: -5px;
+  width: 0;
+  height: 0;
+  border-top: 7px solid transparent;
+  border-right: 7px solid #484848;
+  border-bottom: 7px solid transparent;
+}
+
+/* Slider */
+
 .Container {
-    width: 100%; /* Width of the outside container */
+  position: relative;
+  height: 10px;
+  display: flex;
+  background: #EBEBEB; /* Fallback color. */
+  background: var(--my-background-color);
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  width: 100%; /* Width of the outside container */
+}
+
+.Container::after {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  width: 0;
+  width: var(--my-progress-bar-width);
+  height: 100%;
+  border-radius: inherit;   
+  border-top-right-radius: var(--my-border-right);
+  border-bottom-right-radius: var(--my-border-right);
+  content: '';
+  background-color: #1ea3cc; /* Fallback color. */
+  background: var(--my-progress-background-color);
 }
 
 .Slider {
-    -webkit-appearance: none;
-    width: 100%;
-    height: 15px;
-    border-radius: 5px;   
-    background: #d3d3d3;
-    outline: none;
-    opacity: 0.7;
-    -webkit-transition: .2s;
-    transition: opacity .2s;
+  position: relative;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background: transparent;
+  outline: none;
+  cursor: pointer;
+  z-index: 1;
 }
 
-.Header {
-    font-size: 17px;
-    color: #484848;
-    margin: 12px 0;
+.Slider::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #1ea3cc; /* Fallback color. */
+  background: var(--my-progress-background-color);
+  cursor: grabbing;
+  transition: transform ease 200ms;
 }
 
-.Slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%; 
-    background: #FF7043;
-    cursor: pointer;
+.Wrapper:hover input[type="range"]::-webkit-slider-thumb,
+.Wrapper:focus-within input[type="range"]::-webkit-slider-thumb {
+  transform: scale(1.3);
 }
+
+/* Mozilla. */
 
 .Slider::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background: #FF7043;
-    cursor: pointer;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #1ea3cc; /* Fallback color. */
+  background: var(--my-progress-background-color);
+  cursor: grabbing;
+  transition: transform ease 200ms;
+}
+
+.Wrapper:hover input[type="range"]::-moz-range-thumb,
+.Wrapper:focus-within input[type="range"]::-moz-range-thumb {
+  transform: scale(1.1);
+}
+
+/* MS Edge. */
+
+.Slider::-ms-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%; 
+  background: #1ea3cc; /* Fallback color. */
+  background: var(--my-progress-background-color);
+  cursor: grabbing;
+  transition: transform ease 200ms;
 }

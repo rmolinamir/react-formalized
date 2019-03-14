@@ -16,7 +16,6 @@ const icon = (props: IIconProps) => {
   const { valid, touched } = props
 
   React.useEffect(() => {
-    console.log('icon inside useEffect touched', touched)
     if (touched) {
       if (valid) {
         setIconClasses([classes.Icon, classes.Valid])

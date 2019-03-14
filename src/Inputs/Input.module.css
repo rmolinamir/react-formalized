@@ -7,10 +7,15 @@
 .Input {
   position: relative;
   width: 100%;
-  padding: 10px 0;
+  padding: 8px 0;
   margin: 8px 0;
-  height: 68px;
+  min-height: 68px;
   box-sizing: border-box;
+}
+
+.TextAreaInput {
+  min-height: 68px;
+  height: auto;
 }
 
 /* 

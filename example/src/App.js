@@ -37,7 +37,12 @@ export default class App extends Component {
         <Input
           type='textarea'
           placeholder='Username' />
-        <Slider />
+        {/* <Slider /> */}
+        <Slider
+          indicator
+          step={5}
+          minValue='100'
+          maxValue='350' />
       </div>
     )
   }
