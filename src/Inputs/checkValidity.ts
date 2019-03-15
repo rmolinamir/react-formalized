@@ -3,9 +3,10 @@ interface IValidation {
   message?: string 
 }
 
-// const evaluate = (status, message) => {
-
-// }
+/**
+ * **TODO:** Turn into a promise (with `async` & `await`) and evalute results using: `const evaluate = (status, message) => {}`
+ * for performance improvements and better readability.
+ */
 
 export const checkValidity = (value: string | number | string[] | undefined, rules: IInputValidation | undefined, valueType: string): IValidation => {
   const validation: IValidation = {

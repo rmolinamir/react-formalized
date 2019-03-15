@@ -4,8 +4,15 @@ const { useRef, useState } = React
 import classes from './Select.css'
 
 export const Select = (props: any) => {
+
+  // const elementConfig: {
+  //     label: 'Choose a category type',
+  //     placeholder: 'Select a category',
+  //     options: this.props.categoriesDatalist
+  // },
+
   const myList:React.RefObject<HTMLUListElement> = useRef(null)
-  const display = props.elementConfig.displayValue
+  const display = props.displayValue
   const [displayValue, setDisplayValue] = useState(display || '')
   const [bIsListOpen , setIsListOpen] = useState(false)
 
@@ -38,7 +45,7 @@ export const Select = (props: any) => {
     setDisplayValue(option.displayValue)
   }
     
-  props.inputClasses.push(classes.InputSelect)
+  // props.inputClasses.push(classes.InputSelect)
   const listClasses = [classes.List]
 
   if (bIsListOpen) {
@@ -47,7 +54,7 @@ export const Select = (props: any) => {
 
   return (
     <div className={classes.Wrapper}>
-      <div className={classes.InputSelectType}><strong>{props.elementConfig.label}</strong></div>
+      <div className={classes.InputSelectType}><strong>{props.label}</strong></div>
       <div onClick={() => listHandler('open')} 
           onBlur={() => listHandler('close')} 
           tabIndex={0}
@@ -61,8 +68,8 @@ export const Select = (props: any) => {
             // otherwise render the value.
             value={displayValue}
             // value={props.displayValue}
-            placeholder={props.elementConfig.placeholder}
-            className={props.inputClasses.join(' ')} >
+            placeholder={props.placeholder}
+            className={props.inputClasses} >
           </input>
           <div tabIndex={0}
               className={classes.ArrowWrapper}>
@@ -72,8 +79,8 @@ export const Select = (props: any) => {
           </div>
       </div>
       <ul ref={myList} className={listClasses.join(' ')}>
-        {bIsListOpen ? 
-          props.elementConfig.options.map((option: any, index: any) => {
+        {bIsListOpen && props.datalist ? 
+          props.datalist.map((option: any, index: any) => {
             return (
               <li key={index}
                 /**

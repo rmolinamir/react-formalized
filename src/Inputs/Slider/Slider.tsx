@@ -24,7 +24,7 @@ export const Slider = (props: ISliderProps) => {
   const [progressBar, setProgressBar] = React.useState<number>(initialProgressBar)
   const [value, setValue] = React.useState<number>(defaultValue)
 
-  const containerRef = React.useRef<HTMLDivElement>(null)
+  const containerRef = React.useRef<HTMLFieldSetElement>(null)
   const sliderRef = React.useRef<HTMLInputElement>(null)
 
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,8 +61,11 @@ export const Slider = (props: ISliderProps) => {
   }, [progressBar])
 
   return (
-    <fieldset className={classes.Wrapper}>
-      <div 
+    <div
+      draggable={false}
+      className={classes.Wrapper}>
+      <fieldset 
+        draggable={false}
         ref={containerRef}
         className={classes.Container}>
         <input type='range'
@@ -74,11 +77,11 @@ export const Slider = (props: ISliderProps) => {
           defaultValue={defaultValue.toString()}
           min={minValue} 
           max={maxValue} />
-      </div>
+      </fieldset>
       {props.indicator || props.indicatorClassName ? (
         <span className={props.indicatorClassName || classes.Indicator}>{value}</span>
       )
       : null}
-    </fieldset>
+    </div>
   )
 }

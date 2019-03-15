@@ -5,10 +5,6 @@
   position: relative;
   height: 28px;
   width: 100%; /* Width of the outside container */
-  /* Fieldset */
-  border: none;
-  margin: 0;
-  padding: 0;
 }
 
 /* Value Indicator */
@@ -46,7 +42,7 @@
 
 .Container {
   position: relative;
-  height: 10px;
+  height: 12px;
   display: flex;
   background: #EBEBEB; /* Fallback color. */
   background: var(--my-background-color);
@@ -54,6 +50,10 @@
   align-items: center;
   border-radius: 4px;
   width: 100%; /* Width of the outside container */
+  /* Fieldset */
+  border: none;
+  margin: 0;
+  padding: 0;
 }
 
 .Container::after {
@@ -87,8 +87,8 @@
 .Slider::-webkit-slider-thumb{
   -webkit-appearance: none;
   appearance: none;
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   background: #1ea3cc; /* Fallback color. */
   background: var(--my-progress-background-color);

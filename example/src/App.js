@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Input, Slider } from 'react-png-input'
+import { Input, Slider, Select } from 'react-png-input'
 
 export default class App extends Component {
   render () {
@@ -35,7 +35,7 @@ export default class App extends Component {
           placeholder='Password' />
         <Input
           type='textarea'
-          placeholder='Username' />
+          placeholder='TextArea' />
         {/* <Slider /> */}
         <Slider
           indicator
@@ -57,6 +57,7 @@ export default class App extends Component {
           indicator
           step={25}
           value='99' />
+        <Select />
       </div>
     )
   }

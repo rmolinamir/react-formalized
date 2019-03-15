@@ -125,7 +125,8 @@ export const Input = (props: IInputProps) => {
   if (props.type) {
     const type: string = props.type.toLowerCase()
     switch (type) {
-      case 'text' || 'email': 
+      case 'text': 
+      case 'email':
         element = <Text {...inputProps} />
         break
       case 'password':
@@ -142,7 +143,9 @@ export const Input = (props: IInputProps) => {
         element = <Textarea {...inputProps} />
         break
       default:
-        console.warn('No prop types match your query, this results in a fallback to the Text input.')
+        if (type) {
+          console.warn('No prop types match your query, this results in a fallback to the Text input.')
+        }
         element = <Text {...inputProps} />
         break
     }
