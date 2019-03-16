@@ -160,17 +160,17 @@ export const Input = (props: IInputProps) => {
   )
 
   return (
-      <fieldset style={props.style}
-          className={wrapperClasses.join(' ')}>
-          <div className={classes.Container}>
-            {inputElement}
-            <span className={classes.Bar}></span>
-            <label className={labelClasses.join(' ')}>{props.placeholder}</label>
-          </div>
-          {props.validation ? (
-            <div className={validationMessageClasses.join(' ')}>{state.validationMessage}</div>
-          ) 
-          : null}
-      </fieldset>
+    <fieldset style={props.style}
+        className={wrapperClasses.join(' ')}>
+        <div className={classes.Container}>
+          {inputElement}
+          <span className={classes.Bar}></span>
+          <label className={labelClasses.join(' ')}>{props.placeholder}</label>
+        </div>
+        {props.validation ? (
+          <div className={validationMessageClasses.join(' ')}>{state.validationMessage}</div>
+        ) 
+        : null}
+    </fieldset>
   )
 }

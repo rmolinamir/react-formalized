@@ -38,12 +38,10 @@ export default class App extends Component {
           placeholder='TextArea' />
         {/* <Slider /> */}
         <Slider
-          indicator
           // value='325'
           minValue='100'
           maxValue='350' />
         <Slider
-          indicator
           step={65}
           // value='325'
           minValue='125'
@@ -57,7 +55,19 @@ export default class App extends Component {
           indicator
           step={25}
           value='99' />
-        <Select />
+        <Select
+          placeholder='Select'
+          datalist={[
+            'Option A',
+            {
+              value: '35193BB0sk2F',
+              displayValue: 'Option B (custom value)'
+            },
+            'Option C', 'Option D',
+            {
+              value: '192aaa3349130',
+              displayValue: 'Option F (custom value)'
+            }]} />
       </div>
     )
   }

@@ -1,104 +1,278 @@
 import * as React from 'react'
-const { useRef, useState } = React
+const { useRef, useReducer, useEffect } = React
+import { isMobile } from '../isMobile'
 // CSS
 import classes from './Select.css'
 
-export const Select = (props: any) => {
+type value = string | number | string[] | undefined
 
-  // const elementConfig: {
-  //     label: 'Choose a category type',
-  //     placeholder: 'Select a category',
-  //     options: this.props.categoriesDatalist
-  // },
+interface IValue {
+  value: value
+  displayValue: string | number
+}
 
+interface IInputConfig {
+  required?: boolean
+  disabled?: boolean
+  form?: string
+  list?: string
+  name?: string
+  tabIndex?: number
+}
+
+interface ISelectProps {
+  shouldCloseListOnChange: boolean
+  required: boolean
+  elementConfig?: IInputConfig
+  value: value
+  datalist: (value | IValue)[]
+  onChange: (value: value) => void
+  /**
+   * CSS Properties.
+   */
+  style: React.CSSProperties
+  placeholder: string
+  backgroundColor: string
+  borderRadius: string
+  color: string
+}
+
+interface IInputState {
+  value?: value
+  displayValue?: value
+  bIsListOpen?: boolean
+}
+
+interface IReducerAction extends IInputState {
+  handler: EReducerHandler
+}
+
+enum EReducerHandler {
+  VALUE,
+  DISPLAYVALUE,
+  LIST,
+  STATE
+}
+
+/**
+ * `IValue` interface type checker.
+ */
+const instanceOfIValue = (object: any): object is IValue => {
+  if (object && object.value) {
+    return 'value' in object;
+  } else {
+    return false
+  }
+}
+
+const reducer = (state: IInputState, action: IReducerAction) => {
+  const { handler, ...newState } = action
+  switch (handler) {
+    case EReducerHandler.STATE:
+      return {
+        ...state,
+        ...newState
+      }
+    case EReducerHandler.VALUE:
+      return {
+        ...state,
+        value: action.value
+      }
+    case EReducerHandler.DISPLAYVALUE:
+      return {
+        ...state,
+        displayValue: action.displayValue
+      }
+    case EReducerHandler.LIST:
+      return {
+        ...state,
+        bIsListOpen: action.bIsListOpen
+      }
+    default:
+      throw new Error()
+  }
+}
+
+export const Select = (props: ISelectProps) => {
+  const shouldCloseListOnChange: boolean = props.shouldCloseListOnChange || true
+
+  const myWrapper:React.RefObject<HTMLFieldSetElement> = useRef(null)
   const myList:React.RefObject<HTMLUListElement> = useRef(null)
-  const display = props.displayValue
-  const [displayValue, setDisplayValue] = useState(display || '')
-  const [bIsListOpen , setIsListOpen] = useState(false)
 
-  const listHandler = (handler: any) => { 
-    const list = myList.current 
-    switch (handler) {
-      case 'open': 
-        if (list) {
-          list.blur()
-        }
-        setIsListOpen(true)
-      case 'close': 
-        setIsListOpen(false)
+  const initialState: IInputState = {
+    value: props.value,
+    displayValue: props.value || '',
+    bIsListOpen: false
+  }
+
+  const [state, dispatch] = useReducer(reducer, initialState)
+
+  const onClickListHandler = () => {
+    if (state.bIsListOpen) {
+      dispatch({ handler: EReducerHandler.LIST, bIsListOpen: false })
+      if (myList && myList.current) {
+        myList.current.blur()
+      }
+    } else {
+      dispatch({ handler: EReducerHandler.LIST, bIsListOpen: true })
+      if (myList && myList.current) {
+        myList.current.focus()
+      }
     }
   }
-    
-  const setValue = (option: any, onChange: any) => {
-    switch (true) {
-      case option.value === '':
-        props.labelClasses.push(classes.SelectLabelValid)
-        break
-      case option.value.length > 0:
-        props.labelClasses.pop()
-        break
-    }
-    listHandler('close') // After selecting a category, close the list.
-    if (onChange) { // Protection
-        onChange(option.value) // props.onChange passed from stateful container to change its 
-    }
-    setDisplayValue(option.displayValue)
-  }
-    
-  // props.inputClasses.push(classes.InputSelect)
-  const listClasses = [classes.List]
 
-  if (bIsListOpen) {
+  const bIsMobile = isMobile()
+
+  /**
+   * `onOutsideClickHandler` will close the list if the click was made outside
+   * the component wrapper div element.
+   */
+  const onOutsideClickHandler = (event: MouseEvent) => {
+    if (state.bIsListOpen && myWrapper && myWrapper.current) {
+      const bClickedIsOutside:boolean = !myWrapper.current.contains((event.target as Node))
+      if (bClickedIsOutside) onClickListHandler()
+    }
+  }
+
+  const escFunction = (event: KeyboardEvent) => {
+    if (event.keyCode === 27 && state.bIsListOpen) {
+      dispatch({ handler: EReducerHandler.LIST, bIsListOpen: false })
+      if (myList && myList.current) {
+        myList.current.blur()
+      }
+    }
+  }
+
+  const onChangeHandler = () => {
+    if (props.onChange) {
+      props.onChange(state.value)
+    }
+  }
+
+  /**
+   * CSS Variables setup.
+   */
+  useEffect(() => {
+    const { backgroundColor, borderRadius, color } = props
+    if (myWrapper && myWrapper.current) {
+      myWrapper.current.style.setProperty('--my-highlight-color', '#1EA3CC')
+      myWrapper.current.style.setProperty('--my-background-color', backgroundColor || '#FAFBFC')
+      myWrapper.current.style.setProperty('--my-border-radius', borderRadius || '4px')
+      myWrapper.current.style.setProperty('--my-color', color || '#484848')
+    }
+  }, [])
+
+  /**
+   * Respective event listener handler on `useEffect`.
+   */
+  useEffect(() => {
+    if (!bIsMobile) {
+      if (state.bIsListOpen) {
+        window.addEventListener('keydown', escFunction)
+      } else {
+        window.removeEventListener('keydown', escFunction)
+      }
+    }
+    window.addEventListener('mousedown', onOutsideClickHandler)
+    return (() => {
+      if (!bIsMobile) window.removeEventListener('keydown', escFunction)
+      window.removeEventListener('mousedown', onOutsideClickHandler)
+    })
+  }, [state.bIsListOpen])
+
+  const wrapperClasses: string[] = [classes.Wrapper]
+  const listClasses: string[] = [classes.List]
+  const labelClasses: string[] = [classes.Label]
+
+  if (state.bIsListOpen) {
+    wrapperClasses.push(classes.Open)
     listClasses.push(classes.Open)
+    labelClasses.push(classes.ActiveLabel)
+  } else if (state.value && state.value !== '' ? true : false) {
+    labelClasses.push(classes.ActiveLabel)
   }
+
+  let list: JSX.Element[] | null = null
+  if (props.datalist) {
+    list = (
+      props.datalist.map((option: (value | IValue), index: number) => {
+        let data: (value | IValue);
+        let displayValue: string | number | undefined = undefined
+        if (instanceOfIValue(option)) {
+          data = option
+          displayValue = option.displayValue
+        } else {
+          data = option
+        }
+        return (
+          <li key={index}>
+            <button 
+              type='button'
+              onClick={() => setValueHandler(data)} 
+              >
+              {displayValue || data}
+            </button>
+          </li>
+        )
+      })
+    )
+  }
+
+  const setValueHandler = (data: (value | IValue)) => {
+    if (instanceOfIValue(data)) {
+      dispatch({
+        handler: EReducerHandler.STATE,
+        value: data.value,
+        displayValue: data.displayValue || '' 
+      })
+    } else {
+      dispatch({
+        handler: EReducerHandler.STATE,
+        value: data,
+        displayValue: data
+      })
+    }
+    if (shouldCloseListOnChange) {
+      onClickListHandler()
+    }
+  }
+
+  console.log('state', state)
 
   return (
-    <div className={classes.Wrapper}>
-      <div className={classes.InputSelectType}><strong>{props.label}</strong></div>
-      <div onClick={() => listHandler('open')} 
-          onBlur={() => listHandler('close')} 
-          tabIndex={0}
-          className={classes.Container}>
+    <fieldset
+      ref={myWrapper}
+      className={wrapperClasses.join(' ')}>
+      <div
+        className={classes.Container}>
+        <div
+            onClick={onClickListHandler}
+            className={classes.Input}>
           <input
-            disabled
-            required
-            // onChange={handleChange}
+            tabIndex={-1}
+            readOnly
+            required={props.required}
+            onChange={onChangeHandler}
             style={props.style}
-            // If there is a default display value in the element config then display it initially, 
-            // otherwise render the value.
-            value={displayValue}
-            // value={props.displayValue}
-            placeholder={props.placeholder}
-            className={props.inputClasses} >
+            value={state.displayValue}
+            className={classes.Select}
+            {...props.elementConfig}>
           </input>
-          <div tabIndex={0}
-              className={classes.ArrowWrapper}>
-              <div className={classes.ArrowContainer}>
-                  <span className={classes.Arrow} />
-              </div>
+          <label className={labelClasses.join(' ')}>{props.placeholder}</label>
+        </div>
+        <button
+          onClick={onClickListHandler}
+          className={classes.Button}>
+          <div className={classes.Icon}>
+            <span className={classes.Arrow} />
           </div>
+        </button>
       </div>
       <ul ref={myList} className={listClasses.join(' ')}>
-        {bIsListOpen && props.datalist ? 
-          props.datalist.map((option: any, index: any) => {
-            return (
-              <li key={index}
-                /**
-                * onMouseDown event fires before onBlur event on input. It calls event.preventDefault() to
-                * prevent onBlur from being called, and doesn't prevent the navLink click from happening, 
-                * this guarantees that the NavLink will redirect on click without having to use SetTimeout 
-                * or any other hack.
-                    */
-                onMouseDown={event => event.preventDefault()}
-                value={option.value}>
-                <button type='button' onClick={() => setValue(option, props.onChange)}>
-                  {option.displayValue}
-                </button>
-              </li>
-            )
-          })
+        {state.bIsListOpen ? 
+          list
         : null}
       </ul>
-    </div>
+    </fieldset>
   )
 }

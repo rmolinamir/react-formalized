@@ -1,181 +1,297 @@
 .Wrapper {
-    position: relative;
-    width: 100%;
-    cursor: pointer;
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+  box-sizing: border-box;
+  /* Fieldset */
+  margin: 0;
+  padding: 0;
+  border: 0;
+  transform: border-color ease 300ms;
+  /* Aesthetics */
+  /* Fallback */
+  color: #484848;
+  border-radius: 4px;
+  background-color: #FAFBFC;
+  /* Programmatically */
+  color: var(--my-color);
+  border-radius: var(--my-border-radius);
+  background-color: var(--my-background-color);
 }
 
 .Container {
-    display: table;
-    margin: 12px 0;
-    margin-bottom: -1px;
-    margin-right: -1px;
-    table-layout: fixed;
+  display: table;
+  white-space: nowrap;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: auto;
+  transition: box-shadow 200ms ease-in, border 0.2s ease;
+  /* Aesthetics */
+  color: inherit;
+  border-radius: inherit;
+  background-color: inherit;
+}
+
+.Wrapper:hover .Container {
+  background-color: transparent;
+}
+
+/* 
+-----------------
+------INPUT------
+-----------------
+*/
+
+.Input {
+  display: table-cell;
+  width: 100%;
+  border-radius: inherit;
+  box-sizing: border-box;
+  cursor: pointer;
+  vertical-align: middle;
+  /* Button style */
+  background-color: transparent;
+  outline: 0;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+@supports (-ms-ime-align:auto) {
+  .Input {
+    width: auto;
+  }
+}
+
+.Select {
+  display: block;
+  width: 100%;
+  height: 48px;
+  font: inherit;
+  font-size: 17px;
+  pointer-events:none;
+  /* border: 0; */
+  border: 1px solid #EBEBEB;
+  border-right: 0;
+  border-radius: inherit;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  background-color: inherit;
+  padding: 12px 10px 36px;
+  padding-bottom: 0;
+  box-sizing: border-box;
+  transition: all 250ms ease;
+  cursor: pointer;
+  outline: none;
+  /* Disabling iOS and other native CSS. */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.Wrapper.Open .Select {
+  border-color: var(--my-highlight-color);
+}
+
+/* 
+-----------------
+------LABEL------
+-----------------
+*/
+
+.Label {
+  text-transform: uppercase;
+  color: #a4a4a4; 
+  font-weight: 600;
+  font-size: 13px;
+  font-weight: bold;
+  position: absolute;
+  pointer-events: none;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: 150ms ease-in-out all; 
+}
+
+@media (min-width: 1025px) {
+  .Wrapper:hover .Label {
+    top: 9px;
+    left: 6px;
+    font-size: 9px;
     white-space: nowrap;
-    border: 1px solid #EBEBEB;
-    border-radius: 4px;
-    background-color: #FFF;
-    width: 100%;
-    height: 54px;
-    transition: box-shadow 200ms ease-in, border 0.2s ease;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
-.InputSelect {
-    display: table-cell;
-    pointer-events:none;
-    user-select: none;
-    padding-left: 10px;
-    width: 100%;
-    height: 52px;
-    vertical-align: middle;
-    padding-right: 12px;
-    appearance: none;
-    border-radius: 4px;
-    background: #FFF;
-    color: #484848;
-    border: 0 !important;
-    outline: 0 !important;
+.Wrapper.Open .Label,
+.ActiveLabel {
+  top: 9px;
+  left: 6px;
+  font-size: 9px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.ValidSelectLabel {
-    display: none;
+/* 
+-----------------
+------ARROW------
+-----------------
+*/
+
+.Button {
+  display: table-cell;
+  box-sizing: border-box;
+  cursor: pointer;
+  vertical-align: middle;
+  width: 48px;
+  height: 48px;
+  background-color: inherit;
+  color: inherit;
+  transition: all 300ms ease;
+  /* Button properties */
+  outline: 0;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #EBEBEB;
+  border-radius: inherit;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
 }
 
-.InputSelectType {
-    color: #686868;
-    margin: 6px 0;
+.Button::-moz-focus-inner {
+  border: 0;
 }
 
-.Container:hover,
-.Container:focus-within {
-    border: 1px solid rgba(255, 112, 67);
-}
-
-.Container:focus-within {
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
-}
-
-.Container:focus-within .Arrow {
-    margin-bottom: 0;
-    margin-top: 4px;
-    transform: rotate(-45deg);
-}
-
-.Container:hover .ArrowWrapper,
-.Container:focus-within .ArrowWrapper {
-    background-color: rgba(255, 112, 67);
-    border-left: 1px solid rgba(255, 112, 67);
-}
-
-@media (min-width: 1024px) {
-    .Container:hover .Arrow,
-    .Container:focus-within .Arrow {
-        border-top: 2px solid #FFF;
-        border-right: 2px solid #FFF;
-    }
-}
-
-.ArrowWrapper {
-    display: table-cell;
-    box-sizing: border-box;
-    border-left: 1px solid rgba(26, 26, 29, 0.08);
-    cursor: pointer;
-    vertical-align: middle;
-    transition: all 0.2s ease;
-    width: 50px;
-}
-
-.ArrowContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 20px;
-    height: 20px;
-    padding: 6px;
-    margin: 0 auto;
+.Icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin: 0 auto;
 }
 
 .Arrow {
-    width: 100%;
-    height: 100%;
-    margin-bottom: 4px;
-    border-top: 2px solid #484848;
-    border-right: 2px solid #484848;
-    margin-bottom: 4px;
-    transform: rotate(135deg);
-    transition: all ease 0.25s;
+  position: relative;
+  width: 100%;
+  color: inherit;
 }
+
+.Arrow::before,
+.Arrow::after {
+  display: block;
+  position: absolute;
+  border-color: inherit;
+  content: '';
+  transition: transform ease 400ms;
+  width: 100%;
+}
+
+.Arrow::before {
+  border-top: 2px solid;
+  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 24px;
+  transform: rotate(135deg) translate(3px, 6px);
+  -moz-transform: rotate(135deg) translate(3px, 6px);
+}
+
+.Arrow::after {
+  border-top: 2px solid;
+  border-top-right-radius: 12px;
+  border-top-left-radius: 24px;
+  transform: rotate(45deg) translate(3px, -6px);
+  -moz-transform: rotate(45deg) translate(3px, -6px);
+}
+
+.Wrapper.Open .Button {
+  color: #FFF;
+  background-color: var(--my-highlight-color);
+  border-color: var(--my-highlight-color);
+}
+
+.Wrapper.Open .Arrow::before {
+  transform: rotate(-45deg) translate(3px, 6px) scaleY(-1);
+  -moz-transform: rotate(-45deg) translate(3px, 6px) scaleY(-1);
+}
+
+.Wrapper.Open .Arrow::after {
+  transform: rotate(225deg) translate(3px, -6px) scaleY(-1);
+  -moz-transform: rotate(225deg) translate(3px, -6px) scaleY(-1);
+}
+
+/* 
+----------------
+------LIST------
+----------------
+*/
 
 .List {
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: auto;
-    max-height: 400px;
-    background-color: #FFF;
-    color: #484848;
-    box-shadow: 0px 3px 5px rgb(229,229,229);
-    margin: 0 auto;
-    padding: 0;
-    top: 100%;
-    left: 0;
-    overflow-y: auto;
-    z-index: 5;
-    list-style-type: none;
-    /* opacity: 0; */
-    transition: all ease 200ms;
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 0px;
+  max-height: 0px;
+  box-shadow: 0px 3px 5px #EBEBEB;
+  overflow: hidden;
+  background-color: inherit;
+  color: inherit;
+  z-index: 5;
+  transition: all ease 300ms;
+  border: 0;
+  opacity: 0;
+  /* List style */
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  /* Aesthetics */
+  color: inherit;
+  border-radius: inherit;
+  background-color: inherit;
 }
 
-.Open {
-    border: 1px solid rgba(255, 112, 67);
+.Wrapper .List.Open {
+  height: auto;
+  min-height: 68px;
+  max-height: 50vh;
+  overflow: auto;
+  border: 1px solid var(--my-highlight-color);
+  opacity: 1;
+  margin: 6px 0 18px;
+  padding: 8px 8px 8px 12px;
 }
 
 .List li {
-    display: block;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-    transform: all ease 200ms;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform: all ease 300ms;
+}
+
+.Wrapper .List li:hover {
+  box-shadow: 0px 1px 0px var(--my-highlight-color);
 }
 
 .List button {
-    display: block;
-    width: 100%;
-    height: 100%;
-    padding: 18px 24px; 
-    margin: 0;
-    text-align: left;
-
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 18px 12px;
+  font-size: 16px;
+  margin: 0;
+  cursor: pointer;
+  text-align: left;
+  /* Button style */
+  background-color: inherit;
+  outline: 0;
+  border: 0;
 }
 
 .List li:hover {
-    color: #FF7043;
-}
-
-input.InputSelect::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-    color: #999; 
-}
-
-input.InputSelect::-moz-placeholder { /* Firefox 19+ */
-    color: #999; 
-}
-
-input.InputSelect:-ms-input-placeholder { /* IE 10+ */
-    color: #999; 
-}
-
-input.InputSelect:-moz-placeholder { /* Firefox 18- */
-    color: #999; 
-}
-
-input:disabled.InputSelect {
-    color: #484848 !important;
-    opacity: 1 !important;
-}
-
-@media only screen and (max-width: 744px)  {
-    input:disabled.InputSelect {
-        color: #282828 !important;
-        font-weight: 600;
-    }
+  color: #FF7043;
 }
