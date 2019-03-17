@@ -21,6 +21,20 @@ declare module 'react-svg-library' {
   export const Underline: React.ReactType
 }
 
+/**
+ * In TypeScript 2.8, the Exclude type was added to the standard library, which allows an omission type to be written as:
+ * ```ts
+ *  type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
+ * ```
+ * `https://stackoverflow.com/questions/48215950/exclude-property-from-type`.
+ */
+type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
+
+/**
+ * HTML Input tag value type.
+ */
+type value = string | number | string[] | undefined;
+
 interface IInputValidation {
   required?: boolean
   email?: boolean
@@ -30,7 +44,7 @@ interface IInputValidation {
 }
 
 interface IInputState {
-  value: any
+  value?: value
   validationMessage: string
   className?: string
   valueType?: string
@@ -39,17 +53,21 @@ interface IInputState {
   placeholder?: string
   elementConfig?: IInputConfig
   required?: boolean
-  valid: boolean
+  valid?: boolean
   shouldValidate?: boolean
   touched?: boolean
 }
 
-interface IInputProps extends IInputState {
+interface IInputProps extends IInputState, Omit<IInputElementProps, 'onChange'> {
   type: string
   placeholder: string
   valueType: string
   className: string
-  onChange: (value: any, valid: boolean) => void
+  onChange: (value: value, valid: boolean) => void
+  /**
+   * Text area input.
+   */
+  minRows: number
   /**
    * Password element input.
    */
@@ -63,14 +81,19 @@ interface IInputConfig {
   autoCorrect?: string
   autoFocus?: boolean
   autoSave?: string
+  cols?: number
   disabled?: boolean
   form?: string
   list?: string
+  maxLength?: number
+  minLength?: number
   name?: string
   readOnly?: boolean
+  rows?: number
   tabIndex?: number
   type?: string
   defaultValue?: string | string[]
+  wrap?: string
   /**
    * Global HTML Props
    */
@@ -82,6 +105,10 @@ interface IInputElementProps extends React.DetailedHTMLProps<React.InputHTMLAttr
   valid?: boolean
   shouldValidate?: boolean
   touched?: boolean
+  /**
+   * Text area input.
+   */
+  minRows?: number
   onChangeHandler?: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
   /**
    * Password element input.

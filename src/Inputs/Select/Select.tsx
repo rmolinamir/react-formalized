@@ -1,5 +1,5 @@
 import * as React from 'react'
-const { useRef, useReducer, useEffect } = React
+const { useRef, useReducer, useEffect, useState } = React
 import { isMobile } from '../isMobile'
 // CSS
 import classes from './Select.css'
@@ -98,6 +98,7 @@ export const Select = (props: ISelectProps) => {
 
   const myWrapper:React.RefObject<HTMLFieldSetElement> = useRef(null)
   const myList:React.RefObject<HTMLUListElement> = useRef(null)
+  const [bIsMobile] = useState(isMobile())
 
   const initialState: IInputState = {
     value: props.value,
@@ -121,7 +122,6 @@ export const Select = (props: ISelectProps) => {
     }
   }
 
-  const bIsMobile = isMobile()
 
   /**
    * `onOutsideClickHandler` will close the list if the click was made outside
@@ -236,8 +236,6 @@ export const Select = (props: ISelectProps) => {
       onClickListHandler()
     }
   }
-
-  console.log('state', state)
 
   return (
     <fieldset

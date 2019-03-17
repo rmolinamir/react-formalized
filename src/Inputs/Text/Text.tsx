@@ -3,9 +3,9 @@ import * as React from 'react'
 import Icon from '../../Icon/Icon'
 
 const defaultConfig: IInputConfig = {
-  autoComplete: 'off',
-  autoCorrect: 'off',
-  autoCapitalize: 'off',
+  autoComplete: 'on',
+  autoCorrect: 'none',
+  autoCapitalize: 'none',
   spellCheck: false
 }
 

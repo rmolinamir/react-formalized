@@ -7,13 +7,10 @@
 .Wrapper {
   position: relative;
   width: 100%;
-  /* padding: 8px 0;
-  margin: 8px 0; */
-  max-height: 500px;
-  transition: max-height 300ms ease-in;
   box-sizing: border-box;
   /* Fieldset */
   border: none;
+  outline: none;
 }
 
 .Aesthetics {

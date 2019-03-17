@@ -140,7 +140,11 @@ export const Input = (props: IInputProps) => {
       case 'textarea':
         wrapperClasses.push(classes.TextAreaInput)
         labelClasses.push(classes.TextAreaLabel)
-        element = <Textarea {...inputProps} />
+        element = (
+          <Textarea
+            minRows={props.minRows}
+            {...inputProps} />
+        )
         break
       default:
         if (type) {

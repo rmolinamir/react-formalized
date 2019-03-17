@@ -35,7 +35,11 @@ export default class App extends Component {
           placeholder='Password' />
         <Input
           type='textarea'
-          placeholder='TextArea' />
+          placeholder='TextArea'
+          elementConfig={{
+            maxLength: 3500,
+            minLength: 15
+          }} />
         {/* <Slider /> */}
         <Slider
           // value='325'

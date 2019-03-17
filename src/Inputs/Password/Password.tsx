@@ -7,9 +7,9 @@ import { Icon as LibraryIcon } from 'react-svg-library'
 import Icon from '../../Icon/Icon'
 
 const defaultConfig: IInputConfig = {
-  autoComplete: 'off',
-  autoCorrect: 'off',
-  autoCapitalize: 'off',
+  autoComplete: 'none',
+  autoCorrect: 'none',
+  autoCapitalize: 'none',
 }
 
 const password = (props: IInputElementProps): JSX.Element => {
