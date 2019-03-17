@@ -2,7 +2,7 @@ import * as React from 'react'
 const { useRef, useReducer, useEffect, useState } = React
 import { isMobile } from '../isMobile'
 // CSS
-import classes from './Select.css'
+import classes from './Select.module.css'
 
 type value = string | number | string[] | undefined
 

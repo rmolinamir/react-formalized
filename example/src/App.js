@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Input, Slider, Select } from 'react-png-input'
+import { Input, Slider, Select, Checkbox } from 'react-png-input'
 
 export default class App extends Component {
   render () {
@@ -40,6 +40,14 @@ export default class App extends Component {
             maxLength: 3500,
             minLength: 15
           }} />
+        <Input
+          type='textarea'
+          placeholder='TextArea'
+          elementConfig={{
+            maxLength: 3500,
+            minLength: 15,
+            rows: 5
+          }} />
         {/* <Slider /> */}
         <Slider
           // value='325'
@@ -72,6 +80,8 @@ export default class App extends Component {
               value: '192aaa3349130',
               displayValue: 'Option F (custom value)'
             }]} />
+        <Checkbox checked option='Checkbox A (checked)' />
+        <Checkbox option='Checkbox B' />
       </div>
     )
   }

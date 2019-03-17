@@ -65,10 +65,20 @@ const textarea = (props: IInputElementProps): JSX.Element => {
       const minRows: number = props.minRows || 3
       textAreaEl.rows = props.minRows || 3
       const rows = Math.ceil((textAreaEl.scrollHeight - baseScrollHeight) / 16)
-      console.log(Math.ceil((textAreaEl.scrollHeight - baseScrollHeight)))
-      console.log(Math.ceil((textAreaEl.scrollHeight - baseScrollHeight) / 16))
+      /**
+       * If the input was expanded manually.
+       */
+      if (textAreaEl.style.height) {
+        const styledHeight = Number(textAreaEl.style.height.replace(/[^\d.-]/g, ''))
+        if (textAreaEl.scrollHeight > styledHeight) {
+          textAreaEl.style.height = null
+        }
+      }
+      /**
+       * Automatically expand.
+       */
       if (props.elementConfig && props.elementConfig.rows) {
-        textAreaEl.rows = Math.max(minRows + rows, props.elementConfig.rows)
+        textAreaEl.rows = Math.max(minRows + rows + 1, props.elementConfig.rows)
       } else {
         textAreaEl.rows = minRows + rows
       }

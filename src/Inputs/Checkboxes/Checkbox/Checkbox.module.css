@@ -1,0 +1,88 @@
+.Wrapper {
+  display: flex;
+  align-items: center;
+}
+
+/* Customize the label (the container) */
+.Container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-left: 18px;
+  margin-bottom: 9px;
+  font-size: 16px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.Input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+  margin: 0;
+}
+
+.Label {
+  padding-left: 9px;
+}
+
+.Square {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 16px;
+  width: 16px;
+  /* Aesthetics */
+  background-color: #e6e6e6;
+  border: 1px solid inherit;
+  border-radius: 2px;
+}
+
+.Icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+  opacity: 1;
+}
+
+.Unmounted {
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.True {
+  animation: pop-in forwards var(--my-animation-duration);
+}
+
+.False {
+  animation: pop-out forwards var(--my-animation-duration);
+}
+
+@keyframes pop-in {
+  0% {
+    opacity: 0;
+    transform: translate(1px, 2px) rotate(30deg) scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0) scale(1);
+  }
+}
+
+@keyframes pop-out {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(1px, 2px) rotate(30deg) scale(0.8);
+  }
+}
