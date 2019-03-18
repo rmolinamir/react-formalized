@@ -10,17 +10,55 @@ import { Icon } from 'react-svg-library'
 //   touched?: boolean
 // }
 
-export const Checkbox = (props: any): JSX.Element => {
+export const Checkbox = React.memo((props: any): JSX.Element => {
   const [bIsChecked, setIsChecked] = useState(props.checked || false)
   const [bIsTouched, setIsTouched] = useState()
-  const [bIsMounted, setIsMounted] = useState()
-  const myIcon: React.RefObject<HTMLInputElement> = useRef(null)
+  // const [bIsMounted, setIsMounted] = useState()
+  const myInput: React.RefObject<HTMLInputElement> = useRef(null)
+  const myIcon: React.RefObject<HTMLSpanElement> = useRef(null)
+
+  const checkboxProps: {type: string, body?: string, icon?: JSX.Element, name?: string, animation?: string} = {
+    type: 'checkbox',
+    body: undefined,
+    icon: undefined,
+    name: undefined,
+    animation: undefined
+  }
+  const type:string = String(props.type).toLowerCase()
+  switch (type) {
+    case 'radio':
+      checkboxProps.type = props.multiple ? 'checkbox' : type
+      checkboxProps.body = classes.Radio
+      checkboxProps.animation = classes.Zoom
+      checkboxProps.icon = (
+        <span className={classes.Circle} />
+      )
+      break
+    case 'checkbox':
+    default:
+      if (type && type !== 'checkbox') {
+        console.warn('No prop types match your query, this results in a fallback to the checkbox input.')
+      }
+      checkboxProps.type = props.single ? 'radio' : 'checkbox'
+      checkboxProps.body = classes.Box
+      checkboxProps.animation = classes.Pop
+      checkboxProps.icon = (
+        <Icon
+            size='0.7em'
+            icon='bullet-checkmark-no-bg' />
+      )
+      break
+  }
 
   const onClickHandler = () => {
     if (!bIsTouched) {
       setIsTouched(true)
     }
-    setIsChecked(!bIsChecked)
+    if (myInput && myInput.current) {
+      console.log(props.option, 'onClickHandler myInput checked', !myInput.current.checked)
+      myInput.current.checked = !myInput.current.checked
+      setIsChecked(!myInput.current.checked)
+    }
   }
 
   const onChangeHandler = () => {
@@ -35,7 +73,7 @@ export const Checkbox = (props: any): JSX.Element => {
    */
   useEffect(() => {
     if (props.checked) {
-      setIsMounted(true)
+      // setIsMounted(true)
     }
   }, [])
 
@@ -49,46 +87,48 @@ export const Checkbox = (props: any): JSX.Element => {
       if (myIcon && myIcon.current) {
         myIcon.current.style.setProperty('--my-animation-duration', '200ms')
       }
-      setIsMounted(true)
+      // setIsMounted(true)
     }
   }, [bIsTouched])
 
-  console.log(props.option, 'bIsChecked', bIsChecked)
-  console.log(props.option, 'bIsTouched', bIsTouched)
-  console.log(props.option, 'bIsMounted', bIsMounted)
+  // console.log(props.option, 'bIsChecked', bIsChecked)
+  // console.log(props.option, 'bIsTouched', bIsTouched)
+  // console.log(props.option, 'bIsMounted', bIsMounted)
 
   return (
-    <div className={classes.Wrapper}>
+    <fieldset className={classes.Wrapper}>
       <input
-        type='checkbox'
+        ref={myInput}
+        type={checkboxProps.type}
         className={classes.Input}
         value={props.value}
-        checked={bIsChecked}
+        name={props.name || props.single ? 'single' : undefined}
+        checked={props.checked}
         onChange={onChangeHandler} />
       <label 
         onClick={onClickHandler}
         className={classes.Container}>
         <span
-          className={classes.Square}>
+          className={[
+            checkboxProps.body,
+            bIsChecked ? classes.Checked : null
+          ].join(' ')}>
           <span 
             ref={myIcon}
             className={[
               classes.Icon,
-              !bIsMounted ? classes.Unmounted : null,
+              checkboxProps.animation,
+              // !bIsMounted ? classes.Unmounted : null,
               /**
                * The animations will only play if `bIsTouched` is touched,
-               * meaning it was mounted/clicked or `props.checked` was true by default.
+               * meaning if it was mounted/clicked or `props.checked` was true by default.
                */
-              bIsTouched ? bIsChecked ? classes.True : classes.False : null
             ].join(' ')}>
-            <Icon
-              size='0.9em'
-              icon='bullet-checkmark-no-bg' />
+            {checkboxProps.icon}
           </span>
         </span>
         <span className={classes.Label}>{props.option}</span>
       </label>
-    </div>
+    </fieldset>
   )
-}
-
+})

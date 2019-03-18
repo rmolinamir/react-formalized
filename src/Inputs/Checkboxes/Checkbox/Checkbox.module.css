@@ -1,11 +1,16 @@
 .Wrapper {
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  /* Fieldset */
+  border: 0;
+  outline: 0;
+  padding: 0;
+  margin: 0;
 }
 
 /* Customize the label (the container) */
 .Container {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   position: relative;
   padding-left: 18px;
@@ -32,38 +37,94 @@
   padding-left: 9px;
 }
 
-.Square {
+.Box,
+.Radio {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 16px;
   width: 16px;
+}
+
+.Box {
   /* Aesthetics */
   background-color: #e6e6e6;
   border: 1px solid inherit;
   border-radius: 2px;
+  transition: background-color ease 200ms;
 }
 
-.Icon {
+.Radio {
+  border-radius: 50%;
+  /* Aesthetics */
+  background-color: #e6e6e6;
+  border: 1px solid inherit;
+  transition: background-color ease 200ms;
+}
+
+.Input:checked ~ .Container .Box,
+.Input:checked ~  .Container .Radio {
+  background-color: #1EA3CC !important;
+}
+
+.Wrapper:hover .Box,
+.Wrapper:hover .Radio {
+  background-color: #ccc;
+}
+
+/**
+* -------------------
+* -------ICONS-------
+* -------------------
+*/
+
+
+.Input:checked ~ .Container .Icon {
   display: flex;
   justify-content: center;
-  align-items: center;  
+  align-items: center;
+  color: #FFF;
   opacity: 1;
 }
 
-.Unmounted {
-  display: none;
-  visibility: hidden;
+.Icon {
   opacity: 0;
+  transform: opacity ease var(--my-animation-duration);
 }
 
-.True {
+
+/* Circle */
+
+.Circle {
+  width: 0.7em;
+  height: 0.7em;
+  background-color: currentColor;
+  border-radius: 50%;
+}
+
+/**
+* ------------------------
+* -------ANIMATIONS-------
+* ------------------------
+*/
+
+.Input:checked ~ .Container .Icon.Pop {
   animation: pop-in forwards var(--my-animation-duration);
 }
 
-.False {
+.Icon.Pop {
   animation: pop-out forwards var(--my-animation-duration);
 }
+
+.Input:checked ~  .Container .Icon.Zoom {
+  animation: zoom-in forwards var(--my-animation-duration);
+}
+
+.Icon.Zoom {
+  animation: zoom-out forwards var(--my-animation-duration);
+}
+
+/* Pop */
 
 @keyframes pop-in {
   0% {
@@ -83,6 +144,34 @@
   }
   100% {
     opacity: 0;
+    display: none;
+    visibility: hidden;
     transform: translate(1px, 2px) rotate(30deg) scale(0.8);
+  }
+}
+
+/* Zoom */
+
+@keyframes zoom-in {
+  0% {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes zoom-out {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    display: none;
+    visibility: hidden;
+    transform: scale(0.8);
   }
 }

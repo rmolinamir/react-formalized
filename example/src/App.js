@@ -82,6 +82,8 @@ export default class App extends Component {
             }]} />
         <Checkbox checked option='Checkbox A (checked)' />
         <Checkbox option='Checkbox B' />
+        <Checkbox single checked type='radio' option='Radio A' />
+        <Checkbox single type='radio' option='Radio B' />
       </div>
     )
   }
