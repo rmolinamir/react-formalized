@@ -82,8 +82,17 @@ export default class App extends Component {
             }]} />
         <Checkbox checked option='Checkbox A (checked)' />
         <Checkbox option='Checkbox B' />
-        <Checkbox single checked type='radio' option='Radio A' />
-        <Checkbox single type='radio' option='Radio B' />
+        <Checkbox multiple checked type='radio' option='Checkbox C' />
+        <Checkbox checked type='radio' option='Radio A' />
+        <Checkbox disabled single type='radio' option='Radio B (disabled)' />
+        <Checkbox type='radio' option='Radio C' />
+        <Checkbox type='radio' option='Radio D' />
+        <span>Inside a form:</span>
+        <form>
+          <Checkbox disabled single type='radio' option='Radio E (disabled)' />
+          <Checkbox type='radio' option='Radio F' />
+          <Checkbox type='radio' option='Radio G' />
+        </form>
       </div>
     )
   }

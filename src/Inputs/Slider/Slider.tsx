@@ -62,7 +62,6 @@ export const Slider = (props: ISliderProps) => {
 
   return (
     <div
-      draggable={false}
       className={classes.Wrapper}>
       <fieldset 
         draggable={false}
