@@ -12,6 +12,7 @@ import { Icon } from 'react-svg-library'
 
 export const Checkbox = React.memo((props: any): JSX.Element => {
   const [bIsChecked, setIsChecked] = useState(props.checked || false)
+  const [bIsTouched, setIsTouched] = useState(false)
   const myInput: React.RefObject<HTMLInputElement> = useRef(null)
   const myLabel: React.RefObject<HTMLLabelElement> = useRef(null)
 
@@ -64,11 +65,18 @@ export const Checkbox = React.memo((props: any): JSX.Element => {
   }
 
   const onClickHandler = (event: React.SyntheticEvent) => {
-    console.log('inside onClickHandler')
     if (props.disabled) return
+    /**
+     * The animation duration is undefined (defaults to 0), until the input is first touched.
+     * This improves U/UIX during the first rendering.
+     */
+    if (!bIsTouched) {
+      if (myLabel && myLabel.current) {
+        myLabel.current.style.setProperty('--my-animation-duration', '200ms')
+        setIsTouched(true)
+      }
+    }
     if (myInput && myInput.current) {
-      console.log('inside onClickHandler myInput.current.checked', myInput.current.checked)
-      console.log('inside onClickHandler !myInput.current.checked', !myInput.current.checked)
       const status = !myInput.current.checked
       setIsChecked(status)
       if (props.onChange) {
@@ -90,7 +98,6 @@ export const Checkbox = React.memo((props: any): JSX.Element => {
    */
   useEffect(() => {
     if (myLabel && myLabel.current) {
-      myLabel.current.style.setProperty('--my-animation-duration', '200ms')
       myLabel.current.style.setProperty('--my-background-color', '#E6E6E6')
       myLabel.current.style.setProperty('--my-highlighted-background-color', '#1EA3CC')
       myLabel.current.style.setProperty('--my-hovered-background-color', '#CCC')
@@ -99,8 +106,6 @@ export const Checkbox = React.memo((props: any): JSX.Element => {
   }, [])
 
   const key = props.id || String(`${props.label}_${type}`).toLowerCase().split(' ').join('_')
-
-  console.log('props', props)
 
   return (
     <React.Fragment>
