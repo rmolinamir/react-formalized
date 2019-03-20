@@ -13,14 +13,17 @@
   display: inline-flex;
   align-items: center;
   position: relative;
-  padding-left: 18px;
-  margin-bottom: 9px;
-  font-size: 16px;
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.Container.Aesthetics {
+  padding-left: 18px;
+  margin-bottom: 9px;
+  font-size: 16px;
 }
 
 /* Disabled */
@@ -61,9 +64,10 @@
 }
 
 .Body {
-  display: flex;
-  justify-content: center;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
+  position: relative;
   background-color: var(--my-background-color);
   transition: background-color ease var(--my-animation-duration);
 }
@@ -86,11 +90,32 @@
   border: 1px solid inherit;
 }
 
-.Input:checked ~ .Container .Body {
+.Input.Checked ~ .Container .Body {
   background-color: var(--my-highlighted-background-color) !important;
 }
 
 .Wrapper:hover .Body {
+  background-color: var(--my-hovered-background-color);
+}
+
+/**
+* --------------------
+* -------BUBBLE-------
+* --------------------
+*/
+
+.Bubble {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 12px;
+  width: 100%;
+  background-color: var(--my-background-color);
+  border: 1px solid var(--my-background-color);
+  border-radius: 12px;
+}
+
+.Wrapper:hover .Bubble {
   background-color: var(--my-hovered-background-color);
 }
 
@@ -100,17 +125,18 @@
 * -------------------
 */
 
-.Input:checked ~ .Container .Icon {
+.Icon {
+  position: absolute;
+  opacity: 0;
+  color: var(--my-icon-color);
+  transition: all ease var(--my-animation-duration);
+}
+
+.Input.Checked ~ .Container .Icon {
   display: flex;
   justify-content: center;
   align-items: center;
   opacity: 1;
-}
-
-.Icon {
-  opacity: 0;
-  color: var(--my-icon-color);
-  transition: opacity ease var(--my-animation-duration);
 }
 
 
@@ -129,70 +155,26 @@
 * ------------------------
 */
 
-.Input:checked ~ .Container .Icon.Pop {
-  animation: pop-in forwards var(--my-animation-duration);
+/* Pop */
+
+.Input.Checked ~ .Container .Icon.Pop {
+  opacity: 1;
+  transform: translate(0, 0) rotate(0) scale(1);
 }
 
 .Icon.Pop {
-  animation: pop-out forwards var(--my-animation-duration);
-}
-
-.Input:checked ~  .Container .Icon.Zoom {
-  animation: zoom-in forwards var(--my-animation-duration);
-}
-
-.Icon.Zoom {
-  animation: zoom-out forwards var(--my-animation-duration);
-}
-
-/* Pop */
-
-@keyframes pop-in {
-  0% {
-    opacity: 0;
-    transform: translate(1px, 2px) rotate(30deg) scale(1.2);
-  }
-  100% {
-    opacity: 1;
-    transform: translate(0, 0) rotate(0) scale(1);
-  }
-}
-
-@keyframes pop-out {
-  0% {
-    opacity: 1;
-    transform: translate(0, 0) rotate(0) scale(1);
-  }
-  100% {
-    opacity: 0;
-    display: none;
-    visibility: hidden;
-    transform: translate(1px, 2px) rotate(30deg) scale(0.8);
-  }
+  opacity: 0;
+  transform: translate(1px, 2px) rotate(30deg) scale(1.2);
 }
 
 /* Zoom */
 
-@keyframes zoom-in {
-  0% {
-    opacity: 0;
-    transform: scale(1.2);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
+.Input.Checked ~ .Container .Icon.Zoom {
+  opacity: 1;
+  transform: scale(1);
 }
 
-@keyframes zoom-out {
-  0% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  100% {
-    opacity: 0;
-    display: none;
-    visibility: hidden;
-    transform: scale(0.8);
-  }
+.Icon.Zoom {
+  opacity: 0;
+  transform: scale(1.2);
 }

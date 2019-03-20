@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Input, Slider, Select, Checkbox } from 'react-png-input'
+import { Input, Slider, Select, Checkbox, CheckboxGroup } from 'react-png-input'
 
 export default class App extends Component {
   render () {
@@ -80,19 +80,27 @@ export default class App extends Component {
               value: '192aaa3349130',
               displayValue: 'Option F (custom value)'
             }]} />
+        <span>Checkboxes:</span>
         <Checkbox checked label='Checkbox A (checked)' />
         <Checkbox label='Checkbox B' />
         <Checkbox multiple checked type='radio' label='Checkbox C' />
+        <Checkbox
+          label='Checkbox D (if checked, renders option E)'
+          dynamic={(<Checkbox style={{ paddingLeft: '9px' }} label='Checkbox E' />)} />
+        <span>Radio inputs:</span>
         <Checkbox checked type='radio' label='Radio A' />
         <Checkbox disabled single type='radio' label='Radio B (disabled)' />
         <Checkbox type='radio' label='Radio C' />
         <Checkbox type='radio' label='Radio D' />
-        <span>Inside a form:</span>
-        <form>
-          <Checkbox disabled single type='radio' label='Radio E (disabled)' />
+        <span>Inside a checkbox group:</span>
+        <CheckboxGroup name='group'>
+          <Checkbox disabled type='radio' label='Radio E (disabled)' />
           <Checkbox type='radio' label='Radio F' />
           <Checkbox type='radio' label='Radio G' />
-        </form>
+        </CheckboxGroup>
+        <span>Bubbles:</span>
+        <Checkbox type='bubble' label='Bubble A' />
+        <Checkbox type='bubble' label='Bubble B' />
       </div>
     )
   }

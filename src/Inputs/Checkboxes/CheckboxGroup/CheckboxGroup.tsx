@@ -1,7 +1,7 @@
 import * as React from 'react'
 
-export const Checkbox = React.memo((props: any): JSX.Element => {
-  const { children, name } = props;
+export const CheckboxGroup = React.memo((props: any): JSX.Element => {
+  const { children, name, style, className } = props;
 
   /**
    * Cloning children to pass props.
@@ -10,7 +10,9 @@ export const Checkbox = React.memo((props: any): JSX.Element => {
     React.cloneElement(
       child, 
       {
-        name: name 
+        name: name,
+        style: style,
+        className: className
       })
   )
 
