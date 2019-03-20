@@ -1,6 +1,4 @@
 .Wrapper {
-  display: inline-flex;
-  align-items: center;
   /* Fieldset */
   border: 0;
   outline: 0;
@@ -8,9 +6,26 @@
   margin: 0;
 }
 
-/* Customize the label (the container) */
-.Container {
-  display: inline-flex;
+/* Disabled */
+
+.Input:disabled ~ .Label {
+  cursor: not-allowed !important;
+  opacity: 0.8 !important;
+}
+
+.Input:disabled ~ .Label .Body {
+  background-color: var(--my-background-color) !important;
+}
+
+/**
+* -------------------
+* -------INPUT-------
+* -------------------
+*/
+
+/* Customize the label */
+.Label {
+  display: flex;
   align-items: center;
   position: relative;
   cursor: pointer;
@@ -20,28 +35,10 @@
   user-select: none;
 }
 
-.Container.Aesthetics {
-  padding-left: 18px;
-  margin-bottom: 9px;
+.Label.Aesthetics {
+  margin: 4px 0;
   font-size: 16px;
 }
-
-/* Disabled */
-
-.Input:disabled ~ .Container {
-  cursor: not-allowed !important;
-  opacity: 0.8 !important;
-}
-
-.Input:disabled ~ .Container .Body {
-  background-color: var(--my-background-color) !important;
-}
-
-/**
-* -------------------
-* -------INPUT-------
-* -------------------
-*/
 
 /* Hide the browser's default checkbox */
 .Input {
@@ -59,14 +56,12 @@
 * -------------------
 */
 
-.Label {
-  padding-left: 9px;
-}
-
 .Body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  /* margin-right: 9px; */
+  margin: 0 9px 0 18px;
   position: relative;
   background-color: var(--my-background-color);
   transition: background-color ease var(--my-animation-duration);
@@ -90,11 +85,11 @@
   border: 1px solid inherit;
 }
 
-.Input.Checked ~ .Container .Body {
+.Input:checked ~ .Label .Body {
   background-color: var(--my-highlighted-background-color) !important;
 }
 
-.Wrapper:hover .Body {
+.Label:hover .Body {
   background-color: var(--my-hovered-background-color);
 }
 
@@ -108,15 +103,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 9px 12px;
+  height: 48px;
+  padding: 9px 0;
   width: 100%;
+  color: inherit;
   background-color: var(--my-background-color);
   border: 1px solid var(--my-background-color);
   border-radius: 12px;
+  transition: all ease var(--my-animation-duration);
 }
 
-.Wrapper:hover .Bubble {
+.Label:hover .Bubble {
   background-color: var(--my-hovered-background-color);
+}
+
+.Input:checked ~ .Label .Bubble {
+  background-color: var(--my-highlighted-background-color);
+  color: var(--my-icon-color);
 }
 
 /**
@@ -132,7 +135,7 @@
   transition: all ease var(--my-animation-duration);
 }
 
-.Input.Checked ~ .Container .Icon {
+.Input:checked ~ .Label .Icon {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -157,7 +160,7 @@
 
 /* Pop */
 
-.Input.Checked ~ .Container .Icon.Pop {
+.Input:checked ~ .Label .Icon.Pop {
   opacity: 1;
   transform: translate(0, 0) rotate(0) scale(1);
 }
@@ -169,7 +172,7 @@
 
 /* Zoom */
 
-.Input.Checked ~ .Container .Icon.Zoom {
+.Input:checked ~ .Label .Icon.Zoom {
   opacity: 1;
   transform: scale(1);
 }

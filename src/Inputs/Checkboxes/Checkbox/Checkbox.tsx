@@ -37,14 +37,10 @@ export const Checkbox = React.memo((props: any): JSX.Element => {
       )
       break
     case 'bubble': 
-      checkboxProps.type = props.multiple ? 'checkbox' : type
+      checkboxProps.type = props.single ? 'radio' : 'checkbox'
       checkboxProps.body = classes.Bubble
-      checkboxProps.animation = classes.Fill
       checkboxProps.label = (
-        <div className={[
-          classes.Bubble,
-          checkboxProps.animation
-        ].join(' ')}>
+        <div className={classes.Bubble}>
           {props.label}
         </div>
       )
@@ -68,18 +64,21 @@ export const Checkbox = React.memo((props: any): JSX.Element => {
   }
 
   const onClickHandler = (event: React.SyntheticEvent) => {
+    console.log('inside onClickHandler')
     if (props.disabled) return
     if (myInput && myInput.current) {
+      console.log('inside onClickHandler myInput.current.checked', myInput.current.checked)
+      console.log('inside onClickHandler !myInput.current.checked', !myInput.current.checked)
       const status = !myInput.current.checked
       setIsChecked(status)
       if (props.onChange) {
         props.onChange(
-          status, 
           {
             label: props.label,
             status: status,
             value: props.value
           },
+          status, 
           event
         )
       }
@@ -101,23 +100,25 @@ export const Checkbox = React.memo((props: any): JSX.Element => {
 
   const key = props.id || String(`${props.label}_${type}`).toLowerCase().split(' ').join('_')
 
+  console.log('props', props)
+
   return (
     <React.Fragment>
       <fieldset
-        style={props.style}
+        style={{
+          ...props.style,
+          display: props.inline && 'inline'
+        }}
         className={classes.Wrapper}>
         <input
           id={key}
           ref={myInput}
           type={checkboxProps.type}
-          className={[
-            classes.Input,
-            bIsChecked && classes.Checked
-          ].join(' ')}
+          className={classes.Input}
           value={props.value}
           name={props.name || (
             checkboxProps.type === 'radio' ? 
-            'single' 
+            'radio' 
             : props.single && 'single'
           )}
           defaultChecked={bIsChecked}
@@ -126,7 +127,7 @@ export const Checkbox = React.memo((props: any): JSX.Element => {
           ref={myLabel}
           htmlFor={key}
           className={[
-            classes.Container,
+            classes.Label,
             props.className || classes.Aesthetics
           ].join(' ')}
           onClick={onClickHandler}>
@@ -145,7 +146,7 @@ export const Checkbox = React.memo((props: any): JSX.Element => {
               </span>
             </span>
           )}
-          <span className={classes.Label}>{checkboxProps.label}</span>
+          {checkboxProps.label}
         </label>
       </fieldset>
       {bIsChecked && (type === 'checkbox' || !props.type) && (

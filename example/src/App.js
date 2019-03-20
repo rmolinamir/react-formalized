@@ -93,14 +93,21 @@ export default class App extends Component {
         <Checkbox type='radio' label='Radio C' />
         <Checkbox type='radio' label='Radio D' />
         <span>Inside a checkbox group:</span>
-        <CheckboxGroup name='group'>
+        <CheckboxGroup name='checkbox-group'>
           <Checkbox disabled type='radio' label='Radio E (disabled)' />
           <Checkbox type='radio' label='Radio F' />
           <Checkbox type='radio' label='Radio G' />
         </CheckboxGroup>
-        <span>Bubbles:</span>
+        <span>Bubbles as checkboxes:</span>
         <Checkbox type='bubble' label='Bubble A' />
-        <Checkbox type='bubble' label='Bubble B' />
+        <Checkbox checked type='bubble' label='Bubble B' />
+        <Checkbox type='bubble' label='Bubble C' />
+        <span>Bubbles as radio inputs:</span>
+        <CheckboxGroup single name='bubble-group'>
+          <Checkbox type='bubble' label='Bubble D' />
+          <Checkbox type='bubble' label='Bubble F' />
+          <Checkbox type='bubble' label='Bubble G' />
+        </CheckboxGroup>
       </div>
     )
   }
