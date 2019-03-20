@@ -31,7 +31,7 @@
 }
 
 .Input:disabled ~ .Container .Body {
-  background-color: #e6e6e6 !important;
+  background-color: var(--my-background-color) !important;
 }
 
 /**
@@ -64,8 +64,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #e6e6e6;
-  transition: background-color ease 200ms;
+  background-color: var(--my-background-color);
+  transition: background-color ease var(--my-animation-duration);
 }
 
 .Box,
@@ -87,11 +87,11 @@
 }
 
 .Input:checked ~ .Container .Body {
-  background-color: #1EA3CC !important;
+  background-color: var(--my-highlighted-background-color) !important;
 }
 
 .Wrapper:hover .Body {
-  background-color: #ccc;
+  background-color: var(--my-hovered-background-color);
 }
 
 /**
@@ -108,8 +108,8 @@
 }
 
 .Icon {
-  color: #FFF;
   opacity: 0;
+  color: var(--my-icon-color);
   transition: opacity ease var(--my-animation-duration);
 }
 

@@ -80,18 +80,18 @@ export default class App extends Component {
               value: '192aaa3349130',
               displayValue: 'Option F (custom value)'
             }]} />
-        <Checkbox checked option='Checkbox A (checked)' />
-        <Checkbox option='Checkbox B' />
-        <Checkbox multiple checked type='radio' option='Checkbox C' />
-        <Checkbox checked type='radio' option='Radio A' />
-        <Checkbox disabled single type='radio' option='Radio B (disabled)' />
-        <Checkbox type='radio' option='Radio C' />
-        <Checkbox type='radio' option='Radio D' />
+        <Checkbox checked label='Checkbox A (checked)' />
+        <Checkbox label='Checkbox B' />
+        <Checkbox multiple checked type='radio' label='Checkbox C' />
+        <Checkbox checked type='radio' label='Radio A' />
+        <Checkbox disabled single type='radio' label='Radio B (disabled)' />
+        <Checkbox type='radio' label='Radio C' />
+        <Checkbox type='radio' label='Radio D' />
         <span>Inside a form:</span>
         <form>
-          <Checkbox disabled single type='radio' option='Radio E (disabled)' />
-          <Checkbox type='radio' option='Radio F' />
-          <Checkbox type='radio' option='Radio G' />
+          <Checkbox disabled single type='radio' label='Radio E (disabled)' />
+          <Checkbox type='radio' label='Radio F' />
+          <Checkbox type='radio' label='Radio G' />
         </form>
       </div>
     )

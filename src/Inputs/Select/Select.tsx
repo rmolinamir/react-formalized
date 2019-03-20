@@ -156,8 +156,9 @@ export const Select = (props: ISelectProps) => {
     const { backgroundColor, borderRadius, color } = props
     if (myWrapper && myWrapper.current) {
       myWrapper.current.style.setProperty('--my-highlight-color', '#1EA3CC')
-      myWrapper.current.style.setProperty('--my-background-color', backgroundColor || '#FAFBFC')
       myWrapper.current.style.setProperty('--my-border-radius', borderRadius || '4px')
+      myWrapper.current.style.setProperty('--my-background-color', backgroundColor || '#FAFBFC')
+      myWrapper.current.style.setProperty('--my-arrow-color', backgroundColor || '#FAFBFC')
       myWrapper.current.style.setProperty('--my-color', color || '#484848')
     }
   }, [])

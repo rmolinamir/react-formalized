@@ -59,7 +59,7 @@ export const Checkbox = React.memo((props: any): JSX.Element => {
         props.onChange(
           status, 
           {
-            label: props.option,
+            label: props.label,
             status: status,
             value: props.value
           },
@@ -75,10 +75,14 @@ export const Checkbox = React.memo((props: any): JSX.Element => {
   useEffect(() => {
     if (myIcon && myIcon.current) {
       myIcon.current.style.setProperty('--my-animation-duration', '200ms')
+      myIcon.current.style.setProperty('--my-background-color', '#E6E6E6')
+      myIcon.current.style.setProperty('--my-highlighted-background-color', '#1EA3CC')
+      myIcon.current.style.setProperty('--my-hovered-background-color', '#CCC')
+      myIcon.current.style.setProperty('--my-icon-color', '#FFF')
     }
   }, [])
 
-  const key = props.id || String(props.option).toLowerCase().split('_').join('')
+  const key = props.id || String(`${props.label}_${type}`).toLowerCase().split(' ').join('_')
 
   return (
     <fieldset className={classes.Wrapper}>
@@ -95,17 +99,17 @@ export const Checkbox = React.memo((props: any): JSX.Element => {
         )}
         defaultChecked={bIsChecked}
         disabled={props.disabled} />
-      <label 
+      <label
         htmlFor={key}
         className={classes.Container}
         onClick={onClickHandler}>
         <span
+          ref={myIcon}
           className={[
-            classes.Body,
-            checkboxProps.body
-            ].join(' ')}>
+          classes.Body,
+          checkboxProps.body
+          ].join(' ')}>
           <span 
-            ref={myIcon}
             className={[
               classes.Icon,
               checkboxProps.animation
@@ -113,7 +117,7 @@ export const Checkbox = React.memo((props: any): JSX.Element => {
             {checkboxProps.icon}
           </span>
         </span>
-        <span className={classes.Label}>{props.option}</span>
+        <span className={classes.Label}>{props.label}</span>
       </label>
     </fieldset>
   )

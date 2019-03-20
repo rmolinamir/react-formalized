@@ -207,7 +207,7 @@
 }
 
 .Wrapper.Open .Button {
-  color: #FFF;
+  color: var(--my-arrow-color);
   background-color: var(--my-highlight-color);
   border-color: var(--my-highlight-color);
 }

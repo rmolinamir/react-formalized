@@ -29,14 +29,10 @@ const textarea = (props: IInputElementProps): JSX.Element => {
      */
     if (bIsMobile) {
       window.addEventListener('orientationchange', autoExpand);
-    } else {
-      window.addEventListener('resize', autoExpand);
     }
     return (() => {
       if (bIsMobile) {
         window.removeEventListener('orientationchange', autoExpand);
-      } else {
-        window.removeEventListener('resize', autoExpand);
       }
     })
   }, [])

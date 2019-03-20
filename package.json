@@ -22,7 +22,8 @@
     "deploy": "gh-pages -d example/build"
   },
   "dependencies": {
-    "react-svg-library": "^1.1.0"
+    "react-svg-library": "^1.1.0",
+    "with-context-react": "^1.1.1"
   },
   "peerDependencies": {
     "prop-types": "^15.5.4",
