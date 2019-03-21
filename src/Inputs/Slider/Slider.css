@@ -7,6 +7,10 @@
   width: 100%; /* Width of the outside container */
 }
 
+.Wrapper.Aesthetics {
+  padding-bottom: 9px;
+}
+
 /* Value Indicator */
 
 .Indicator {
@@ -16,11 +20,11 @@
   position: relative;
   width: 48px;
   height: 100%;
-  color: #FFF;
   text-align: center;
   border-radius: 4px;
-  background: #484848;
   margin-left: 8px;
+  color: var(--my-icon-color);
+  background: var(--my-indicator-background-color);
   /* Text overflow. */
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -33,8 +37,8 @@
   left: -5px;
   width: 0;
   height: 0;
+  border-right: 7px solid var(--my-indicator-background-color);
   border-top: 7px solid transparent;
-  border-right: 7px solid #484848;
   border-bottom: 7px solid transparent;
 }
 
@@ -44,8 +48,7 @@
   position: relative;
   height: 12px;
   display: flex;
-  background: #EBEBEB; /* Fallback color. */
-  background: var(--my-background-color);
+  background: var(--my-border-color);
   justify-content: center;
   align-items: center;
   border-radius: 4px;
@@ -69,7 +72,7 @@
   border-bottom-right-radius: var(--my-border-right);
   content: '';
   background-color: #1ea3cc; /* Fallback color. */
-  background: var(--my-progress-background-color);
+  background: var(--my-hightligh-color);
 }
 
 .Slider {
@@ -91,7 +94,7 @@
   height: 22px;
   border-radius: 50%;
   background: #1ea3cc; /* Fallback color. */
-  background: var(--my-progress-background-color);
+  background: var(--my-hightligh-color);
   cursor: grabbing;
   transition: transform ease 200ms;
 }
@@ -109,7 +112,7 @@
   height: 20px;
   border-radius: 50%;
   background: #1ea3cc; /* Fallback color. */
-  background: var(--my-progress-background-color);
+  background: var(--my-hightligh-color);
   cursor: grabbing;
   transition: transform ease 200ms;
 }
@@ -127,7 +130,7 @@
   height: 20px;
   border-radius: 50%; 
   background: #1ea3cc; /* Fallback color. */
-  background: var(--my-progress-background-color);
+  background: var(--my-hightligh-color);
   cursor: grabbing;
   transition: transform ease 200ms;
 }

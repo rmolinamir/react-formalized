@@ -5,7 +5,7 @@
   box-sizing: border-box;
   /* Fieldset */
   margin: 0;
-  padding: 0;
+  padding: 0 0 9px;
   border: 0;
   transform: border-color ease 300ms;
   /* Aesthetics */
@@ -14,7 +14,6 @@
   border-radius: 4px;
   background-color: #FAFBFC;
   /* Programmatically */
-  color: var(--my-color);
   border-radius: var(--my-border-radius);
   background-color: var(--my-background-color);
 }

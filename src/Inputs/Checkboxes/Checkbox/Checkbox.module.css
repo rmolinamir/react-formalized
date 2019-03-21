@@ -14,7 +14,7 @@
 }
 
 .Input:disabled ~ .Label .Body {
-  background-color: var(--my-background-color) !important;
+  background-color: var(--checkbox-background-color) !important;
 }
 
 /**
@@ -63,7 +63,7 @@
   /* margin-right: 9px; */
   margin: 0 9px 0 18px;
   position: relative;
-  background-color: var(--my-background-color);
+  background-color: var(--checkbox-background-color);
   transition: background-color ease var(--my-animation-duration);
 }
 
@@ -86,11 +86,11 @@
 }
 
 .Input:checked ~ .Label .Body {
-  background-color: var(--my-highlighted-background-color) !important;
+  background-color: var(--my-hightligh-color) !important;
 }
 
 .Label:hover .Body {
-  background-color: var(--my-hovered-background-color);
+  background-color: var(--my-hover-color);
 }
 
 /**
@@ -107,18 +107,18 @@
   padding: 9px 0;
   width: 100%;
   color: inherit;
-  background-color: var(--my-background-color);
-  border: 1px solid var(--my-background-color);
+  background-color: var(--checkbox-background-color);
+  border: 1px solid var(--checkbox-background-color);
   border-radius: 12px;
   transition: all ease var(--my-animation-duration);
 }
 
 .Label:hover .Bubble {
-  background-color: var(--my-hovered-background-color);
+  background-color: var(--my-hover-color);
 }
 
 .Input:checked ~ .Label .Bubble {
-  background-color: var(--my-highlighted-background-color);
+  background-color: var(--my-hightligh-color);
   color: var(--my-icon-color);
 }
 

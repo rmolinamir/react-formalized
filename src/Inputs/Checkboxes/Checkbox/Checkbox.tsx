@@ -1,8 +1,10 @@
 import * as React from 'react'
-const { useState, useEffect, useRef } = React
+const { useState, useRef } = React
+import { withContext } from 'with-context-react'
 // CSS
 import classes from './Checkbox.module.css'
 // JSX
+import { Context } from '../../Context/Context'
 import { Icon } from 'react-svg-library'
 
 // interface IInputState {
@@ -10,11 +12,11 @@ import { Icon } from 'react-svg-library'
 //   touched?: boolean
 // }
 
-export const Checkbox = React.memo((props: any): JSX.Element => {
+export const Checkbox = withContext(React.memo((props: any): JSX.Element => {
   const [bIsChecked, setIsChecked] = useState(props.checked || false)
-  const [bIsTouched, setIsTouched] = useState(false)
+  // const [bIsTouched, setIsTouched] = useState(false)
   const myInput: React.RefObject<HTMLInputElement> = useRef(null)
-  const myLabel: React.RefObject<HTMLLabelElement> = useRef(null)
+  // const myLabel: React.RefObject<HTMLLabelElement> = useRef(null)
 
   const checkboxProps: {type: string, body?: string, icon?: JSX.Element | null, name?: string, label?: JSX.Element, animation?: string} = {
     type: 'checkbox',
@@ -70,12 +72,12 @@ export const Checkbox = React.memo((props: any): JSX.Element => {
      * The animation duration is undefined (defaults to 0), until the input is first touched.
      * This improves U/UIX during the first rendering.
      */
-    if (!bIsTouched) {
-      if (myLabel && myLabel.current) {
-        myLabel.current.style.setProperty('--my-animation-duration', '200ms')
-        setIsTouched(true)
-      }
-    }
+    // if (!bIsTouched) {
+      // if (myLabel && myLabel.current) {
+      //   myLabel.current.style.setProperty('--my-animation-duration', '200ms')
+      //   setIsTouched(true)
+      // }
+    // }
     if (myInput && myInput.current) {
       const status = !myInput.current.checked
       setIsChecked(status)
@@ -96,14 +98,18 @@ export const Checkbox = React.memo((props: any): JSX.Element => {
   /**
    * If `props.checked === true` then set then set the animation duration to 200ms
    */
-  useEffect(() => {
-    if (myLabel && myLabel.current) {
-      myLabel.current.style.setProperty('--my-background-color', '#E6E6E6')
-      myLabel.current.style.setProperty('--my-highlighted-background-color', '#1EA3CC')
-      myLabel.current.style.setProperty('--my-hovered-background-color', '#CCC')
-      myLabel.current.style.setProperty('--my-icon-color', '#FFF')
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (myLabel && myLabel.current) {
+  //     myLabel.current.style.setProperty('--my-background-color', '#E6E6E6')
+  //     myLabel.current.style.setProperty('--my-highlighted-background-color', '#1EA3CC')
+  //     myLabel.current.style.setProperty('--my-hovered-background-color', '#CCC')
+  //     myLabel.current.style.setProperty('--my-icon-color', '#FFF')
+  //   }
+  // }, [])
+
+  const CSSVariables = {
+    ...props._context
+  }
 
   const key = props.id || String(`${props.label}_${type}`).toLowerCase().split(' ').join('_')
 
@@ -129,7 +135,9 @@ export const Checkbox = React.memo((props: any): JSX.Element => {
           defaultChecked={bIsChecked}
           disabled={props.disabled} />
         <label
-          ref={myLabel}
+          style={{
+            ...CSSVariables
+          }}
           htmlFor={key}
           className={[
             classes.Label,
@@ -159,4 +167,4 @@ export const Checkbox = React.memo((props: any): JSX.Element => {
       )}
     </React.Fragment>
   )
-})
+}), Context)

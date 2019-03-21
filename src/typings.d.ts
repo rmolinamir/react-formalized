@@ -58,12 +58,16 @@ interface IInputState {
   touched?: boolean
 }
 
-interface IInputProps extends IInputState, Omit<IInputElementProps, 'onChange'> {
+declare interface IInputProps extends IInputState, Omit<IInputElementProps, 'onChange'> {
   type: string
   placeholder: string
   valueType: string
   className: string
   onChange: (value: value, valid: boolean) => void
+  /**
+   * Theme context.
+   */
+  _context: ITheme
   /**
    * Text area input.
    */
@@ -129,4 +133,47 @@ interface ISliderProps extends IInputConfig {
   minValue: sliderValue
   maxValue: sliderValue
   onChange: (value: sliderValue, valid: boolean) => void
+  /**
+   * Theme context.
+   */
+  _context: ITheme
+}
+
+/**
+ * Context.
+ */
+
+interface ITheme {
+  /**
+   * Input.
+   */
+  ['--my-border-color']: string
+  ['--my-border-radius']: string
+  ['--my-background-color']: string
+  ['--my-hightligh-color']: string
+  ['--my-hover-color']: string
+  /**
+   * Label.
+   */
+  ['--my-label-color']: string
+  /**
+   * Validity.
+   */
+  ['--my-valid-color']: string
+  ['--my-invalid-color']: string
+  /**
+   * Slider.
+   */
+  ['--my-indicator-background-color']: string
+  ['--my-icon-color']: string
+  /**
+   * Checkbox.
+   */
+  ['--my-animation-duration']: string
+  ['--checkbox-background-color']: string
+}
+
+interface IContext {
+  theme: ITheme
+  setTheme: (CSSProps: ITheme) => void
 }

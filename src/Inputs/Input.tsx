@@ -1,10 +1,11 @@
 import * as React from 'react'
 import { checkValidity } from './checkValidity'
+import { withContext } from 'with-context-react'
 // CSS
 import classes from './Input.module.css'
 // JSX
+import { Context } from './Context/Context'
 import Text from './Text/Text'
-// import Email from './Email/Email'
 import Password from './Password/Password'
 import Textarea from './Textarea/Textarea'
 
@@ -42,7 +43,8 @@ const reducer = (state: IInputState, action: IReducerAction) => {
   }
 }
 
-export const Input = (props: IInputProps) => {
+export const Input = withContext(React.memo((props: IInputProps) => {
+
   const initialState: IInputState = {
     value: props.value || '',
     validationMessage: '',
@@ -163,18 +165,26 @@ export const Input = (props: IInputProps) => {
     </React.Suspense>
   )
 
+  const CSSVariables = {
+    ...props._context
+  } as React.CSSProperties
+
   return (
-    <fieldset style={props.style}
-        className={wrapperClasses.join(' ')}>
-        <div className={classes.Container}>
-          {inputElement}
-          <span className={classes.Bar}></span>
-          <label className={labelClasses.join(' ')}>{props.placeholder}</label>
-        </div>
-        {props.validation ? (
-          <div className={validationMessageClasses.join(' ')}>{state.validationMessage}</div>
-        ) 
-        : null}
+    <fieldset 
+      style={{
+        ...props.style,
+        ...CSSVariables
+      }}
+      className={wrapperClasses.join(' ')}>
+      <div className={classes.Container}>
+        {inputElement}
+        <span className={classes.Bar}></span>
+        <label className={labelClasses.join(' ')}>{props.placeholder}</label>
+      </div>
+      {props.validation ? (
+        <div className={validationMessageClasses.join(' ')}>{state.validationMessage}</div>
+      ) 
+      : null}
     </fieldset>
   )
-}
+}), Context)

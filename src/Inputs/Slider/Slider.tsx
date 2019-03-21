@@ -1,11 +1,16 @@
 import * as React from 'react'
+import { withContext } from 'with-context-react'
 // CSS
 import classes from './Slider.css'
+// JSX
+import { Context } from '../Context/Context'
 
-export const Slider = (props: ISliderProps) => {
+export const Slider = withContext((props: ISliderProps) => {
+  
   const minValue:number = Number(props.minValue || 0)
   const maxValue:number = Number(props.maxValue || 100)
   const step:number = Number(props.step || 0)
+
   let defaultValue:number
   if (!props.step) {
     defaultValue = Number(props.value || (maxValue - minValue)/2 + minValue)
@@ -19,13 +24,13 @@ export const Slider = (props: ISliderProps) => {
       defaultValue = minValue + step * Math.ceil(amountOfSteps/2)
     }
   }
+
   const initialProgressBar:number = (((defaultValue - minValue)/(maxValue - minValue))*100)
   
   const [progressBar, setProgressBar] = React.useState<number>(initialProgressBar)
   const [value, setValue] = React.useState<number>(defaultValue)
 
   const containerRef = React.useRef<HTMLFieldSetElement>(null)
-  const sliderRef = React.useRef<HTMLInputElement>(null)
 
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
@@ -36,18 +41,6 @@ export const Slider = (props: ISliderProps) => {
       props.onChange(value, true)
     }
   }
-
-  /**
-   * CSS Variables setup.
-   */
-  React.useEffect(() => {
-    const { backgroundColor, progressBackgroundColor } = props
-    if (containerRef && containerRef.current && sliderRef && sliderRef.current) {
-      containerRef.current.style.setProperty('--my-background-color', backgroundColor || '#EBEBEB')
-      containerRef.current.style.setProperty('--my-progress-background-color', progressBackgroundColor || '#1EA3CC')
-      sliderRef.current.style.setProperty('--my-progress-background-color', progressBackgroundColor || '#1EA3CC')
-    }
-  }, [])
 
   React.useEffect(() => {
     if (containerRef && containerRef.current) {
@@ -60,15 +53,24 @@ export const Slider = (props: ISliderProps) => {
     }
   }, [progressBar])
 
+  const CSSVariables = {
+    ...props._context
+  } as React.CSSProperties
+
   return (
     <div
-      className={classes.Wrapper}>
+      style={{
+        ...CSSVariables
+      }}
+      className={[
+        classes.Wrapper,
+        classes.Aesthetics
+      ].join(' ')}>
       <fieldset 
         draggable={false}
         ref={containerRef}
         className={classes.Container}>
         <input type='range'
-          ref={sliderRef}
           className={classes.Slider}
           onChange={onChangeHandler}
           name={props.name}
@@ -83,4 +85,4 @@ export const Slider = (props: ISliderProps) => {
       : null}
     </div>
   )
-}
+}, Context)
