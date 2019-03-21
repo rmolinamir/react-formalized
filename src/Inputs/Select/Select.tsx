@@ -1,8 +1,11 @@
 import * as React from 'react'
 const { useRef, useReducer, useEffect, useState } = React
+import { withContext } from 'with-context-react'
 import { isMobile } from '../isMobile'
 // CSS
 import classes from './Select.module.css'
+// JSX
+import { Context } from '../Context/Context'
 
 type value = string | number | string[] | undefined
 
@@ -35,6 +38,10 @@ interface ISelectProps {
   backgroundColor: string
   borderRadius: string
   color: string
+  /**
+   * Theme context.
+   */
+  _context: ITheme
 }
 
 interface IInputState {
@@ -93,7 +100,7 @@ const reducer = (state: IInputState, action: IReducerAction) => {
   }
 }
 
-export const Select = (props: ISelectProps) => {
+export const Select = withContext(React.memo((props: ISelectProps) => {
   const shouldCloseListOnChange: boolean = props.shouldCloseListOnChange || true
 
   const myWrapper:React.RefObject<HTMLFieldSetElement> = useRef(null)
@@ -152,16 +159,16 @@ export const Select = (props: ISelectProps) => {
   /**
    * CSS Variables setup.
    */
-  useEffect(() => {
-    const { backgroundColor, borderRadius, color } = props
-    if (myWrapper && myWrapper.current) {
-      myWrapper.current.style.setProperty('--my-highlight-color', '#1EA3CC')
-      myWrapper.current.style.setProperty('--my-border-radius', borderRadius || '4px')
-      myWrapper.current.style.setProperty('--my-background-color', backgroundColor || '#FAFBFC')
-      myWrapper.current.style.setProperty('--my-arrow-color', backgroundColor || '#FAFBFC')
-      myWrapper.current.style.setProperty('--my-color', color || '#484848')
-    }
-  }, [])
+  // useEffect(() => {
+  //   const { backgroundColor, borderRadius, color } = props
+  //   if (myWrapper && myWrapper.current) {
+  //     myWrapper.current.style.setProperty('--my-highlight-color', '#1EA3CC')
+  //     myWrapper.current.style.setProperty('--my-border-radius', borderRadius || '4px')
+  //     myWrapper.current.style.setProperty('--my-background-color', backgroundColor || '#FAFBFC')
+  //     myWrapper.current.style.setProperty('--my-arrow-color', backgroundColor || '#FAFBFC')
+  //     myWrapper.current.style.setProperty('--my-color', color || '#484848')
+  //   }
+  // }, [])
 
   /**
    * Respective event listener handler on `useEffect`.
@@ -238,10 +245,28 @@ export const Select = (props: ISelectProps) => {
     }
   }
 
+  let CSSVariables;
+  /**
+   * The CSS Variables will be stored in the `.theme` key if
+   * a provider is invoked.
+   */
+  if (props._context && props._context.theme) {
+    CSSVariables = {
+      ...props._context.theme
+    } as React.CSSProperties
+  } else {
+    CSSVariables = {
+      ...props._context
+    } as React.CSSProperties
+  }
+
   return (
     <fieldset
       ref={myWrapper}
-      className={wrapperClasses.join(' ')}>
+      className={wrapperClasses.join(' ')}
+      style={{
+        ...CSSVariables
+      }}>
       <div
         className={classes.Container}>
         <div
@@ -274,4 +299,4 @@ export const Select = (props: ISelectProps) => {
       </ul>
     </fieldset>
   )
-}
+}), Context)

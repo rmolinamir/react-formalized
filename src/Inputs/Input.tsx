@@ -83,12 +83,6 @@ export const Input = withContext(React.memo((props: IInputProps) => {
   }
   
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // const updatedOrderForm = {
-    //  ...this.state.controls,
-    // };
-    // const updatedFormElement = {
-    //  ...updatedOrderForm[inputIdentifier]
-    // };
     const value = event.target.value
     const validation = checkValidity(value, state.validation, state.valueType || '')
     const action: IReducerAction = {
@@ -98,13 +92,6 @@ export const Input = withContext(React.memo((props: IInputProps) => {
       value: value,
       touched: value && value !== '' ? true : false
     }
-    // for (let inputIdentifier in updatedOrderForm) {
-    //  formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
-    // }
-    // this.setState({
-    //  controls: updatedOrderForm, 
-    //  formIsValid: formIsValid
-    // });
     dispatch({ handler: EOnChangeHandler.STATE, ...action })
     if (props.onChange) {
       props.onChange(action.value, action.valid)
@@ -165,9 +152,20 @@ export const Input = withContext(React.memo((props: IInputProps) => {
     </React.Suspense>
   )
 
-  const CSSVariables = {
-    ...props._context
-  } as React.CSSProperties
+  let CSSVariables;
+  /**
+   * The CSS Variables will be stored in the `.theme` key if
+   * a provider is invoked.
+   */
+  if (props._context && props._context.theme) {
+    CSSVariables = {
+      ...props._context.theme
+    } as React.CSSProperties
+  } else {
+    CSSVariables = {
+      ...props._context
+    } as React.CSSProperties
+  }
 
   return (
     <fieldset 

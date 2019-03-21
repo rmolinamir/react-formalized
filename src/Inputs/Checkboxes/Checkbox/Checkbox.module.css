@@ -64,7 +64,7 @@
   margin: 0 9px 0 18px;
   position: relative;
   background-color: var(--checkbox-background-color);
-  transition: background-color ease var(--my-animation-duration);
+  transition: background-color ease var(--checkbox-animation-duration);
 }
 
 .Box,
@@ -86,11 +86,11 @@
 }
 
 .Input:checked ~ .Label .Body {
-  background-color: var(--my-hightligh-color) !important;
+  background-color: var(--my-highlight-color) !important;
 }
 
 .Label:hover .Body {
-  background-color: var(--my-hover-color);
+  background-color: var(--checkbox-hover-color);
 }
 
 /**
@@ -110,16 +110,16 @@
   background-color: var(--checkbox-background-color);
   border: 1px solid var(--checkbox-background-color);
   border-radius: 12px;
-  transition: all ease var(--my-animation-duration);
+  transition: all ease var(--checkbox-animation-duration);
 }
 
 .Label:hover .Bubble {
-  background-color: var(--my-hover-color);
+  background-color: var(--checkbox-hover-color);
 }
 
 .Input:checked ~ .Label .Bubble {
-  background-color: var(--my-hightligh-color);
-  color: var(--my-icon-color);
+  background-color: var(--my-highlight-color);
+  color: var(--checkbox-color);
 }
 
 /**
@@ -132,7 +132,7 @@
   position: absolute;
   opacity: 0;
   color: var(--my-icon-color);
-  transition: all ease var(--my-animation-duration);
+  transition: all ease var(--checkbox-animation-duration);
 }
 
 .Input:checked ~ .Label .Icon {
@@ -146,8 +146,8 @@
 /* Circle */
 
 .Circle {
-  width: 0.7em;
-  height: 0.7em;
+  width: 0.6em;
+  height: 0.6em;
   background-color: currentColor;
   border-radius: 50%;
 }

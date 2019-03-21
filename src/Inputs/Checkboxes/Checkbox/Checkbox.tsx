@@ -14,9 +14,7 @@ import { Icon } from 'react-svg-library'
 
 export const Checkbox = withContext(React.memo((props: any): JSX.Element => {
   const [bIsChecked, setIsChecked] = useState(props.checked || false)
-  // const [bIsTouched, setIsTouched] = useState(false)
   const myInput: React.RefObject<HTMLInputElement> = useRef(null)
-  // const myLabel: React.RefObject<HTMLLabelElement> = useRef(null)
 
   const checkboxProps: {type: string, body?: string, icon?: JSX.Element | null, name?: string, label?: JSX.Element, animation?: string} = {
     type: 'checkbox',
@@ -68,16 +66,6 @@ export const Checkbox = withContext(React.memo((props: any): JSX.Element => {
 
   const onClickHandler = (event: React.SyntheticEvent) => {
     if (props.disabled) return
-    /**
-     * The animation duration is undefined (defaults to 0), until the input is first touched.
-     * This improves U/UIX during the first rendering.
-     */
-    // if (!bIsTouched) {
-      // if (myLabel && myLabel.current) {
-      //   myLabel.current.style.setProperty('--my-animation-duration', '200ms')
-      //   setIsTouched(true)
-      // }
-    // }
     if (myInput && myInput.current) {
       const status = !myInput.current.checked
       setIsChecked(status)
@@ -95,20 +83,19 @@ export const Checkbox = withContext(React.memo((props: any): JSX.Element => {
     }
   }
 
+  let CSSVariables;
   /**
-   * If `props.checked === true` then set then set the animation duration to 200ms
+   * The CSS Variables will be stored in the `.theme` key if
+   * a provider is invoked.
    */
-  // useEffect(() => {
-  //   if (myLabel && myLabel.current) {
-  //     myLabel.current.style.setProperty('--my-background-color', '#E6E6E6')
-  //     myLabel.current.style.setProperty('--my-highlighted-background-color', '#1EA3CC')
-  //     myLabel.current.style.setProperty('--my-hovered-background-color', '#CCC')
-  //     myLabel.current.style.setProperty('--my-icon-color', '#FFF')
-  //   }
-  // }, [])
-
-  const CSSVariables = {
-    ...props._context
+  if (props._context && props._context.theme) {
+    CSSVariables = {
+      ...props._context.theme
+    } as React.CSSProperties
+  } else {
+    CSSVariables = {
+      ...props._context
+    } as React.CSSProperties
   }
 
   const key = props.id || String(`${props.label}_${type}`).toLowerCase().split(' ').join('_')

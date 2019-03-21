@@ -8,8 +8,9 @@
     "prop-types": "^15.6.2",
     "react": "file:../node_modules/react",
     "react-dom": "file:../node_modules/react-dom",
+    "react-png-input": "file:..",
     "react-scripts": "^2.1.5",
-    "react-png-input": "file:.."
+    "with-context-react": "^1.1.1"
   },
   "scripts": {
     "start": "react-scripts start",

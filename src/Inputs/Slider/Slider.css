@@ -23,8 +23,8 @@
   text-align: center;
   border-radius: 4px;
   margin-left: 8px;
-  color: var(--my-icon-color);
-  background: var(--my-indicator-background-color);
+  color: var(--slider-indicator-color);
+  background: var(--slider-indicator-background-color);
   /* Text overflow. */
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -37,7 +37,7 @@
   left: -5px;
   width: 0;
   height: 0;
-  border-right: 7px solid var(--my-indicator-background-color);
+  border-right: 7px solid var(--slider-indicator-background-color);
   border-top: 7px solid transparent;
   border-bottom: 7px solid transparent;
 }
@@ -48,11 +48,12 @@
   position: relative;
   height: 12px;
   display: flex;
-  background: var(--my-border-color);
+  background: var(--slider-progressbar-background-color);
   justify-content: center;
   align-items: center;
   border-radius: 4px;
   width: 100%; /* Width of the outside container */
+  transition: background-color ease 200ms;
   /* Fieldset */
   border: none;
   margin: 0;
@@ -72,7 +73,7 @@
   border-bottom-right-radius: var(--my-border-right);
   content: '';
   background-color: #1ea3cc; /* Fallback color. */
-  background: var(--my-hightligh-color);
+  background: var(--my-highlight-color);
 }
 
 .Slider {
@@ -94,7 +95,7 @@
   height: 22px;
   border-radius: 50%;
   background: #1ea3cc; /* Fallback color. */
-  background: var(--my-hightligh-color);
+  background: var(--my-highlight-color);
   cursor: grabbing;
   transition: transform ease 200ms;
 }
@@ -112,7 +113,7 @@
   height: 20px;
   border-radius: 50%;
   background: #1ea3cc; /* Fallback color. */
-  background: var(--my-hightligh-color);
+  background: var(--my-highlight-color);
   cursor: grabbing;
   transition: transform ease 200ms;
 }
@@ -130,7 +131,7 @@
   height: 20px;
   border-radius: 50%; 
   background: #1ea3cc; /* Fallback color. */
-  background: var(--my-hightligh-color);
+  background: var(--my-highlight-color);
   cursor: grabbing;
   transition: transform ease 200ms;
 }

@@ -2,3 +2,21 @@
   padding-top: 16px;
   padding-bottom: 9px;
 }
+
+.App {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  transition: all ease 200ms;
+}
+
+.LightTheme {
+  background-color: #FFF;
+  color: #484848;
+}
+
+.DarkTheme {
+  background-color: #484848;
+  color: #FFF;
+}

@@ -31,7 +31,7 @@
 
 .Label {
   text-transform: uppercase;
-  color: var(--my-label-color); 
+  color: var(--input-label-color); 
   font-weight: 600;
   font-size: 13px;
   font-weight: bold;
@@ -85,9 +85,9 @@
   height: 48px;
   font: inherit;
   font-size: 17px;
-  border: 1px solid var(--my-border-color);
-  border-radius: 4px;
-  background-color: var(--my-background-color);
+  border: 1px solid var(--input-border-color);
+  border-radius: var(--input-border-radius);
+  background-color: var(--input-background-color);
   padding: 12px 10px 36px;
   padding-bottom: 0;
   color: inherit;
@@ -100,12 +100,12 @@
 }
 
 .InputElement:hover, .InputElement:focus {
-  background-color: inherit;
+  background-color: var(--input-focused-color);
 }
 
 .InputElement:focus {
   outline: none;
-  border-color: var(--my-hightligh-color);
+  border-color: var(--my-highlight-color);
 }
 
 input.InputElement::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -156,7 +156,7 @@ input.InputElement:-moz-placeholder { /* Firefox 18- */
   width: 0;
   bottom: -1px;
   position: absolute;
-  background: var(--my-hightligh-color);
+  background: var(--my-highlight-color);
   transition: 0.2s ease all;
 }
 .Bar:before {
@@ -189,20 +189,20 @@ input.InputElement:-moz-placeholder { /* Firefox 18- */
 
 /* Input borders */
 .Invalid {
-  border-color: var(--my-invalid-color) !important;
+  border-color: var(--input-invalid-color) !important;
 }
 
 .Valid {
-  border-color: var(--my-valid-color) !important;
+  border-color: var(--input-valid-color) !important;
 }
 
 /* Bar */
 .Valid ~ .Bar::after, .Valid ~ .Bar::before {
-  background: var(--my-valid-color);
+  background: var(--input-valid-color);
 }
 
 .Invalid ~ .Bar::after, .Invalid ~ .Bar::before {
-  background: var(--my-invalid-color);
+  background: var(--input-invalid-color);
 }
 
 /* Feedback */
@@ -210,7 +210,7 @@ input.InputElement:-moz-placeholder { /* Firefox 18- */
   display: block;
   float: right;
   font-size: 0.8em;
-  color: var(--my-invalid-color);
+  color: var(--input-invalid-color);
   text-align: right;
   max-height: 0px;
   transition: all 300ms ease;
@@ -223,7 +223,7 @@ input.InputElement:-moz-placeholder { /* Firefox 18- */
 
 .InvalidFeedback {
   margin: 3px 0;
-  color: var(--my-invalid-color);
+  color: var(--input-invalid-color);
   animation: slide-in ease forwards 300ms;
   max-height: 1000px;
 }

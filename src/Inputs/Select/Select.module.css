@@ -7,15 +7,13 @@
   margin: 0;
   padding: 0 0 9px;
   border: 0;
-  transform: border-color ease 300ms;
   /* Aesthetics */
+  color: inherit;
   /* Fallback */
-  color: #484848;
   border-radius: 4px;
-  background-color: #FAFBFC;
+  background-color: transparent;
   /* Programmatically */
-  border-radius: var(--my-border-radius);
-  background-color: var(--my-background-color);
+  border-radius: var(--input-border-radius);
 }
 
 .Container {
@@ -25,15 +23,21 @@
   padding: 0;
   width: 100%;
   height: auto;
-  transition: box-shadow 200ms ease-in, border 0.2s ease;
+  transition: box-shadow 250ms ease-in, border 0.2s ease;
   /* Aesthetics */
   color: inherit;
   border-radius: inherit;
-  background-color: inherit;
+  background-color: #FAFBFC;
+  /* Programmatically */
+  background-color: var(--input-background-color);
 }
 
-.Wrapper:hover .Container {
-  background-color: transparent;
+.Wrapper:focus-within .Container {
+  background-color: var(--input-focused-color);
+}
+
+.Wrapper:focus-within .List.Open {
+  background-color: var(--input-focused-color);
 }
 
 /* 
@@ -43,11 +47,13 @@
 */
 
 .Input {
+  position: relative;
   display: table-cell;
   width: 100%;
   border-radius: inherit;
   box-sizing: border-box;
   cursor: pointer;
+  color: inherit;
   vertical-align: middle;
   /* Button style */
   background-color: transparent;
@@ -70,7 +76,7 @@
   font: inherit;
   font-size: 17px;
   pointer-events:none;
-  /* border: 0; */
+  color: inherit;
   border: 1px solid #EBEBEB;
   border-right: 0;
   border-radius: inherit;
@@ -80,7 +86,7 @@
   padding: 12px 10px 36px;
   padding-bottom: 0;
   box-sizing: border-box;
-  transition: all 250ms ease;
+  /* transition: all 250ms ease; */
   cursor: pointer;
   outline: none;
   /* Disabling iOS and other native CSS. */
@@ -110,7 +116,7 @@
   left: 10px;
   top: 50%;
   transform: translateY(-50%);
-  transition: 150ms ease-in-out all; 
+  transition: 250ms ease-in-out all; 
 }
 
 @media (min-width: 1025px) {
@@ -149,7 +155,7 @@
   height: 48px;
   background-color: inherit;
   color: inherit;
-  transition: all 300ms ease;
+  transition: all 250ms ease, background-color 0ms ease;
   /* Button properties */
   outline: 0;
   margin: 0;
@@ -185,7 +191,7 @@
   position: absolute;
   border-color: inherit;
   content: '';
-  transition: transform ease 400ms;
+  transition: transform ease 250ms;
   width: 100%;
 }
 
@@ -206,7 +212,7 @@
 }
 
 .Wrapper.Open .Button {
-  color: var(--my-arrow-color);
+  color: var(--my-icon-color);
   background-color: var(--my-highlight-color);
   border-color: var(--my-highlight-color);
 }
@@ -236,12 +242,9 @@
   width: 100%;
   height: 0px;
   max-height: 0px;
-  box-shadow: 0px 3px 5px #EBEBEB;
   overflow: hidden;
-  background-color: inherit;
-  color: inherit;
   z-index: 5;
-  transition: all ease 300ms;
+  transition: all ease 250ms;
   border: 0;
   opacity: 0;
   /* List style */
@@ -251,25 +254,29 @@
   /* Aesthetics */
   color: inherit;
   border-radius: inherit;
-  background-color: inherit;
+  /* Programmatically */
+  background-color: var(--input-background-color);
 }
 
 .Wrapper .List.Open {
   height: auto;
   min-height: 68px;
   max-height: 50vh;
-  overflow: auto;
   border: 1px solid var(--my-highlight-color);
   opacity: 1;
-  margin: 6px 0 18px;
+  margin: 0 0 18px;
   padding: 8px 8px 8px 12px;
+}
+
+.Wrapper .List.Open:hover {
+  overflow: auto !important;
 }
 
 .List li {
   display: block;
   width: 100%;
   height: 100%;
-  transform: all ease 300ms;
+  transform: all ease 250ms;
 }
 
 .Wrapper .List li:hover {
@@ -287,10 +294,7 @@
   text-align: left;
   /* Button style */
   background-color: inherit;
+  color: inherit;
   outline: 0;
   border: 0;
-}
-
-.List li:hover {
-  color: #FF7043;
 }

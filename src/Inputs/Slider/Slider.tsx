@@ -53,9 +53,20 @@ export const Slider = withContext((props: ISliderProps) => {
     }
   }, [progressBar])
 
-  const CSSVariables = {
-    ...props._context
-  } as React.CSSProperties
+  let CSSVariables;
+  /**
+   * The CSS Variables will be stored in the `.theme` key if
+   * a provider is invoked.
+   */
+  if (props._context && props._context.theme) {
+    CSSVariables = {
+      ...props._context.theme
+    } as React.CSSProperties
+  } else {
+    CSSVariables = {
+      ...props._context
+    } as React.CSSProperties
+  }
 
   return (
     <div

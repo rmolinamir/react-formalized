@@ -145,32 +145,38 @@ interface ISliderProps extends IInputConfig {
 
 interface ITheme {
   /**
+   * General
+   */
+  '--my-highlight-color': string,
+  '--my-icon-color': string,
+  /**
    * Input.
    */
-  ['--my-border-color']: string
-  ['--my-border-radius']: string
-  ['--my-background-color']: string
-  ['--my-hightligh-color']: string
-  ['--my-hover-color']: string
-  /**
-   * Label.
-   */
-  ['--my-label-color']: string
-  /**
-   * Validity.
-   */
-  ['--my-valid-color']: string
-  ['--my-invalid-color']: string
+  '--input-border-radius': string,
+  '--input-border-color': string,
+  '--input-background-color': string,
+  '--input-focused-color': string,
+  '--input-label-color': string,
+  '--input-valid-color': string,
+  '--input-invalid-color': string,
   /**
    * Slider.
    */
-  ['--my-indicator-background-color']: string
-  ['--my-icon-color']: string
+  '--slider-progressbar-background-color': string,
+  '--slider-indicator-background-color': string,
+  '--slider-indicator-color': string,
   /**
    * Checkbox.
    */
-  ['--my-animation-duration']: string
-  ['--checkbox-background-color']: string
+  '--checkbox-color': string,
+  '--checkbox-hover-color': string,
+  '--checkbox-animation-duration': string,
+  '--checkbox-background-color': string
+  /**
+   * WithProvider properties.
+   */
+  theme?: ITheme
+  setTheme?: (CSSProps: ITheme) => void
 }
 
 interface IContext {
