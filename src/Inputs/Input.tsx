@@ -44,7 +44,9 @@ const reducer = (state: IInputState, action: IReducerAction) => {
 }
 
 export const Input = withContext(React.memo((props: IInputProps) => {
-
+  /**
+   * Input initial state, which dictates how it will behave (validation, validity, required, etc.).
+   */
   const initialState: IInputState = {
     value: props.value || '',
     validationMessage: '',
@@ -68,6 +70,10 @@ export const Input = withContext(React.memo((props: IInputProps) => {
   const labelClasses: string[] = [classes.Label]
   const validationMessageClasses:string[] = [classes.Feedback]
 
+  /**
+   * `className` handler for different elements, depending if the input is `valid`, 
+   * `invalid`, if it's `touched` and if it `shouldValidate`.
+   */
   if (!state.valid && state.shouldValidate && state.touched) {
     inputClasses.push(classes.Invalid)
     validationMessageClasses.push(classes.InvalidFeedback)
@@ -76,12 +82,20 @@ export const Input = withContext(React.memo((props: IInputProps) => {
     validationMessageClasses.push(classes.ValidFeedback)
   }
 
+  /**
+   * If `touched` then the label will become active.
+   */
   if (state.touched) {
     labelClasses.push(classes.ActiveLabel)
   } else {
     validationMessageClasses.push(classes.ValidFeedback)
   }
   
+  /**
+   * `onChangeHandler` handles the input `onChange` event.
+   * Evaluates de validity of the value respective to how it's set up through `checkValidity`.
+   * Executes the `props.onChange` callback if it exists after evaluating the value and saving it in the state.
+   */
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
     const validation = checkValidity(value, state.validation, state.valueType || '')
@@ -98,6 +112,9 @@ export const Input = withContext(React.memo((props: IInputProps) => {
     }
   }
 
+  /**
+   * The input element configuration props.
+   */
   const inputProps: IInputElementProps = {
     className: inputClasses.join(' '),
     elementConfig: props.elementConfig,
@@ -111,42 +128,48 @@ export const Input = withContext(React.memo((props: IInputProps) => {
   }
 
   let element: JSX.Element
-  if (props.type) {
-    const type: string = props.type.toLowerCase()
-    switch (type) {
-      case 'text': 
-      case 'email':
-        element = <Text {...inputProps} />
-        break
-      case 'password':
-        element = (
-          <Password
-            passwordHandler={props.passwordHandler}
-            passwordHandlerClassName={props.passwordHandlerClassName}
-            {...inputProps} />
-        )
-        break
-      case 'textarea':
-        wrapperClasses.push(classes.TextAreaInput)
-        labelClasses.push(classes.TextAreaLabel)
-        element = (
-          <Textarea
-            minRows={props.minRows}
-            {...inputProps} />
-        )
-        break
-      default:
-        if (type) {
-          console.warn('No prop types match your query, this results in a fallback to the Text input.')
-        }
-        element = <Text {...inputProps} />
-        break
-    }
-  } else {
-    element = <Text {...inputProps} />
+
+  /**
+   * This switch statement sets up the respective Input type, depending on `prop.type`.
+   * Respective properties are also passed down as props, as well as respective classes.
+   * **NOTE:** if the type does not matches any of the available inputs, a `console.warn`
+   * will trigger.
+   */
+  const type: string = props.type ? props.type.toLowerCase() : ''
+  switch (type) {
+    case 'text': 
+    case 'email':
+      element = <Text {...inputProps} />
+      break
+    case 'password':
+      element = (
+        <Password
+          passwordHandler={props.passwordHandler}
+          passwordHandlerClassName={props.passwordHandlerClassName}
+          {...inputProps} />
+      )
+      break
+    case 'textarea':
+      wrapperClasses.push(classes.TextAreaInput)
+      labelClasses.push(classes.TextAreaLabel)
+      element = (
+        <Textarea
+          minRows={props.minRows}
+          {...inputProps} />
+      )
+      break
+    default:
+      if (type) {
+        console.warn('No prop types match your query, this results in a fallback to the Text input.')
+      }
+      element = <Text {...inputProps} />
+      break
   }
 
-  const inputElement = (
+  /**
+   * The input is lazy loaded, hence the `React.Suspense`.
+   */
+  const inputElement: JSX.Element = (
     <React.Suspense fallback={null}>
       {element}
     </React.Suspense>
