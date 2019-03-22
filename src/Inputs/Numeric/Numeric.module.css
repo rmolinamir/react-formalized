@@ -1,0 +1,98 @@
+.Wrapper {
+  background-color: inherit;
+  display: table;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 0;
+  margin: 0 0 9px;
+  width: 124px;
+  height: 40px;
+  padding: 4px 0;
+  animation: fade-in ease 150ms;
+  outline: none;
+  transition: all ease 250ms;
+}
+
+.Button {
+  display: table-cell;
+  vertical-align: middle;
+  background-color: inherit;
+  border: 1px solid var(--my-highlight-color);
+  border-radius: 50%;
+  padding: 0;
+  margin: 0 6px;
+  width: 26px;
+  height: 26px;
+  user-select: none;
+  cursor: pointer;
+  outline: 0;
+  transition: all ease 250ms;
+}
+
+.Button svg {
+  vertical-align: middle;
+  color: var(--my-highlight-color);
+  width: 70%;
+  height: 70%;
+}
+
+.Button:active {
+  box-shadow: 0 0 2px 2px var(--my-highlight-color);
+}
+
+.Input {
+  /* Desired styling */
+  display: inline-block;
+  cursor: text;
+  width: 48px;
+  height: 100%;
+  color: inherit;
+  background-color: inherit;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid #EBEBEB;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  transition: all ease 250ms;
+  /* Disabling default browser styling */
+  vertical-align: middle;
+  line-height: normal;
+  letter-spacing: normal;
+  word-spacing: normal;
+  font-family: inherit;
+  font-size: 100%;
+  font-weight: bold;
+  text-align: center;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  text-rendering: auto;
+}
+
+.DisablePointerEvents {
+  pointer-events: none;
+}
+
+.Input::-webkit-outer-spin-button,
+.Input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+.Input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
+
+.Wrapper:focus-within .Input {
+  border-bottom: 1px solid var(--my-highlight-color);
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

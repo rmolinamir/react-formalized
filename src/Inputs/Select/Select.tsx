@@ -7,21 +7,9 @@ import classes from './Select.module.css'
 // JSX
 import { Context } from '../Context/Context'
 
-type value = string | number | string[] | undefined
-
-interface IValue {
-  value: value
-  displayValue: string | number
-}
-
-interface IInputConfig {
-  required?: boolean
-  disabled?: boolean
-  form?: string
-  list?: string
-  name?: string
-  tabIndex?: number
-}
+/**
+ * Overwriting interfaces for the select input.
+ */
 
 interface ISelectProps {
   shouldCloseListOnChange: boolean
@@ -41,7 +29,7 @@ interface ISelectProps {
   /**
    * Theme context.
    */
-  _context: ITheme
+  _context: IInputContext
 }
 
 interface IInputState {
@@ -50,10 +38,27 @@ interface IInputState {
   bIsListOpen?: boolean
 }
 
+interface IValue {
+  value: value
+  displayValue: string | number
+}
+
+interface IInputConfig {
+  required?: boolean
+  disabled?: boolean
+  form?: string
+  list?: string
+  name?: string
+  tabIndex?: number
+}
+
 interface IReducerAction extends IInputState {
   handler: EReducerHandler
 }
 
+/**
+ * Reducer handlers for the `switch` statement.
+ */
 enum EReducerHandler {
   VALUE,
   DISPLAYVALUE,
@@ -72,6 +77,9 @@ const instanceOfIValue = (object: any): object is IValue => {
   }
 }
 
+/**
+ * Store reducer.
+ */
 const reducer = (state: IInputState, action: IReducerAction) => {
   const { handler, ...newState } = action
   switch (handler) {
@@ -115,6 +123,9 @@ export const Select = withContext(React.memo((props: ISelectProps) => {
 
   const [state, dispatch] = useReducer(reducer, initialState)
 
+  /**
+   * `onClickListHandler` opens or closes the list.
+   */
   const onClickListHandler = () => {
     if (state.bIsListOpen) {
       dispatch({ handler: EReducerHandler.LIST, bIsListOpen: false })
@@ -129,7 +140,6 @@ export const Select = withContext(React.memo((props: ISelectProps) => {
     }
   }
 
-
   /**
    * `onOutsideClickHandler` will close the list if the click was made outside
    * the component wrapper div element.
@@ -141,6 +151,10 @@ export const Select = withContext(React.memo((props: ISelectProps) => {
     }
   }
 
+  /**
+   * If not on mobile, a keyboard event listener will execute `escFunction`.
+   * If the pressed key is the ESC key, then close the list.
+   */
   const escFunction = (event: KeyboardEvent) => {
     if (event.keyCode === 27 && state.bIsListOpen) {
       dispatch({ handler: EReducerHandler.LIST, bIsListOpen: false })
@@ -150,6 +164,9 @@ export const Select = withContext(React.memo((props: ISelectProps) => {
     }
   }
 
+  /**
+   * Input `onChangeHandler`.
+   */
   const onChangeHandler = () => {
     if (props.onChange) {
       props.onChange(state.value)
@@ -157,23 +174,13 @@ export const Select = withContext(React.memo((props: ISelectProps) => {
   }
 
   /**
-   * CSS Variables setup.
-   */
-  // useEffect(() => {
-  //   const { backgroundColor, borderRadius, color } = props
-  //   if (myWrapper && myWrapper.current) {
-  //     myWrapper.current.style.setProperty('--my-highlight-color', '#1EA3CC')
-  //     myWrapper.current.style.setProperty('--my-border-radius', borderRadius || '4px')
-  //     myWrapper.current.style.setProperty('--my-background-color', backgroundColor || '#FAFBFC')
-  //     myWrapper.current.style.setProperty('--my-arrow-color', backgroundColor || '#FAFBFC')
-  //     myWrapper.current.style.setProperty('--my-color', color || '#484848')
-  //   }
-  // }, [])
-
-  /**
    * Respective event listener handler on `useEffect`.
    */
   useEffect(() => {
+    /**
+     * If not on mobile, and if the list is open, apply the keyboard
+     * event listener that executes `escFunction`.
+     */
     if (!bIsMobile) {
       if (state.bIsListOpen) {
         window.addEventListener('keydown', escFunction)
@@ -181,8 +188,14 @@ export const Select = withContext(React.memo((props: ISelectProps) => {
         window.removeEventListener('keydown', escFunction)
       }
     }
+    /**
+     * Apply the mouse event listener that executes `onOutsideClickHandler`.
+     */
     window.addEventListener('mousedown', onOutsideClickHandler)
     return (() => {
+      /**
+       * Remove respective event listeners when unmounted.
+       */
       if (!bIsMobile) window.removeEventListener('keydown', escFunction)
       window.removeEventListener('mousedown', onOutsideClickHandler)
     })
@@ -192,6 +205,9 @@ export const Select = withContext(React.memo((props: ISelectProps) => {
   const listClasses: string[] = [classes.List]
   const labelClasses: string[] = [classes.Label]
 
+  /**
+   * Apply classes depending if the list is opened or closed.
+   */
   if (state.bIsListOpen) {
     wrapperClasses.push(classes.Open)
     listClasses.push(classes.Open)
@@ -200,6 +216,9 @@ export const Select = withContext(React.memo((props: ISelectProps) => {
     labelClasses.push(classes.ActiveLabel)
   }
 
+  /**
+   * `list` JSX element rendered when the list is opened.
+   */
   let list: JSX.Element[] | null = null
   if (props.datalist) {
     list = (
@@ -226,6 +245,9 @@ export const Select = withContext(React.memo((props: ISelectProps) => {
     )
   }
 
+  /**
+   * 
+   */
   const setValueHandler = (data: (value | IValue)) => {
     if (instanceOfIValue(data)) {
       dispatch({
@@ -245,18 +267,15 @@ export const Select = withContext(React.memo((props: ISelectProps) => {
     }
   }
 
-  let CSSVariables;
+  let CSSVariables
   /**
    * The CSS Variables will be stored in the `.theme` key if
    * a provider is invoked.
    */
   if (props._context && props._context.theme) {
     CSSVariables = {
-      ...props._context.theme
-    } as React.CSSProperties
-  } else {
-    CSSVariables = {
-      ...props._context
+      ...props._context.theme.general,
+      ...props._context.theme.input
     } as React.CSSProperties
   }
 

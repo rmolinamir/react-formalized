@@ -12,7 +12,6 @@ const defaultConfig: IInputConfig = {
 }
 
 const textarea = (props: IInputElementProps): JSX.Element => {
-
   const myTextArea: React.RefObject<HTMLTextAreaElement> = useRef(null)
   const [baseScrollHeight, setBaseScrollHeight] = useState(0)
   const [bIsMobile] = useState(isMobile())
@@ -37,6 +36,9 @@ const textarea = (props: IInputElementProps): JSX.Element => {
     })
   }, [])
 
+  /**
+   * Calculates the base height of the textarea, used to expand it automatically when user types.
+   */
   const calculateBaseScrollHeight = () => {
     if (myTextArea && myTextArea.current) {
       const textAreaEl: HTMLTextAreaElement = myTextArea.current
@@ -48,6 +50,11 @@ const textarea = (props: IInputElementProps): JSX.Element => {
     }
   }
 
+  /**
+   * `onChangeHandler` executes `autoExpand` and the `props.onChangeHandler` callback
+   * passing the value and the event of the `textarea` type input.
+   * `props.onChangeHandler` is passed by the `Input` functional component.
+   */
   const onChangeHandler = (event: React.ChangeEvent<HTMLTextAreaElement>): void => {
     autoExpand()
     if (props.onChangeHandler) {
@@ -55,6 +62,13 @@ const textarea = (props: IInputElementProps): JSX.Element => {
     }
   }
 
+  /**
+   * Based on: `https://codepen.io/vsync/pen/frudD?editors=1010`.
+   * `autoExpand` sets up the input's height by adding more rows depending on how much
+   * the user has typed. If the user manually sets the height, then the `autoExpand` will
+   * overwrite it if the `textarea` type input scroll height is higher than the manually
+   * set height.
+   */
   const autoExpand = () => {
     if (myTextArea && myTextArea.current) {
       const textAreaEl: HTMLTextAreaElement = myTextArea.current

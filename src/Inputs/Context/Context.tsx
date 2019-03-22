@@ -2,7 +2,7 @@ import * as React from 'react'
 // Pre-set themes
 import { defaultTheme } from './Themes/Themes'
 
-interface IContextProps extends ITheme {
+interface IInputContextProps extends ITheme {
   children: React.ReactChildren
 }
 
@@ -14,9 +14,23 @@ const reducer = (state: ITheme, action: ITheme): ITheme => {
   }
 }
 
-export const Context = React.createContext<IContext | ITheme>(defaultTheme)
+/**
+ * The initial context includes the `defaultTheme` as the `theme`, and
+ * the `setTheme` function. Will be changed or the store dispatcher later.
+ */
+const initialContext: IInputContext = {
+  theme: defaultTheme,
+  setTheme: function(theme) {
+    this.theme = {
+      ...this.theme,
+      ...theme
+    }
+  }
+}
 
-export const Provider = (props: IContextProps) => {
+export const Context = React.createContext<IInputContext>(initialContext)
+
+export const Provider = (props: IInputContextProps) => {
   const initialState: ITheme = {
     ...defaultTheme,
     ...props

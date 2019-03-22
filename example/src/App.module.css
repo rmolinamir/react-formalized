@@ -9,6 +9,7 @@
   align-items: center;
   justify-content: center;
   transition: all ease 200ms;
+  padding-top: 53px;
 }
 
 .LightTheme {

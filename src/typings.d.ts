@@ -31,16 +31,38 @@ declare module 'react-svg-library' {
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 
 /**
+ * `Input` element of `prop.type`(s):
+ * 1. `text`.
+ * 2. `textarea`.
+ * 3. `email`.
+ * 4. `password`.
+ * 5. `select`.
+ */
+
+/**
  * HTML Input tag value type.
  */
 type value = string | number | string[] | undefined;
 
-interface IInputValidation {
-  required?: boolean
-  email?: boolean
-  number?: boolean
-  minLength?: number
-  maxLength?: number
+declare interface IInputProps extends IInputState, Omit<IInputElementProps, 'onChange'> {
+  type: string
+  placeholder: string
+  valueType: string
+  className: string
+  onChange: (value: value, valid: boolean) => void
+  /**
+   * Theme context.
+   */
+  _context: IInputContext
+  /**
+   * Text area input.
+   */
+  minRows: number
+  /**
+   * Password element input.
+   */
+  passwordHandler?: string
+  passwordHandlerClassName?: string
 }
 
 interface IInputState {
@@ -58,25 +80,12 @@ interface IInputState {
   touched?: boolean
 }
 
-declare interface IInputProps extends IInputState, Omit<IInputElementProps, 'onChange'> {
-  type: string
-  placeholder: string
-  valueType: string
-  className: string
-  onChange: (value: value, valid: boolean) => void
-  /**
-   * Theme context.
-   */
-  _context: ITheme
-  /**
-   * Text area input.
-   */
-  minRows: number
-  /**
-   * Password element input.
-   */
-  passwordHandler?: string
-  passwordHandlerClassName?: string
+interface IInputValidation {
+  required?: boolean
+  email?: boolean
+  number?: boolean
+  minLength?: number
+  maxLength?: number
 }
 
 interface IInputConfig {
@@ -121,6 +130,11 @@ interface IInputElementProps extends React.DetailedHTMLProps<React.InputHTMLAttr
   passwordHandlerClassName?: string
 }
 
+/**
+ * Slider, an input of type `range`.
+ */
+
+/* Slider value type. */
 type sliderValue = string | number | undefined;
 
 interface ISliderProps extends IInputConfig {
@@ -132,11 +146,41 @@ interface ISliderProps extends IInputConfig {
   value: sliderValue
   minValue: sliderValue
   maxValue: sliderValue
-  onChange: (value: sliderValue, valid: boolean) => void
+  onChange: (value: sliderValue) => void
   /**
    * Theme context.
    */
-  _context: ITheme
+  _context: IInputContext
+}
+
+/**
+ * CheckboxGroup
+ */
+
+interface ICheckboxGroupProps {
+  children: React.ReactChild,
+  name?: string,
+  type?: string,
+  style?: React.CSSProperties,
+  className?: string,
+  single?: boolean
+}
+
+/**
+ * Numeric, an input of type `number` that handles natural numbers **only** (`integers`).
+ */
+
+interface INumericProps {
+  onChange?: (value: number) => void
+  value?: number
+  minValue?: number
+  maxValue?: number
+  style?: React.CSSProperties
+  shouldNotType?: boolean
+  /**
+   * Theme context.
+   */
+  _context: IInputContext
 }
 
 /**
@@ -144,42 +188,54 @@ interface ISliderProps extends IInputConfig {
  */
 
 interface ITheme {
-  /**
-   * General
-   */
-  '--my-highlight-color': string,
-  '--my-icon-color': string,
-  /**
-   * Input.
-   */
-  '--input-border-radius': string,
-  '--input-border-color': string,
-  '--input-background-color': string,
-  '--input-focused-color': string,
-  '--input-label-color': string,
-  '--input-valid-color': string,
-  '--input-invalid-color': string,
-  /**
-   * Slider.
-   */
-  '--slider-progressbar-background-color': string,
-  '--slider-indicator-background-color': string,
-  '--slider-indicator-color': string,
-  /**
-   * Checkbox.
-   */
-  '--checkbox-color': string,
-  '--checkbox-hover-color': string,
-  '--checkbox-animation-duration': string,
-  '--checkbox-background-color': string
-  /**
-   * WithProvider properties.
-   */
-  theme?: ITheme
-  setTheme?: (CSSProps: ITheme) => void
+  general: IThemeGeneral
+  input: IThemeInput
+  slider: IThemeSlider
+  checkbox: IThemeCheckbox
 }
 
-interface IContext {
+/**
+ * General
+ */
+
+declare interface IInputContext {
   theme: ITheme
   setTheme: (CSSProps: ITheme) => void
+}
+
+declare interface IThemeGeneral {
+  '--my-highlight-color': string
+  '--my-icon-color': string
+}
+
+/**
+ * Input.
+ */
+declare interface IThemeInput {
+  '--input-border-radius': string
+  '--input-border-color': string
+  '--input-background-color': string
+  '--input-focused-color': string
+  '--input-label-color': string
+  '--input-valid-color': string
+  '--input-invalid-color': string
+}
+
+/**
+ * Slider.
+ */
+declare interface IThemeSlider {
+  '--slider-progressbar-background-color': string
+  '--slider-indicator-background-color': string
+  '--slider-indicator-color': string
+}
+
+/**
+ * Checkbox.
+ */
+declare interface IThemeCheckbox {
+  '--checkbox-color': string
+  '--checkbox-hover-color': string
+  '--checkbox-animation-duration': string
+  '--checkbox-background-color': string
 }

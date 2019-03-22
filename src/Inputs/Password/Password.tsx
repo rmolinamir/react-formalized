@@ -6,6 +6,9 @@ import classes from './Password.module.css'
 import { Icon as LibraryIcon } from 'react-svg-library'
 import Icon from '../../Icon/Icon'
 
+/**
+ * Default input config.
+ */
 const defaultConfig: IInputConfig = {
   autoComplete: 'none',
   autoCorrect: 'none',
@@ -15,17 +18,26 @@ const defaultConfig: IInputConfig = {
 const password = (props: IInputElementProps): JSX.Element => {
   const [bShowPassword, setShowPassword] = React.useState(false)
 
-  const togglePassword = () => {
+  const togglePassword: () => void = () => {
     setShowPassword(!bShowPassword)
   }
 
-  const passwordIcon = (
+  const passwordIcon: JSX.Element = (
     <LibraryIcon icon={bShowPassword ? 'show' : 'hide'} />
   )
 
-  const utilContainerEl = document.getElementById('react-png-inputs-util-container')
+  /**
+   * The `utilContainerEl` is a functional component that has a remember me button,
+   * and will include the show password if it exists.
+   */
+  const utilContainerEl: HTMLElement | null = document.getElementById('react-png-inputs-util-container')
 
-  const passwordHandler = (
+  /**
+   * `passwordHandler` is a JSX element that will only render if utilContainer exists,
+   * of if the user passes one o the `props.passwordHandler` or `props.passwordHandlerClassName`
+   * props.
+   */
+  const passwordHandler: JSX.Element = (
     <div className={[classes.Container, bShowPassword ? classes.Show : classes.Hide].join(' ')}>
       <button type="button"
         onClick={togglePassword}

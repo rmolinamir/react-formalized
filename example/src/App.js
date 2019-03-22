@@ -3,7 +3,8 @@ import React, { useState } from 'react'
 import classes from './App.module.css'
 // JSX
 import { withContext } from 'with-context-react'
-import { Input, Slider, Select, Checkbox, CheckboxGroup, Context, Provider, defaultTheme, darkTheme } from 'react-png-input'
+import Button from 'react-png-button'
+import { Input, Slider, Select, Checkbox, CheckboxGroup, Numeric, Context, Provider, defaultTheme, darkTheme } from 'react-png-input'
 
 const app = (props) => {
   const [bIsLightTheme, setHandler] = useState(true)
@@ -23,7 +24,17 @@ const app = (props) => {
       classes.App,
       bIsLightTheme ? classes.LightTheme : classes.DarkTheme
     ].join(' ')}>
-      <button onClick={changeThemeHandler}>Change Theme</button>
+      <Button
+        style={{
+          position: 'fixed',
+          top: '0',
+          left: '0',
+          borderRadius: '0',
+          zIndex: '5'
+        }}
+        blockButton
+        button={!bIsLightTheme ? 'light' : 'dark'}
+        onClick={changeThemeHandler}>Change Theme</Button>
       <div style={{
         display: 'flex',
         flexFlow: 'column',
@@ -90,6 +101,8 @@ const app = (props) => {
               value: '192aaa3349130',
               displayValue: 'Option F (custom value)'
             }]} />
+        <Numeric />
+        <Numeric float />
         <span className={classes.Divider}>Checkboxes:</span>
         <Checkbox checked label='Checkbox A (checked)' />
         <Checkbox label='Checkbox B' />
@@ -113,10 +126,10 @@ const app = (props) => {
         <Checkbox checked type='bubble' label='Bubble B' />
         <Checkbox type='bubble' label='Bubble C' />
         <span className={classes.Divider}>Bubbles as radio inputs:</span>
-        <CheckboxGroup single name='bubble-group'>
-          <Checkbox type='bubble' label='Bubble D' />
-          <Checkbox type='bubble' label='Bubble F' />
-          <Checkbox type='bubble' label='Bubble G' />
+        <CheckboxGroup type='bubble' single name='bubble-group'>
+          <Checkbox label='Bubble D' />
+          <Checkbox label='Bubble F' />
+          <Checkbox label='Bubble G' />
         </CheckboxGroup>
       </div>
     </div>

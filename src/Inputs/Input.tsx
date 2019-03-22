@@ -159,11 +159,8 @@ export const Input = withContext(React.memo((props: IInputProps) => {
    */
   if (props._context && props._context.theme) {
     CSSVariables = {
-      ...props._context.theme
-    } as React.CSSProperties
-  } else {
-    CSSVariables = {
-      ...props._context
+      ...props._context.theme.general,
+      ...props._context.theme.input
     } as React.CSSProperties
   }
 

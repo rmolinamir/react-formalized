@@ -24,6 +24,11 @@ export { CheckboxGroup } from './Inputs/Checkboxes/CheckboxGroup/CheckboxGroup'
 export { Checkbox } from './Inputs/Checkboxes/Checkbox/Checkbox'
 
 // /**
+//  * @function Themes
+//  */
+export { Numeric } from './Inputs/Numeric/Numeric'
+
+// /**
 //  * @function Context & Provider
 //  */
 export { Context, Provider } from './Inputs/Context/Context'

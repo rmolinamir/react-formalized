@@ -1,16 +1,22 @@
 import * as React from 'react'
 import { withContext } from 'with-context-react'
 // CSS
-import classes from './Slider.css'
+import classes from './Slider.module.css'
 // JSX
 import { Context } from '../Context/Context'
 
 export const Slider = withContext((props: ISliderProps) => {
-  
+  /**
+   * Slider setup. Depends if `props.step` exists.
+   * If there is a step:
+   * - If there is a value, recalculates the `defaultValue` to the nearest step,
+   *   otherwise place it at the step closest to the middle of the slider.
+   * If there is no step:
+   * - The `defaultValue` is at the middle of the slider or the value if it exists.
+   */
   const minValue:number = Number(props.minValue || 0)
   const maxValue:number = Number(props.maxValue || 100)
   const step:number = Number(props.step || 0)
-
   let defaultValue:number
   if (!props.step) {
     defaultValue = Number(props.value || (maxValue - minValue)/2 + minValue)
@@ -25,6 +31,9 @@ export const Slider = withContext((props: ISliderProps) => {
     }
   }
 
+  /**
+   * Progress bar width percentage.
+   */
   const initialProgressBar:number = (((defaultValue - minValue)/(maxValue - minValue))*100)
   
   const [progressBar, setProgressBar] = React.useState<number>(initialProgressBar)
@@ -32,16 +41,23 @@ export const Slider = withContext((props: ISliderProps) => {
 
   const containerRef = React.useRef<HTMLFieldSetElement>(null)
 
+  /**
+   * `onChangeHandler` sets the new value and the new progress bar percentage.
+   * Executes the `props.onChange` callback if it exists.
+   */
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
     const progress = (((Number(value) - minValue)/(maxValue - minValue))*100)
     setProgressBar(progress)
     setValue(Number(value))
     if (props.onChange) {
-      props.onChange(value, true)
+      props.onChange(value)
     }
   }
 
+  /**
+   * Subscribes to `progressBar` changes then adjusts the width appropriately.
+   */
   React.useEffect(() => {
     if (containerRef && containerRef.current) {
       containerRef.current.style.setProperty('--my-progress-bar-width', `${progressBar}%`)
@@ -53,18 +69,15 @@ export const Slider = withContext((props: ISliderProps) => {
     }
   }, [progressBar])
 
-  let CSSVariables;
+  let CSSVariables
   /**
    * The CSS Variables will be stored in the `.theme` key if
    * a provider is invoked.
    */
   if (props._context && props._context.theme) {
     CSSVariables = {
-      ...props._context.theme
-    } as React.CSSProperties
-  } else {
-    CSSVariables = {
-      ...props._context
+      ...props._context.theme.general,
+      ...props._context.theme.slider
     } as React.CSSProperties
   }
 
