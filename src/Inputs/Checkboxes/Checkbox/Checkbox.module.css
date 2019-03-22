@@ -14,7 +14,7 @@
 }
 
 .Input:disabled ~ .Label .Body {
-  background-color: var(--checkbox-background-color) !important;
+  background-color: var(--checkbox-background-color, #E6E6E6) !important;
 }
 
 /**
@@ -63,8 +63,8 @@
   /* margin-right: 9px; */
   margin: 0 9px 0 18px;
   position: relative;
-  background-color: var(--checkbox-background-color);
-  transition: background-color ease var(--checkbox-animation-duration);
+  background-color: var(--checkbox-background-color, #E6E6E6);
+  transition: background-color ease var(--checkbox-animation-duration, 200ms);
 }
 
 .Box,
@@ -86,11 +86,12 @@
 }
 
 .Input:checked ~ .Label .Body {
-  background-color: var(--my-highlight-color) !important;
+  background-color: var(--my-highlight-color, #1EA3CC ) !important;
 }
 
-.Label:hover .Body {
-  background-color: var(--checkbox-hover-color);
+.Label:hover .Body,
+.Wrapper:focus-within .Body {
+  background-color: var(--checkbox-hover-color, #CCC);
 }
 
 /**
@@ -107,19 +108,20 @@
   padding: 9px 0;
   width: 100%;
   color: inherit;
-  background-color: var(--checkbox-background-color);
-  border: 1px solid var(--checkbox-background-color);
+  background-color: var(--checkbox-background-color, #E6E6E6);
+  border: 1px solid var(--checkbox-background-color, #E6E6E6);
   border-radius: 12px;
-  transition: all ease var(--checkbox-animation-duration);
+  transition: all ease var(--checkbox-animation-duration, 200ms);
 }
 
-.Label:hover .Bubble {
-  background-color: var(--checkbox-hover-color);
+.Label:hover .Bubble,
+.Wrapper:focus-within .Bubble {
+  background-color: var(--checkbox-hover-color, #CCC);
 }
 
 .Input:checked ~ .Label .Bubble {
-  background-color: var(--my-highlight-color);
-  color: var(--checkbox-color);
+  background-color: var(--my-highlight-color, #1EA3CC );
+  color: var(--checkbox-color, #FFF);
 }
 
 /**
@@ -131,8 +133,8 @@
 .Icon {
   position: absolute;
   opacity: 0;
-  color: var(--my-icon-color);
-  transition: all ease var(--checkbox-animation-duration);
+  color: var(--my-icon-color, #FFF);
+  transition: all ease var(--checkbox-animation-duration, 200ms);
 }
 
 .Input:checked ~ .Label .Icon {

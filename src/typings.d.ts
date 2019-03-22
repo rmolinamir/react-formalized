@@ -80,7 +80,17 @@ interface IInputState {
   touched?: boolean
 }
 
+interface ICustomRuleValidation {
+  evaluation: (value: value) => boolean
+  message?: string 
+}
+
+interface ICustomRulesValidation {
+  [propName: string]: ICustomRuleValidation
+}
+
 interface IInputValidation {
+  customRules?: ICustomRulesValidation
   required?: boolean
   email?: boolean
   number?: boolean
@@ -118,6 +128,7 @@ interface IInputElementProps extends React.DetailedHTMLProps<React.InputHTMLAttr
   valid?: boolean
   shouldValidate?: boolean
   touched?: boolean
+  style?: React.CSSProperties
   /**
    * Text area input.
    */

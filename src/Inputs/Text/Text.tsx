@@ -18,10 +18,11 @@ const text = (props: IInputElementProps): JSX.Element => {
         {...{ 
           ...defaultConfig, 
           ...props.elementConfig 
-        }} 
+        }}
         required={props.required}
         value={props.value}
-        onChange={props.onChangeHandler} />
+        onChange={props.onChangeHandler}
+        style={props.style} />
         {props.shouldValidate ?
           <Icon
             valid={props.valid || false}

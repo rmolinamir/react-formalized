@@ -50,11 +50,11 @@ export const Input = withContext(React.memo((props: IInputProps) => {
   const initialState: IInputState = {
     value: props.value || '',
     validationMessage: '',
-    valueType: props.valueType || props.placeholder ? props.placeholder.toLowerCase() : undefined,
+    valueType: props.valueType || props.placeholder && props.placeholder.toLowerCase(),
     placeholder: props.placeholder,
     validation: {
       required: props.required || false,
-      email: props.type === 'email' ? true : false, 
+      email: props.type === 'email' && true, 
       ...props.validation
     },
     required: props.required || true,
@@ -98,7 +98,7 @@ export const Input = withContext(React.memo((props: IInputProps) => {
    */
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
-    const validation = checkValidity(value, state.validation, state.valueType || '')
+    const validation = checkValidity(value, state.validation, state.valueType)
     const action: IReducerAction = {
       valid: validation.status,
       validationMessage: validation.message || state.validationMessage,
@@ -123,8 +123,8 @@ export const Input = withContext(React.memo((props: IInputProps) => {
     valid: state.valid,
     touched: state.touched,
     shouldValidate: state.shouldValidate,
-    onChangeHandler: onChangeHandler
-    // style={props.elementConfig.disabled ? { cursor: 'not-allowed' } : null}
+    onChangeHandler: onChangeHandler,
+    style: props.disabled ? { opacity: 0.5, pointerEvents: 'none' } : undefined
   }
 
   let element: JSX.Element
@@ -188,13 +188,17 @@ export const Input = withContext(React.memo((props: IInputProps) => {
   }
 
   return (
-    <fieldset 
+    <fieldset
+      disabled={props.disabled}
       style={{
         ...props.style,
-        ...CSSVariables
+        ...CSSVariables,
+        cursor: props.disabled ? 'not-allowed' : undefined,
+        userSelect: props.disabled ? 'none' : undefined
       }}
       className={wrapperClasses.join(' ')}>
-      <div className={classes.Container}>
+      <div
+        className={classes.Container}>
         {inputElement}
         <span className={classes.Bar}></span>
         <label className={labelClasses.join(' ')}>{props.placeholder}</label>

@@ -57,7 +57,8 @@ const password = (props: IInputElementProps): JSX.Element => {
         }} 
         required={props.required}
         value={props.value}
-        onChange={props.onChangeHandler} />
+        onChange={props.onChangeHandler}
+        style={props.style} />
         {props.shouldValidate ?
           <Icon
             valid={props.valid || false}

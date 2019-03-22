@@ -23,8 +23,8 @@
   text-align: center;
   border-radius: 4px;
   margin-left: 8px;
-  color: var(--slider-indicator-color);
-  background: var(--slider-indicator-background-color);
+  color: var(--slider-indicator-color, #FFF);
+  background: var(--slider-indicator-background-color, #484848);
   /* Text overflow. */
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -37,7 +37,7 @@
   left: -5px;
   width: 0;
   height: 0;
-  border-right: 7px solid var(--slider-indicator-background-color);
+  border-right: 7px solid var(--slider-indicator-background-color, #484848);
   border-top: 7px solid transparent;
   border-bottom: 7px solid transparent;
 }
@@ -48,7 +48,7 @@
   position: relative;
   height: 12px;
   display: flex;
-  background: var(--slider-progressbar-background-color);
+  background: var(--slider-progressbar-background-color, #EBEBEB);
   justify-content: center;
   align-items: center;
   border-radius: 4px;
@@ -72,8 +72,7 @@
   border-top-right-radius: var(--my-border-right);
   border-bottom-right-radius: var(--my-border-right);
   content: '';
-  background-color: #1ea3cc; /* Fallback color. */
-  background: var(--my-highlight-color);
+  background: var(--my-highlight-color, #1EA3CC );
 }
 
 .Slider {
@@ -94,8 +93,7 @@
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: #1ea3cc; /* Fallback color. */
-  background: var(--my-highlight-color);
+  background: var(--my-highlight-color, #1EA3CC );
   cursor: grabbing;
   transition: transform ease 200ms;
 }
@@ -112,8 +110,7 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: #1ea3cc; /* Fallback color. */
-  background: var(--my-highlight-color);
+  background: var(--my-highlight-color, #1EA3CC );
   cursor: grabbing;
   transition: transform ease 200ms;
 }
@@ -130,8 +127,7 @@
   width: 20px;
   height: 20px;
   border-radius: 50%; 
-  background: #1ea3cc; /* Fallback color. */
-  background: var(--my-highlight-color);
+  background: var(--my-highlight-color, #1EA3CC );
   cursor: grabbing;
   transition: transform ease 200ms;
 }

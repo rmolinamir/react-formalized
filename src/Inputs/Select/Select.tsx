@@ -21,6 +21,7 @@ interface ISelectProps {
   /**
    * CSS Properties.
    */
+  disabled?: boolean
   style: React.CSSProperties
   placeholder: string
   backgroundColor: string
@@ -281,12 +282,16 @@ export const Select = withContext(React.memo((props: ISelectProps) => {
 
   return (
     <fieldset
+      disabled={props.disabled}
       ref={myWrapper}
       className={wrapperClasses.join(' ')}
       style={{
-        ...CSSVariables
+        ...CSSVariables,
+        cursor: props.disabled ? 'not-allowed' : undefined,
+        userSelect: props.disabled ? 'none' : undefined
       }}>
       <div
+        style={props.disabled ? { opacity: 0.5, pointerEvents: 'none' } : undefined}
         className={classes.Container}>
         <div
             onClick={onClickListHandler}

@@ -10,6 +10,7 @@
     "react-dom": "file:../node_modules/react-dom",
     "react-png-button": "^1.0.2",
     "react-png-input": "file:..",
+    "react-png-modal": "^2.0.1",
     "react-scripts": "^2.1.5",
     "with-context-react": "^1.1.1"
   },

@@ -70,6 +70,21 @@ const app = (props) => {
           elementConfig={{
             maxLength: 150
           }} />
+        <Input
+          disabled
+          validation={{
+            required: true,
+            minLength: 4,
+            maxLength: 10
+          }}
+          placeholder='Disabled' />
+        <Input
+          disabled
+          type='textarea'
+          placeholder='TextArea'
+          elementConfig={{
+            maxLength: 150
+          }} />
         <Slider
           // value='325'
           minValue='100'
@@ -101,6 +116,12 @@ const app = (props) => {
               value: '192aaa3349130',
               displayValue: 'Option F (custom value)'
             }]} />
+        <Select
+          disabled
+          placeholder='Select (Disabled)'
+          datalist={[
+            'Option A',
+            'Obtion B']} />
         <Numeric />
         <Numeric float />
         <span className={classes.Divider}>Checkboxes:</span>

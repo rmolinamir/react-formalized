@@ -117,7 +117,8 @@ const textarea = (props: IInputElementProps): JSX.Element => {
         }}
         required={props.required}
         value={props.value}
-        onChange={onChangeHandler} />
+        onChange={onChangeHandler}
+        style={props.style} />
       {maxLength ? (
         <span className={classes.Length}>{maxLength - length}</span>
       )

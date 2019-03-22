@@ -9,11 +9,9 @@
   border: 0;
   /* Aesthetics */
   color: inherit;
-  /* Fallback */
-  border-radius: 4px;
   background-color: transparent;
   /* Programmatically */
-  border-radius: var(--input-border-radius);
+  border-radius: var(--input-border-radius, 4px);
 }
 
 .Container {
@@ -27,17 +25,13 @@
   /* Aesthetics */
   color: inherit;
   border-radius: inherit;
-  background-color: #FAFBFC;
   /* Programmatically */
-  background-color: var(--input-background-color);
+  background-color: var(--input-background-color, #FAFBFC);
 }
 
-.Wrapper:focus-within .Container {
-  background-color: var(--input-focused-color);
-}
-
+.Wrapper:focus-within .Container,
 .Wrapper:focus-within .List.Open {
-  background-color: var(--input-focused-color);
+  background-color: var(--input-focused-color, #FFF);
 }
 
 /* 
@@ -95,8 +89,9 @@
   appearance: none;
 }
 
+.Wrapper:focus-within .Select,
 .Wrapper.Open .Select {
-  border-color: var(--my-highlight-color);
+  border-color: var(--my-highlight-color, #1EA3CC );
 }
 
 /* 
@@ -120,7 +115,7 @@
 }
 
 @media (min-width: 1025px) {
-  .Wrapper:hover .Label {
+  .Container:hover .Label {
     top: 9px;
     left: 6px;
     font-size: 9px;
@@ -211,10 +206,11 @@
   -moz-transform: rotate(45deg) translate(3px, -6px);
 }
 
+.Wrapper:focus-within .Button,
 .Wrapper.Open .Button {
-  color: var(--my-icon-color);
-  background-color: var(--my-highlight-color);
-  border-color: var(--my-highlight-color);
+  color: var(--my-icon-color, #FFF);
+  background-color: var(--my-highlight-color, #1EA3CC );
+  border-color: var(--my-highlight-color, #1EA3CC );
 }
 
 .Wrapper.Open .Arrow::before {
@@ -255,14 +251,14 @@
   color: inherit;
   border-radius: inherit;
   /* Programmatically */
-  background-color: var(--input-background-color);
+  background-color: var(--input-background-color, #FAFBFC);
 }
 
 .Wrapper .List.Open {
   height: auto;
   min-height: 68px;
   max-height: 50vh;
-  border: 1px solid var(--my-highlight-color);
+  border: 1px solid var(--my-highlight-color, #1EA3CC );
   opacity: 1;
   margin: 0 0 18px;
   padding: 8px 8px 8px 12px;
@@ -279,8 +275,9 @@
   transform: all ease 250ms;
 }
 
-.Wrapper .List li:hover {
-  box-shadow: 0px 1px 0px var(--my-highlight-color);
+.Wrapper .List li:hover,
+.Wrapper .List li:focus-within {
+  box-shadow: 0px 1px 0px var(--my-highlight-color, #1EA3CC );
 }
 
 .List button {
