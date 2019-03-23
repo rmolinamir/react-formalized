@@ -4,7 +4,7 @@ import classes from './App.module.css'
 // JSX
 import { withContext } from 'with-context-react'
 import Button from 'react-png-button'
-import { Input, Slider, Select, Checkbox, CheckboxGroup, Numeric, Context, Provider, defaultTheme, darkTheme } from 'react-png-input'
+import { Form, Input, Slider, Select, Checkbox, CheckboxGroup, Numeric, Context, Provider, defaultTheme, darkTheme } from 'react-png-input'
 
 const app = (props) => {
   const [bIsLightTheme, setHandler] = useState(true)
@@ -81,7 +81,7 @@ const app = (props) => {
         <Input
           disabled
           type='textarea'
-          placeholder='TextArea'
+          placeholder='TextArea (Disabled)'
           elementConfig={{
             maxLength: 150
           }} />
@@ -127,7 +127,7 @@ const app = (props) => {
         <span className={classes.Divider}>Checkboxes:</span>
         <Checkbox checked label='Checkbox A (checked)' />
         <Checkbox label='Checkbox B' />
-        <Checkbox multiple checked type='radio' label='Checkbox C' />
+        <Checkbox multiple checked type='radio' label='Checkbox C, radio as checkbox.' />
         <Checkbox
           label='Checkbox D (if checked, renders option E)'
           dynamic={(<Checkbox style={{ paddingLeft: '9px' }} label='Checkbox E' />)} />
@@ -152,6 +152,29 @@ const app = (props) => {
           <Checkbox label='Bubble F' />
           <Checkbox label='Bubble G' />
         </CheckboxGroup>
+        <span className={classes.Divider}>Form:</span>
+        <Form>
+          <Input
+            validation={{
+              minLength: 3
+            }}
+            placeholder='Username' />
+          <Input
+            type='email'
+            validation={{
+              minLength: 3
+            }}
+            placeholder='Email' />
+          <Input
+            type='password'
+            validation={{
+              required: true,
+              minLength: 4,
+              maxLength: 10
+            }}
+            placeholder='Password' />
+          <div>Div element.</div>
+        </Form>
       </div>
     </div>
   )

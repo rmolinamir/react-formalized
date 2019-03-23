@@ -40,7 +40,7 @@ interface ICheckboxStyle {
   animation?: string
 }
 
-export const Checkbox = withContext(React.memo((props: ICheckboxProps): JSX.Element => {
+const MyCheckbox = withContext(React.memo((props: ICheckboxProps): JSX.Element => {
   const [bIsChecked, setIsChecked] = useState(props.checked || false)
   const myInput: React.RefObject<HTMLInputElement> = useRef(null)
 
@@ -201,3 +201,6 @@ export const Checkbox = withContext(React.memo((props: ICheckboxProps): JSX.Elem
     </React.Fragment>
   )
 }), Context)
+
+export const Checkbox = (props: ICheckboxProps): JSX.Element => <MyCheckbox {...props} />
+(Checkbox as React.FunctionComponent).displayName = 'react-png-input/checkbox'

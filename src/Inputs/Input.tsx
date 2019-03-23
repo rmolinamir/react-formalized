@@ -43,7 +43,7 @@ const reducer = (state: IInputState, action: IReducerAction) => {
   }
 }
 
-export const Input = withContext(React.memo((props: IInputProps) => {
+const MyInput = withContext(React.memo((props: IInputProps) => {
   /**
    * Input initial state, which dictates how it will behave (validation, validity, required, etc.).
    */
@@ -210,3 +210,6 @@ export const Input = withContext(React.memo((props: IInputProps) => {
     </fieldset>
   )
 }), Context)
+
+export const Input = (props: IInputProps): JSX.Element => <MyInput {...props} />
+(Input as React.FunctionComponent).displayName = 'react-png-input/input'

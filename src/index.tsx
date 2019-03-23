@@ -1,4 +1,9 @@
 // /**
+//  * @function Form
+//  */
+export { Form } from './Form/Form'
+
+// /**
 //  * @function Input
 //  */
 export { Input } from './Inputs/Input'
