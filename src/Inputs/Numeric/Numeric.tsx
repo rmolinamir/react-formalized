@@ -5,7 +5,7 @@ import { withContext } from 'with-context-react'
 import classes from './Numeric.module.css'
 // JSX
 import { Context } from '../Context/Context'
-import { Icon } from 'react-svg-library'
+import Icon from '../../Icon/SVG/SVG'
 
 enum EClickHandler {
   SUM,

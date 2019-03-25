@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom'
 // CSS
 import classes from './Password.module.css'
 // JSX
-import { Icon as LibraryIcon } from 'react-svg-library'
+import LibraryIcon from '../../Icon/SVG/SVG'
 import Icon from '../../Icon/Icon'
 
 /**

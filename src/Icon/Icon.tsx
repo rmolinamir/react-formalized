@@ -2,7 +2,8 @@ import * as React from 'react'
 // CSS
 import classes from './Icon.module.css'
 // JSX
-import { Icon } from 'react-svg-library'
+// import { Icon } from 'react-svg-library'
+import Icon from './SVG/SVG'
 
 interface IIconProps {
   valid: boolean
