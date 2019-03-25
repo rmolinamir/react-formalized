@@ -49,7 +49,7 @@ declare interface IInputProps extends IInputState, Omit<IInputElementProps, 'onC
   placeholder: string
   valueType: string
   className: string
-  onChange: (value: value, valid: boolean) => void
+  onChange: (identifier?: string, value?: value, valid?: boolean) => void
   /**
    * Theme context.
    */
@@ -66,6 +66,7 @@ declare interface IInputProps extends IInputState, Omit<IInputElementProps, 'onC
 }
 
 interface IInputState {
+  identifier?: string
   value?: value
   validationMessage: string
   className?: string
@@ -142,6 +143,56 @@ interface IInputElementProps extends React.DetailedHTMLProps<React.InputHTMLAttr
 }
 
 /**
+ * Select, an input of type `text`, but similar to type `select`.
+ */
+
+interface ISelectProps {
+  shouldCloseListOnChange: boolean
+  shouldValidate: boolean
+  required: boolean
+  value: value
+  datalist: (value | ISelectValue)[]
+  onChange: (identifier?: string, value?: value, valid?: boolean) => void
+  elementConfig?: ISelectConfig
+  identifier?: string
+  /**
+   * CSS Properties.
+   */
+  disabled?: boolean
+  style: React.CSSProperties
+  placeholder: string
+  backgroundColor: string
+  borderRadius: string
+  color: string
+  /**
+   * Theme context.
+   */
+  _context: IInputContext
+}
+
+interface ISelectState {
+  identifier?: string
+  shouldValidate?: boolean,
+  value?: value
+  displayValue?: value
+  bIsListOpen?: boolean
+}
+
+interface ISelectValue {
+  value: value
+  displayValue: string | number
+}
+
+interface ISelectConfig {
+  required?: boolean
+  disabled?: boolean
+  form?: string
+  list?: string
+  name?: string
+  tabIndex?: number
+}
+
+/**
  * Slider, an input of type `range`.
  */
 
@@ -169,12 +220,15 @@ interface ISliderProps extends IInputConfig {
  */
 
 interface ICheckboxGroupProps {
-  children: React.ReactChild,
-  name?: string,
-  type?: string,
-  style?: React.CSSProperties,
-  className?: string,
+  children: React.ReactChild
+  name?: string
+  type?: string
+  style?: React.CSSProperties
+  className?: string
+  required?: boolean
   single?: boolean
+  multiple?: boolean
+  onChange?: (identifier: string, value: value, valid: boolean) => void
 }
 
 /**
@@ -249,4 +303,23 @@ declare interface IThemeCheckbox {
   '--checkbox-hover-color': string
   '--checkbox-animation-duration': string
   '--checkbox-background-color': string
+}
+
+/**
+ * Form
+ */
+
+
+declare interface IFormProps {
+  children: React.ReactElement[] | React.ReactElement
+  onChange: (state: IFormState) => void
+  onSubmit: (event: React.SyntheticEvent, state: IFormState) => void
+  className?: string
+  style?: React.CSSProperties
+}
+
+declare interface IFormState {
+  children?: React.ReactElement[] | React.ReactElement
+  isValid?: boolean
+  [inputName: string]: any
 }

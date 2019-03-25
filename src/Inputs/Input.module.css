@@ -88,8 +88,11 @@
   border: 1px solid var(--input-border-color, #EBEBEB);
   border-radius: var(--input-border-radius, 4px);
   background-color: var(--input-background-color, #FAFBFC);
-  padding: 12px 10px 36px;
+  padding: 12px 36px 0 12px;
   padding-bottom: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   color: inherit;
   box-sizing: border-box;
   transition: all 250ms ease;

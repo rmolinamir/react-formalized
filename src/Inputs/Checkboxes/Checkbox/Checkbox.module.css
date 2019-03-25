@@ -1,5 +1,6 @@
 .Wrapper {
   /* Fieldset */
+  position: relative;
   border: 0;
   outline: 0;
   padding: 0;
@@ -8,12 +9,12 @@
 
 /* Disabled */
 
-.Input:disabled ~ .Label {
+.Input:disabled ~ .Body {
   cursor: not-allowed !important;
   opacity: 0.8 !important;
 }
 
-.Input:disabled ~ .Label .Body {
+.Input:disabled ~ .Body {
   background-color: var(--checkbox-background-color, #E6E6E6) !important;
 }
 
@@ -25,7 +26,7 @@
 
 /* Customize the label */
 .Label {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   position: relative;
   cursor: pointer;
@@ -35,18 +36,23 @@
   user-select: none;
 }
 
+.BlockLabel {
+  display: flex;
+}
+
 .Label.Aesthetics {
-  margin: 4px 0;
+  margin: 0 0 9px;
   font-size: 16px;
 }
 
 /* Hide the browser's default checkbox */
 .Input {
   position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
   opacity: 0;
   cursor: pointer;
-  height: 0;
-  width: 0;
   margin: 0;
 }
 
@@ -85,7 +91,7 @@
   border: 1px solid inherit;
 }
 
-.Input:checked ~ .Label .Body {
+.Input:checked ~ .Body {
   background-color: var(--my-highlight-color, #1EA3CC ) !important;
 }
 
@@ -119,7 +125,7 @@
   background-color: var(--checkbox-hover-color, #CCC);
 }
 
-.Input:checked ~ .Label .Bubble {
+.Input:checked ~ .Bubble {
   background-color: var(--my-highlight-color, #1EA3CC );
   color: var(--checkbox-color, #FFF);
 }
@@ -137,7 +143,7 @@
   transition: all ease var(--checkbox-animation-duration, 200ms);
 }
 
-.Input:checked ~ .Label .Icon {
+.Input:checked ~ .Body .Icon {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -162,7 +168,7 @@
 
 /* Pop */
 
-.Input:checked ~ .Label .Icon.Pop {
+.Input:checked ~ .Body .Icon.Pop {
   opacity: 1;
   transform: translate(0, 0) rotate(0) scale(1);
 }
@@ -174,7 +180,7 @@
 
 /* Zoom */
 
-.Input:checked ~ .Label .Icon.Zoom {
+.Input:checked ~ .Body .Icon.Zoom {
   opacity: 1;
   transform: scale(1);
 }

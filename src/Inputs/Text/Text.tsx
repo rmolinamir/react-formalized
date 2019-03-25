@@ -13,7 +13,7 @@ const text = (props: IInputElementProps): JSX.Element => {
   return (
     <React.Fragment>
       <input
-        type='text'
+        type={props.type}
         className={props.className} 
         {...{ 
           ...defaultConfig, 

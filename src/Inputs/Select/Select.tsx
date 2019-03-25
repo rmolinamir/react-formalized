@@ -6,54 +6,9 @@ import { isMobile } from '../isMobile'
 import classes from './Select.module.css'
 // JSX
 import { Context } from '../Context/Context'
+import Icon from '../../Icon/Icon'
 
-/**
- * Overwriting interfaces for the select input.
- */
-
-interface ISelectProps {
-  shouldCloseListOnChange: boolean
-  required: boolean
-  elementConfig?: IInputConfig
-  value: value
-  datalist: (value | IValue)[]
-  onChange: (value: value) => void
-  /**
-   * CSS Properties.
-   */
-  disabled?: boolean
-  style: React.CSSProperties
-  placeholder: string
-  backgroundColor: string
-  borderRadius: string
-  color: string
-  /**
-   * Theme context.
-   */
-  _context: IInputContext
-}
-
-interface IInputState {
-  value?: value
-  displayValue?: value
-  bIsListOpen?: boolean
-}
-
-interface IValue {
-  value: value
-  displayValue: string | number
-}
-
-interface IInputConfig {
-  required?: boolean
-  disabled?: boolean
-  form?: string
-  list?: string
-  name?: string
-  tabIndex?: number
-}
-
-interface IReducerAction extends IInputState {
+interface IReducerAction extends ISelectState {
   handler: EReducerHandler
 }
 
@@ -68,9 +23,9 @@ enum EReducerHandler {
 }
 
 /**
- * `IValue` interface type checker.
+ * `ISelectValue` interface type checker.
  */
-const instanceOfIValue = (object: any): object is IValue => {
+const instanceOfISelectValue = (object: any): object is ISelectValue => {
   if (object && object.value) {
     return 'value' in object;
   } else {
@@ -81,7 +36,7 @@ const instanceOfIValue = (object: any): object is IValue => {
 /**
  * Store reducer.
  */
-const reducer = (state: IInputState, action: IReducerAction) => {
+const reducer = (state: ISelectState, action: IReducerAction) => {
   const { handler, ...newState } = action
   switch (handler) {
     case EReducerHandler.STATE:
@@ -109,20 +64,26 @@ const reducer = (state: IInputState, action: IReducerAction) => {
   }
 }
 
-export const Select = withContext(React.memo((props: ISelectProps) => {
+const displayName:string = 'react-png-input/select'
+
+const MySelect = withContext(React.memo((props: ISelectProps) => {
   const shouldCloseListOnChange: boolean = props.shouldCloseListOnChange || true
 
   const myWrapper:React.RefObject<HTMLFieldSetElement> = useRef(null)
   const myList:React.RefObject<HTMLUListElement> = useRef(null)
   const [bIsMobile] = useState(isMobile())
 
-  const initialState: IInputState = {
-    value: props.value,
+  const initialState: ISelectState = {
+    identifier: props.identifier || (`${displayName}_${props.placeholder || 'select'}`),
+    shouldValidate: props.shouldValidate || props.required || false,
+    value: props.value || '',
     displayValue: props.value || '',
     bIsListOpen: false
   }
 
   const [state, dispatch] = useReducer(reducer, initialState)
+  
+  const bIsValid = state.value && state.value !== '' ? true : false
 
   /**
    * `onClickListHandler` opens or closes the list.
@@ -166,13 +127,21 @@ export const Select = withContext(React.memo((props: ISelectProps) => {
   }
 
   /**
-   * Input `onChangeHandler`.
+   * Input `onChangeHandler`, subscribed to any changes made to `state.value`.
    */
   const onChangeHandler = () => {
+    const bIsValid = state.value && state.value !== '' ? true : false
     if (props.onChange) {
-      props.onChange(state.value)
+      props.onChange(state.identifier, state.value, bIsValid)
     }
   }
+
+  /**
+   * Execute `onChange` if `state.value` changes. 
+   */
+  useEffect(() => {
+    onChangeHandler()
+  }, [state.value])
 
   /**
    * Respective event listener handler on `useEffect`.
@@ -207,13 +176,13 @@ export const Select = withContext(React.memo((props: ISelectProps) => {
   const labelClasses: string[] = [classes.Label]
 
   /**
-   * Apply classes depending if the list is opened or closed.
+   * Apply CSS classes depending if the list is opened or closed.
    */
   if (state.bIsListOpen) {
     wrapperClasses.push(classes.Open)
     listClasses.push(classes.Open)
     labelClasses.push(classes.ActiveLabel)
-  } else if (state.value && state.value !== '' ? true : false) {
+  } else if (bIsValid) {
     labelClasses.push(classes.ActiveLabel)
   }
 
@@ -223,10 +192,10 @@ export const Select = withContext(React.memo((props: ISelectProps) => {
   let list: JSX.Element[] | null = null
   if (props.datalist) {
     list = (
-      props.datalist.map((option: (value | IValue), index: number) => {
-        let data: (value | IValue);
+      props.datalist.map((option: (value | ISelectValue), index: number) => {
+        let data: (value | ISelectValue);
         let displayValue: string | number | undefined = undefined
-        if (instanceOfIValue(option)) {
+        if (instanceOfISelectValue(option)) {
           data = option
           displayValue = option.displayValue
         } else {
@@ -247,10 +216,12 @@ export const Select = withContext(React.memo((props: ISelectProps) => {
   }
 
   /**
-   * 
+   * `setValueHandler` will set the selected value, respectively to the type. If the value is of type
+   * `ISelectValue` then the `value` and `displayValue` will be set accordingly, otherwise they will be the
+   * same. Closes the input afterwards if `shouldCloseListOnChange` is `true`, which it is by default.
    */
-  const setValueHandler = (data: (value | IValue)) => {
-    if (instanceOfIValue(data)) {
+  const setValueHandler = (data: (value | ISelectValue)) => {
+    if (instanceOfISelectValue(data)) {
       dispatch({
         handler: EReducerHandler.STATE,
         value: data.value,
@@ -280,6 +251,13 @@ export const Select = withContext(React.memo((props: ISelectProps) => {
     } as React.CSSProperties
   }
 
+  /**
+   * Apply respective CSS classes if the input is valid.
+   */
+  if (state.shouldValidate && bIsValid) {
+    wrapperClasses.push(classes.Valid)
+  }
+
   return (
     <fieldset
       disabled={props.disabled}
@@ -300,15 +278,21 @@ export const Select = withContext(React.memo((props: ISelectProps) => {
             tabIndex={-1}
             readOnly
             required={props.required}
-            onChange={onChangeHandler}
             style={props.style}
             value={state.displayValue}
             className={classes.Select}
             {...props.elementConfig}>
           </input>
+          {state.shouldValidate ?
+            <Icon
+              valid={bIsValid}
+              // The icon hides if the list opens, otherwise only show if the state isn't empty/undefined.
+              touched={state.bIsListOpen ? false : Boolean(state.value) && state.value !== ''} />
+            : null}
           <label className={labelClasses.join(' ')}>{props.placeholder}</label>
         </div>
         <button
+          type='button'
           onClick={onClickListHandler}
           className={classes.Button}>
           <div className={classes.Icon}>
@@ -324,3 +308,6 @@ export const Select = withContext(React.memo((props: ISelectProps) => {
     </fieldset>
   )
 }), Context)
+
+export const Select = (props: IInputProps): JSX.Element => <MySelect {...props} />
+(Select as React.FunctionComponent).displayName = displayName

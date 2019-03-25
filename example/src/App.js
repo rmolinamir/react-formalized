@@ -9,6 +9,15 @@ import { Form, Input, Slider, Select, Checkbox, CheckboxGroup, Numeric, Context,
 const app = (props) => {
   const [bIsLightTheme, setHandler] = useState(true)
 
+  const onChangeHandler = (formState) => {
+    console.log('app onChangeHandler formState', formState)
+  }
+
+  const onSubmitHandler = (event, formState) => {
+    event.preventDefault()
+    window.alert(JSON.stringify(formState, null, 3))
+  }
+
   const changeThemeHandler = () => {
     if (bIsLightTheme) {
       props._context.setTheme(darkTheme)
@@ -122,50 +131,63 @@ const app = (props) => {
           datalist={[
             'Option A',
             'Obtion B']} />
+        <Select
+          required
+          placeholder='Select (Required, has validity)'
+          datalist={[
+            '',
+            'Option A',
+            'Obtion B']} />
         <Numeric />
         <Numeric float />
-        <span className={classes.Divider}>Checkboxes:</span>
+        <div className={classes.Divider}>Checkboxes:</div>
         <Checkbox checked label='Checkbox A (checked)' />
         <Checkbox label='Checkbox B' />
         <Checkbox multiple checked type='radio' label='Checkbox C, radio as checkbox.' />
-        <Checkbox
-          label='Checkbox D (if checked, renders option E)'
-          dynamic={(<Checkbox style={{ paddingLeft: '9px' }} label='Checkbox E' />)} />
-        <span className={classes.Divider}>Radio inputs:</span>
+        <Checkbox disabled label='Checkbox D (disabled)' />
+        <div className={classes.Divider}>Radio inputs:</div>
         <Checkbox checked type='radio' label='Radio A' />
         <Checkbox disabled single type='radio' label='Radio B (disabled)' />
         <Checkbox type='radio' label='Radio C' />
         <Checkbox type='radio' label='Radio D' />
-        <span className={classes.Divider}>Inside a checkbox group:</span>
+        <div className={classes.Divider}>Inside a checkbox group:</div>
         <CheckboxGroup name='checkbox-group'>
           <Checkbox disabled type='radio' label='Radio E (disabled)' />
           <Checkbox type='radio' label='Radio F' />
           <Checkbox type='radio' label='Radio G' />
         </CheckboxGroup>
-        <span className={classes.Divider}>Bubbles as checkboxes:</span>
+        <div className={classes.Divider}>Bubbles as checkboxes:</div>
         <Checkbox type='bubble' label='Bubble A' />
         <Checkbox checked type='bubble' label='Bubble B' />
         <Checkbox type='bubble' label='Bubble C' />
-        <span className={classes.Divider}>Bubbles as radio inputs:</span>
+        <div className={classes.Divider}>Bubbles as radio inputs:</div>
         <CheckboxGroup type='bubble' single name='bubble-group'>
           <Checkbox label='Bubble D' />
           <Checkbox label='Bubble F' />
           <Checkbox label='Bubble G' />
         </CheckboxGroup>
-        <span className={classes.Divider}>Form:</span>
-        <Form>
+        <div className={classes.Divider}>Form:</div>
+        <Form
+          onChange={onChangeHandler}
+          onSubmit={onSubmitHandler} >
           <Input
+            identifier='username'
+            required
             validation={{
               minLength: 3
             }}
             placeholder='Username' />
           <Input
+            identifier='email'
+            required
             type='email'
             validation={{
               minLength: 3
             }}
             placeholder='Email' />
           <Input
+            identifier='password'
+            required
             type='password'
             validation={{
               required: true,
@@ -173,7 +195,40 @@ const app = (props) => {
               maxLength: 10
             }}
             placeholder='Password' />
-          <div>Div element.</div>
+          <Select
+            identifier='select'
+            required
+            placeholder='Select (Required, has validity)'
+            datalist={[
+              '',
+              'Option A',
+              'Obtion B']} />
+          <Input
+            identifier='first_name'
+            placeholder='First Name (Optional)' />
+          <Select
+            identifier='select_optional'
+            placeholder='Select (Optional)'
+            datalist={[
+              '',
+              'Option A',
+              'Obtion B']} />
+          <Button
+            type='submit'
+            blockButton button='danger'>Sign up</Button>
+        </Form>
+        <Form
+          onChange={onChangeHandler}
+          onSubmit={onSubmitHandler} >
+          <div className={classes.Divider}>Which ice cream flavours do you like?</div>
+          <CheckboxGroup identifier='favoritePet' type='bubble' required name='favorite-ice-creams'>
+            <Checkbox value='FLAV_01' label='Chocolate' />
+            <Checkbox value='FLAV_02' label='Vanilla' />
+            <Checkbox value='FLAV_03' label='Strawberry' />
+          </CheckboxGroup>
+          <Button
+            type='submit'
+            blockButton button='danger'>Submit</Button>
         </Form>
       </div>
     </div>

@@ -9,27 +9,29 @@ import { Icon } from 'react-svg-library'
 
 interface ICheckboxProps {
   label: string
+  identifier?: string
+  /**
+   * Checkbox input props.
+   */
   checked?: boolean
   type?: string
-  disabled?: boolean
-  id?: string
   name?: string
+  disabled?: boolean
   multiple?: boolean
   single?: boolean
   inline?: boolean
   value?: value
+  required?: boolean
   style?: React.CSSProperties
   className?: string
   onChange?: onChange
-  dynamic?: JSX.Element
+  /**
+   * CSS theme.
+   */
   _context: IInputContext
 }
 
-type onChange = (data: {
-  label: string,
-  status: boolean,
-  value: value
-}, status:boolean, event: React.SyntheticEvent) => void
+type onChange = (identifier: string, checked: boolean, value: value) => void
 
 interface ICheckboxStyle {
   type: string
@@ -43,6 +45,8 @@ interface ICheckboxStyle {
 const MyCheckbox = withContext(React.memo((props: ICheckboxProps): JSX.Element => {
   const [bIsChecked, setIsChecked] = useState(props.checked || false)
   const myInput: React.RefObject<HTMLInputElement> = useRef(null)
+
+  const key: string = props.identifier || String(props.label).toLowerCase().split(' ').join('_')
 
   const checkboxStyle: ICheckboxStyle = {
     type: 'checkbox',
@@ -99,27 +103,29 @@ const MyCheckbox = withContext(React.memo((props: ICheckboxProps): JSX.Element =
   }
 
   /**
-   * `onClickHandler` saves the input checked status into the state upon clicking the checkbox.
-   * Executes the `onChange` callback.
+   * `onClickHandler` saves the input checked status into the state upon clicking the checkbox if not disabled.
    */
-  const onClickHandler = (event: React.SyntheticEvent) => {
+  const onClickHandler = () => {
     if (props.disabled) return
     if (myInput && myInput.current) {
-      const status = !myInput.current.checked
-      setIsChecked(status)
-      if (props.onChange) {
-        props.onChange(
-          {
-            label: props.label,
-            status: status,
-            value: props.value
-          },
-          status, 
-          event
-        )
-      }
+      const checked = myInput.current.checked
+      setIsChecked(checked)
     }
   }
+
+  /**
+   * Subscribed to any changes made to `bIsChecked`. Executes the `onChange` callback and passes
+   * the key identifier, checked status, and value if it exists.
+   */
+  React.useEffect(() => {
+    if (props.onChange) {
+      props.onChange(
+        key,
+        bIsChecked,
+        props.value,
+      )
+    }
+  }, [bIsChecked])
 
   let CSSVariables
   /**
@@ -132,8 +138,6 @@ const MyCheckbox = withContext(React.memo((props: ICheckboxProps): JSX.Element =
       ...props._context.theme.checkbox
     } as React.CSSProperties
   }
-
-  const key: string = props.id || String(`${props.label}_${type}`).toLowerCase().split(' ').join('_')
 
   /**
    * Adds `display: 'inline'` CSS property if `props.inline` is `true`.
@@ -154,29 +158,34 @@ const MyCheckbox = withContext(React.memo((props: ICheckboxProps): JSX.Element =
       <fieldset
         style={style}
         className={classes.Wrapper}>
-        <input
-          id={key}
-          ref={myInput}
-          type={checkboxStyle.type}
-          className={classes.Input}
-          value={props.value}
-          name={props.name || (
-            checkboxStyle.type === 'radio' ? 
-              'radio' 
-              : props.single ? 'single' : undefined
-          )}
-          defaultChecked={bIsChecked}
-          disabled={props.disabled} />
         <label
           style={{
-            ...CSSVariables
-          }}
+            ...CSSVariables,
+          cursor: props.disabled ? 'not-allowed' : undefined,
+          opacity: props.disabled ? 0.8 : undefined
+        }}
           htmlFor={key}
           className={[
             classes.Label,
+            // If checkbox type is bubble, then the label should be a block element.
+            type === 'bubble' && classes.BlockLabel,
             props.className || classes.Aesthetics
-          ].join(' ')}
-          onClick={onClickHandler}>
+          ].join(' ')}>
+          <input
+            id={key}
+            ref={myInput}
+            required={props.required}
+            type={checkboxStyle.type}
+            className={classes.Input}
+            value={props.value}
+            onClick={onClickHandler}
+            name={props.name || (
+              checkboxStyle.type === 'radio' ? 
+                'radio' 
+                : props.single ? 'single' : undefined
+            )}
+            defaultChecked={bIsChecked}
+            disabled={props.disabled} />
           {type !== 'bubble' && (
             <span
               className={[
@@ -195,9 +204,6 @@ const MyCheckbox = withContext(React.memo((props: ICheckboxProps): JSX.Element =
           {checkboxStyle.label}
         </label>
       </fieldset>
-      {bIsChecked && (type === 'checkbox' || !props.type) && (
-        props.dynamic
-      )}
     </React.Fragment>
   )
 }), Context)

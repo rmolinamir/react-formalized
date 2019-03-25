@@ -66,13 +66,20 @@ export const checkValidity = (value: value, rules: IInputValidation | undefined,
       if (!validation.status) return validation
     }
     /**
-     * The `email` rule evaluates if the value include the following characters:
-     *  1. `@` symbol.
-     *  2. `.` dot symbol.
+     * The `email` rule evaluates if the value matches the international email address
+     * format. More info here:
+     * **[Simple Mail Transfer Protocol](`https://tools.ietf.org/html/rfc5321`)**
+     * **[Internet Message Format](`https://tools.ietf.org/html/rfc5322`)**
      */
     if (rules.email) {
       value = String(value)
-      validation = evaluate(value.includes('@') && value.includes('.'), `Please enter a valid email address.`)
+      /**
+       * Email Regex pattern. More info here:
+       * **[How to validate an email address in JavaScript?](`https://stackoverflow.com/a/46181/10246377`)**
+       */
+      const pattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+      const bMatch: boolean = Boolean(value.match(pattern))
+      validation = evaluate(bMatch, `Please enter a valid email address.`)
       if (!validation.status) return validation
     }
     /**

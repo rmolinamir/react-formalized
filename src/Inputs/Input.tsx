@@ -43,11 +43,14 @@ const reducer = (state: IInputState, action: IReducerAction) => {
   }
 }
 
+const displayName:string = 'react-png-input/input'
+
 const MyInput = withContext(React.memo((props: IInputProps) => {
   /**
    * Input initial state, which dictates how it will behave (validation, validity, required, etc.).
    */
   const initialState: IInputState = {
+    identifier: props.identifier || (`${displayName}_${props.placeholder || props.type || 'default'}`),
     value: props.value || '',
     validationMessage: '',
     valueType: props.valueType || props.placeholder && props.placeholder.toLowerCase(),
@@ -57,8 +60,8 @@ const MyInput = withContext(React.memo((props: IInputProps) => {
       email: props.type === 'email' && true, 
       ...props.validation
     },
-    required: props.required || true,
-    shouldValidate: props.validation ? true : false,
+    required: props.required || false,
+    shouldValidate: Boolean(props.validation) || false,
     valid: props.valid || false,
     touched: props.touched || false
   }
@@ -106,11 +109,18 @@ const MyInput = withContext(React.memo((props: IInputProps) => {
       value: value,
       touched: value && value !== '' ? true : false
     }
-    dispatch({ handler: EOnChangeHandler.STATE, ...action })
-    if (props.onChange) {
-      props.onChange(action.value, action.valid)
-    }
+    dispatch({ ...action })
   }
+
+  /**
+   * Subscribe to any changes to the `state.value` and `state.valid` properties.
+   * Execute `onChange` if any of them change. 
+   */
+  React.useEffect(() => {
+    if (props.onChange) {
+      props.onChange(state.identifier, state.value, state.valid)
+    }
+  }, [state.value, state.valid])
 
   /**
    * The input element configuration props.
@@ -118,7 +128,7 @@ const MyInput = withContext(React.memo((props: IInputProps) => {
   const inputProps: IInputElementProps = {
     className: inputClasses.join(' '),
     elementConfig: props.elementConfig,
-    required: props.required || true,
+    required: props.required || false,
     value: state.value,
     valid: state.valid,
     touched: state.touched,
@@ -139,7 +149,7 @@ const MyInput = withContext(React.memo((props: IInputProps) => {
   switch (type) {
     case 'text': 
     case 'email':
-      element = <Text {...inputProps} />
+      element = <Text type={type} {...inputProps} />
       break
     case 'password':
       element = (
@@ -162,7 +172,7 @@ const MyInput = withContext(React.memo((props: IInputProps) => {
       if (type) {
         console.warn('No prop types match your query, this results in a fallback to the Text input.')
       }
-      element = <Text {...inputProps} />
+      element = <Text type='text' {...inputProps} />
       break
   }
 
@@ -212,4 +222,4 @@ const MyInput = withContext(React.memo((props: IInputProps) => {
 }), Context)
 
 export const Input = (props: IInputProps): JSX.Element => <MyInput {...props} />
-(Input as React.FunctionComponent).displayName = 'react-png-input/input'
+(Input as React.FunctionComponent).displayName = displayName

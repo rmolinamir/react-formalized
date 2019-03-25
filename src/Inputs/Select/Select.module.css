@@ -71,14 +71,17 @@
   font-size: 17px;
   pointer-events:none;
   color: inherit;
-  border: 1px solid #EBEBEB;
+  border: 1px solid var(--input-border-color, #EBEBEB);
   border-right: 0;
   border-radius: inherit;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
   background-color: inherit;
-  padding: 12px 10px 36px;
+  padding: 12px 36px 0 12px;
   padding-bottom: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   box-sizing: border-box;
   /* transition: all 250ms ease; */
   cursor: pointer;
@@ -89,9 +92,13 @@
   appearance: none;
 }
 
+.Wrapper.Valid .Select {
+  border-color: var(--input-valid-color, #28A745);
+}
+
 .Wrapper:focus-within .Select,
 .Wrapper.Open .Select {
-  border-color: var(--my-highlight-color, #1EA3CC );
+  border-color: var(--my-highlight-color, #1EA3CC);
 }
 
 /* 
@@ -206,11 +213,17 @@
   -moz-transform: rotate(45deg) translate(3px, -6px);
 }
 
+.Wrapper.Valid .Button{
+  color: var(--my-icon-color, #FFF);
+  background-color: var(--input-valid-color, #28A745);
+  border-color: var(--input-valid-color, #28A745);
+}
+
 .Wrapper:focus-within .Button,
 .Wrapper.Open .Button {
   color: var(--my-icon-color, #FFF);
-  background-color: var(--my-highlight-color, #1EA3CC );
-  border-color: var(--my-highlight-color, #1EA3CC );
+  background-color: var(--my-highlight-color, #1EA3CC);
+  border-color: var(--my-highlight-color, #1EA3CC);
 }
 
 .Wrapper.Open .Arrow::before {
@@ -258,7 +271,7 @@
   height: auto;
   min-height: 68px;
   max-height: 50vh;
-  border: 1px solid var(--my-highlight-color, #1EA3CC );
+  border: 1px solid var(--my-highlight-color, #1EA3CC);
   opacity: 1;
   margin: 0 0 18px;
   padding: 8px 8px 8px 12px;
@@ -277,7 +290,7 @@
 
 .Wrapper .List li:hover,
 .Wrapper .List li:focus-within {
-  box-shadow: 0px 1px 0px var(--my-highlight-color, #1EA3CC );
+  box-shadow: 0px 1px 0px var(--my-highlight-color, #1EA3CC);
 }
 
 .List button {
