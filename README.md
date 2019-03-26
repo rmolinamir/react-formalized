@@ -53,6 +53,9 @@ import {
   CheckboxGroup,
   Numeric,
   Form,
+  /**
+   * Context, Provider, and themes, are used to manage CSS variables.
+   */
   Context,
   Provider,
   defaultTheme,
@@ -144,6 +147,7 @@ This component accepts the following props:
 | type | `string` | `'text'` | The input will be rendered based on the respective types previously mentioned. If the type does not match any of the available inputs, a `console.warn` will trigger. |
 | identifier | `string` | Generated string based on props. | The identifier is used to let the Form component assign a namespace for the input values, more info on the Form section. |
 | required | `boolean` | `false` | HTML input required attribute. |
+| disabled | `boolean` | `false` | HTML input disabled attribute. Also provides additional styling for the component, to better indicate it's disabled. |
 | validation | *validation `object` | Depends on type and if required. | Validation rules, there are some pre-set rules such as minimum and maximum amount of values, required, email, number, and custom rules. More detailed information above. Will displayed validation messages. |
 | valueType | `string` | Placeholder to lower case, or undefined if placeholder is undefined. | Value type to indicate what is being handled in the validation messages. Typically used when the placeholder is not appropriate for the validation messages. |
 | elementConfig | *elementConfig `object` | Depends on type. | HTML input common attributes. [More information available in the MDN official documentation about inputs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Attributes). |
@@ -184,6 +188,40 @@ type onChange = (value: rangeValue) => void;
 ## Select
 
 Based on the HTML `<select>` element with some differences. The main difference is that in actuality it's a common input of type `'text'`, and the list is rendered through a React state. It's easy to set-up since the options are passed as an array, and you may also set up values with different display names. It can also validate.
+
+Closing the list is user friendly. An user may click on the background, on the arrow button, or press the ESC key if not on a mobile device to close it.
+
+The `<Select />` datalist prop type is defined as:
+
+```ts
+// props.datalist
+type datalist = (value | ISelectValue)[]
+
+// props.datalist
+interface ISelectValue {
+  value: value
+  displayValue: string | number
+}
+```
+
+It is based on the HTML `<datalist>` element that contains a set of  `<option>` elements which represent the values available for other controls. Except, instead of a set of `<option>` elements, the datalist is an array of options.
+
+**What this means is that the datalist is an `array` that accepts a `value` for each array item (options), or an object structured like the `ISelectValue` interface shown above**. The `displayValue` will be the value displayed on the input, but the `value` will be the value returned from the `onChange` callbacks. If `displayValue` is null it will simply fallback to `value`.
+
+`<Select />` accepts the following props:
+
+| Props | Type | Default | Definition |
+|:-----------------------:|:-----------------------------:|:-----------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| identifier | `string` | Generated string based on props. | The identifier is used to let the Form component assign a namespace for the input values, more info on the Form section. |
+| value | *value | Empty string `('')`. | Input value. |
+| datalist | (*value or *datalist `object`)[] | [] | Based on the HTML `<datalist>` element that contains a set of  `<option>` elements which represent the values available for other controls. Each array item will be an available option, for more information about the value type options, see the paragraphs above for an explanation. |
+| onChange | *onChange `function` | Undefined. | Callback that executes after the input change event is fired. |
+| elementConfig | *elementConfig  `object` | Undefined. | HTML input common attributes. [More information available in the MDN official documentation about inputs ](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Attributes ). |
+| disabled | `boolean` | Undefined. | HTML input disabled attribute. Also provides additional styling for the component, to better indicate it's disabled. |
+| placeholder | `string` | Undefined. | Placeholder displayed on the label element tag. |
+| required | `boolean` | Undefined. | HTML input required attribute. |
+| shouldValidate | `boolean` | If `required` is true then `shouldValidate` is true, otherwise `false`. | Determines if the component validates the value or not. |
+| shouldCloseListOnChange | `boolean` | `true` | Determines if the list should close after an option is selected, defaults to `true`. |
 
 ---
 

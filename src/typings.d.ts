@@ -150,20 +150,14 @@ interface ISelectProps {
   shouldCloseListOnChange: boolean
   shouldValidate: boolean
   required: boolean
+  placeholder: string
   value: value
   datalist: (value | ISelectValue)[]
   onChange: (identifier?: string, value?: value, valid?: boolean) => void
   elementConfig?: ISelectConfig
   identifier?: string
-  /**
-   * CSS Properties.
-   */
   disabled?: boolean
   style: React.CSSProperties
-  placeholder: string
-  backgroundColor: string
-  borderRadius: string
-  color: string
   /**
    * Theme context.
    */

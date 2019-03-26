@@ -278,7 +278,6 @@ const MySelect = withContext(React.memo((props: ISelectProps) => {
             tabIndex={-1}
             readOnly
             required={props.required}
-            style={props.style}
             value={state.displayValue}
             className={classes.Select}
             {...props.elementConfig}>
