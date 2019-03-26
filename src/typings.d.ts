@@ -83,7 +83,7 @@ interface IInputState {
 
 interface ICustomRuleValidation {
   evaluation: (value: value) => boolean
-  message?: string 
+  message?: string
 }
 
 interface ICustomRulesValidation {
