@@ -163,14 +163,18 @@ This component accepts the following props:
 
 Heavily based on the HTML `<input>` element of type range. To quote the MDN, this component lets the user specify a numeric value which must be no less than a given value, and no more than another given value. It supports the step, minimum and maximum values, and of course initial value.
 
-This component accepts the following props:
+This component accepts the following props. Note that the Range component `onChange` prop is a function defined as:
+
+```ts
+type onChange = (value: rangeValue) => void;
+```
 
 | Props | Type | Default | Definition |
 |:------------------:|:------------------------:|:------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------:|
 | indicator | `boolean` | `false` | A small indicator component will be rendered next to the range slider that indicates the current value if `true`. |
 | indicatorClassName | `string` | Default CSS (dark background, white color, arrow pointing to the range input). | The indicator component `className`. |
 | step | `string` | `'1'` | The stepping interval, used both for user interface and validation purposes. |
-| value | ` string`   or ` number` | Average of `minValue` and `maxValue`. | The HTML input value attribute. |
+| value | ` string`   or ` number` | Average of minValue and maxValue. | The HTML input value attribute. |
 | minValue | ` string`   or ` number` | `0` | The minimum permitted value. |
 | maxValue | `string`  or `number` | `100` | The maximum permitted value. |
 | onChange | *onChange `function` | Undefined. | Callback that executes after the input change event is fired. |
