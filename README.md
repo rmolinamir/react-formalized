@@ -9,7 +9,7 @@
 ## Install
 
 ```bash
-npm install --save react-png-modal
+npm install --save react-formalized
 ```
 
 ---
@@ -131,7 +131,13 @@ type onChange = (identifier: string, value: value, valid: boolean) => void;
 
 ## Input
 
-Based on the HTML `<input>` element, this component accepts data from the user. It can be of type `text` (by default), `email`, `password`, and `textarea`. It accepts the following props:
+Based on the HTML `<input>` element, this component accepts data from the user. It can be of type `text` (by default), `email`, `password`, and `textarea`. The Input component is already programmed to handle many things such as validation and CSS styling with support of CSS variables.
+
+- The `email` type component will always check validity for email and let the user know if the value is valid or not.
+- The `password` can switch between type `text` and `password` to display the password if the programmer allows for it.
+- The `textarea` will auto expand depending on how many characters are typed, it can also be manually expanded, spellcheck is enabled by default.
+
+This component accepts the following props:
 
 | Props | Type | Default | Definition |
 |:------------------------:|:---------------------:|:--------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
@@ -147,17 +153,37 @@ Based on the HTML `<input>` element, this component accepts data from the user. 
 | onChange | *onChange `function` | Undefined. | Callback that executes after the input change event is fired. |
 | valid | `boolean` | `false` | Boolean value used by the Form to calculate validity of all inputs. It depends on the validation rules and if the input is required. |
 | touched | `boolean` | `false` | Determines if the label should be active initially or not. Rarely used. |
-| minRows | `number` | 3 | Minimum rows for the `textarea` input. |
+| minRows | `number` | `3` | Minimum rows for the `textarea` input. |
 | passwordHandler | `string` | Undefined. | Renders a button that displays the password, basically switches the input from type `text` to type `password`, note that it must be of type `password` initially for it to work. **Note that it won't display on mobile**. |
 | passwordHandlerClassName | `string` | Bold font-weight, margin. | CSS class name for the passwordHandler button. |
 
 ---
 
-## Select
+## Range
+
+Heavily based on the HTML `<input>` element of type range. To quote the MDN, this component lets the user specify a numeric value which must be no less than a given value, and no more than another given value. It supports the step, minimum and maximum values, and of course initial value.
+
+This component accepts the following props:
+
+| Props | Type | Default | Definition |
+|:------------------:|:------------------------:|:------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------:|
+| indicator | `boolean` | `false` | A small indicator component will be rendered next to the range slider that indicates the current value if `true`. |
+| indicatorClassName | `string` | Default CSS (dark background, white color, arrow pointing to the range input). | The indicator component `className`. |
+| step | `string` | `'1'` | The stepping interval, used both for user interface and validation purposes. |
+| value | ` string`   or ` number` | Average of `minValue` and `maxValue`. | The HTML input value attribute. |
+| minValue | ` string`   or ` number` | `0` | The minimum permitted value. |
+| maxValue | `string`  or `number` | `100` | The maximum permitted value. |
+| onChange | *onChange `function` | Undefined. | Callback that executes after the input change event is fired. |
 
 ---
 
-## Range
+## Select
+
+Based on the HTML `<select>` element with some differences. The main difference is that in actuality it's a common input of type `'text'`, and the list is rendered through a React state. It's easy to set-up since the options are passed as an array, and you may also set up values with different display names. It can also validate.
+
+---
+
+## Numeric
 
 ---
 
@@ -166,10 +192,6 @@ Based on the HTML `<input>` element, this component accepts data from the user. 
 ---
 
 ## CheckboxGroup
-
----
-
-## Numeric
 
 ---
 

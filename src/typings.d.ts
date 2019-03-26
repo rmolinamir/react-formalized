@@ -200,8 +200,6 @@ interface ISelectConfig {
 type rangeValue = string | number | undefined;
 
 interface IRangeProps extends IInputConfig {
-  backgroundColor: string
-  progressBackgroundColor: string
   indicator: boolean
   indicatorClassName: string
   step: string
