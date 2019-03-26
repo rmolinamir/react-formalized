@@ -1,75 +1,66 @@
-# React Plug-N'-Go Prettyform
+# react-formalized
 
-Afterwards, run the following commands in the root folder:
+> Collection of pre-styled JSX elements based on the HTML Form Elements. Offers an easy way to collect form and input values.
 
-1. Change the `package.json` name, description, and other properties to the component's respective properties.
-2. `npm install`
-3. That's it!
+[![NPM](https://img.shields.io/npm/v/react-formalized.svg)](https://www.npmjs.com/package/react-formalized) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-**To link** the component to the example folder:
-
-1. On the root folder, execute `npm link`.
-2. After it's finished, execute `cd example`, then `npm link [name-of-the-package]`.
-
-**If anything goes wrong, then delete the `node_modules` folders and the `package-lock.json` files then start over.**
-
-**To run**, execute `npm start` on root and inside the example folder.
-
-**To build**, index.js, execute `npm build` on root folder.
-
-**To publish**, execute `npm publish` on root folder.
-
-# React Plug-N'-Go TypeScript Component Template
-
-> Component description
-
-[![NPM](https://img.shields.io/npm/v/[name-of-the-package].svg)](https://www.npmjs.com/package/[name-of-the-package]) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+---
 
 ## Install
 
 ```bash
-npm install --save [name-of-the-package]
+npm install --save react-png-modal
 ```
+
+---
 
 ## Showcase
 
-...
+### [Showcase hosted on CodeSandbox](https://codesandbox.io/s/6l4w83xqpk)
+
+#### Input Elements
+
+![Input Elements](https://i.imgur.com/Pnw7QEo.gif)
+
+#### Checkbox Elements
+
+![Checkbox Elements](https://i.imgur.com/vzyTALz.gif)
+
+#### Select Element
+
+![Select Element](https://i.imgur.com/dfcc4C1.gif)
+
+#### Range Element
+
+![Range Element](https://i.imgur.com/lYjmtiE.gif)
+
+#### Numeric Element
+
+![Numeric Element](https://i.imgur.com/iLav2Jg.gif)
+
+---
 
 ## Instructions
 
-1. ...
+This package contains multiple exports, each used differently. Below you will find instructions for each element and their `props`. Here's a list of all the possible elements you may import:
 
-## Features
-
-1. ...
-
-## Props
-
-Props               |       Functionality
--------------       |       -------------
-`prop`              |       ...
-
-## Usage
-
-[![Edit React Plug-N'-Go Component](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/)
-
-```jsx
-import React, { Component } from 'react'
-
-import Component from '[name-of-the-package]'
-
-const component = () => {
-    return (
-    <Component>
-      React Plug-N'-Go Component.
-    </Component>
-  )
-}
+```js
+import {
+  Form,
+  Input,
+  Range,
+  Select,
+  Checkbox,
+  CheckboxGroup,
+  Numeric,
+  Context,
+  Provider,
+  defaultTheme,
+  darkTheme 
+} from 'react-formalized'
 ```
 
-## Pending
 
-- ...
 
 ## License
 

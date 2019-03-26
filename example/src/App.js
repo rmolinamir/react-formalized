@@ -73,7 +73,7 @@ const app = (props) => {
           margin: '0 auto 64px',
           justifyContent: 'center'
         }}>
-          <Example title='Elements' id='elements'>
+          <Example title='Input Elements' id='elements'>
             <Input
               validation={{
                 required: true,
