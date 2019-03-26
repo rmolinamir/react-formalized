@@ -227,6 +227,23 @@ It is based on the HTML `<datalist>` element that contains a set of  `<option>` 
 
 ## Numeric
 
+A simple component intended to handle small natural numbers or integers while also managing to look elegant.
+
+This component accepts the following props. Note that the Numeric component `onChange` prop is a function defined as:
+
+```ts
+type onChange = (value: number) => void;
+```
+
+| Props | Type | Default | Definition |
+|:-------------:|:--------------------:|:----------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| value | `number` | `0` | Input value. |
+| minValue | `number` | `0` | The minimum permitted value. |
+| maxValue | `number` | `true` | The maximum permitted value. |
+| style | `CSSProperties` | Undefined. | CSS properties for the wrapper fieldset element. |
+| shouldNotType | `boolean` | `true` | Disables typing on the input field. The only way to modify the input value would be by using the buttons. |
+| onChange | *onChange `function` | Undefined. | Callback that executes after the input change event is fired. Only receives the value as an argument unlike the other `onChange` callbacks. The type definition is above. |
+
 ---
 
 ## Checkbox
