@@ -1,0 +1,15 @@
+.Title {
+  position: relative;
+  padding-bottom: 5px;
+  line-height: 1.2em;
+  font-weight: 400;
+  font-size: 36px;
+  border-bottom: 1px dashed rgb(206, 212, 222);
+  margin: 56px 0 0;
+}
+
+.Example {
+  display: block;
+  width: 100%;
+  margin: 0 auto 20px;
+}

@@ -1,15 +1,11 @@
-.Divider {
-  padding-top: 16px;
-  padding-bottom: 9px;
-}
-
 .App {
+  position: relative;
   display: flex;
   flex-flow: column;
-  align-items: center;
-  justify-content: center;
   transition: all ease 200ms;
-  padding-top: 53px;
+  margin: 0 auto;
+  color: inherit;
+  background-color: inherit;
 }
 
 .LightTheme {
@@ -20,4 +16,60 @@
 .DarkTheme {
   background-color: #484848;
   color: #FFF;
+}
+
+.Title {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  font-size: 56px;
+  font-weight: bold;
+  margin: 24px 0;
+  border-bottom: 1px dashed rgb(206, 212, 222);
+}
+
+.Header {
+  display: inline-block;
+  width: fit-content;
+  position: relative;
+  font-size: 48px;
+  font-weight: normal;
+  margin: 24px 0;
+}
+
+.Header:before {
+  display: block;
+  position: absolute;
+  content: "";
+  bottom: -4px;
+  left: 10%;
+  width: 90%;
+  height: 3px;
+  background: rgb(102, 205, 170);
+}
+
+.List {
+  margin: 0 0 36px;
+}
+
+.Item {
+  text-transform: uppercase;
+  list-style: upper-roman
+}
+
+.Anchor {
+  text-decoration: none;
+  color: mediumaquamarine;
+  font-weight: bold;
+}
+
+.Examples {
+  max-width: 1024px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.Divider {
+  padding-top: 16px;
+  padding-bottom: 9px;
 }

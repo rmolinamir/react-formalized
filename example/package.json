@@ -12,6 +12,7 @@
     "react-png-input": "file:..",
     "react-png-modal": "^2.0.1",
     "react-scripts": "^2.1.5",
+    "react-syntax-highlighter": "^10.2.1",
     "with-context-react": "^1.1.1"
   },
   "scripts": {

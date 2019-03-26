@@ -40,6 +40,9 @@
   left: 10px;
   top: 50%;
   transform: translateY(-50%);
+  max-width: calc(100% - 10px);
+  text-overflow: ellipsis;
+  overflow: hidden;
   transition: 150ms ease-in-out all; 
 }
 

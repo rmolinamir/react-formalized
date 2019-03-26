@@ -118,6 +118,10 @@
   left: 10px;
   top: 50%;
   transform: translateY(-50%);
+  max-width: calc(100% - 10px);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   transition: 250ms ease-in-out all; 
 }
 
