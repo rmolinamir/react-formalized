@@ -5,7 +5,7 @@ import classes from './App.module.css'
 import { withContext } from 'with-context-react'
 import Button from 'react-png-button'
 import Modal from 'react-png-modal'
-import { Form, Input, Slider, Select, Checkbox, CheckboxGroup, Numeric, Context, Provider, defaultTheme, darkTheme } from 'react-png-input'
+import { Form, Input, Range, Select, Checkbox, CheckboxGroup, Numeric, Context, Provider, defaultTheme, darkTheme } from 'react-formalized'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import Example from './Example/Example'
@@ -52,11 +52,11 @@ const app = (props) => {
       <div style={{
         margin: '0 36px'
       }}>
-        <h1 className={classes.Title}>React Plug-N'-Go Inputs</h1>
+        <h1 className={classes.Title}>React Formalized</h1>
         <h2 className={classes.Header}>Examples</h2>
         <ul className={classes.List}>
           <li className={classes.Item}><a className={classes.Anchor} href='#elements'>Input Elements</a></li>
-          <li className={classes.Item}><a className={classes.Anchor} href='#slider-element'>Slider Element (Similar to type Range)</a></li>
+          <li className={classes.Item}><a className={classes.Anchor} href='#range-element'>Range Element (Similar to type Range)</a></li>
           <li className={classes.Item}><a className={classes.Anchor} href='#select-element'>Select Element</a></li>
           <li className={classes.Item}><a className={classes.Anchor} href='#numeric-element'>Numeric Element</a></li>
           <li className={classes.Item}><a className={classes.Anchor} href='#checkbox-elements'>Checkbox Elements (Similar to type Checkbox, Radio)</a></li>
@@ -192,44 +192,40 @@ const app = (props) => {
             </SyntaxHighlighter>
           </Example>
 
-          <Example title='Slider Elements' id='slider-element'>
-            <Slider
-              // value='325'
+          <Example title='Range Element' id='range-element'>
+            <Range
               minValue='100'
               maxValue='350' />
-            <Slider
+            <Range
               step={65}
-              // value='325'
               minValue='125'
               maxValue='350' />
-            <Slider
+            <Range
               indicator
               value='325'
               minValue='200'
               maxValue='350' />
-            <Slider
+            <Range
               indicator
               step={25}
               value='99' />
             <SyntaxHighlighter language='javascript' style={atomDark}>{`
-<Slider
-  // value='325'
+<Range
   minValue='100'
   maxValue='350' />
 
-<Slider
+<Range
   step={65}
-  // value='325'
   minValue='125'
   maxValue='350' />
 
-<Slider
+<Range
   indicator
   value='325'
   minValue='200'
   maxValue='350' />
 
-<Slider
+<Range
   indicator
   step={25}
   value='99' />`}

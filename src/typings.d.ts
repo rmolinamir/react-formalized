@@ -193,22 +193,22 @@ interface ISelectConfig {
 }
 
 /**
- * Slider, an input of type `range`.
+ * Range, an input of type `range`.
  */
 
-/* Slider value type. */
-type sliderValue = string | number | undefined;
+/* Range value type. */
+type rangeValue = string | number | undefined;
 
-interface ISliderProps extends IInputConfig {
+interface IRangeProps extends IInputConfig {
   backgroundColor: string
   progressBackgroundColor: string
   indicator: boolean
   indicatorClassName: string
   step: string
-  value: sliderValue
-  minValue: sliderValue
-  maxValue: sliderValue
-  onChange: (value: sliderValue) => void
+  value: rangeValue
+  minValue: rangeValue
+  maxValue: rangeValue
+  onChange: (value: rangeValue) => void
   /**
    * Theme context.
    */
@@ -255,7 +255,7 @@ interface INumericProps {
 interface ITheme {
   general: IThemeGeneral
   input: IThemeInput
-  slider: IThemeSlider
+  range: IThemeRange
   checkbox: IThemeCheckbox
 }
 
@@ -287,12 +287,12 @@ declare interface IThemeInput {
 }
 
 /**
- * Slider.
+ * Range.
  */
-declare interface IThemeSlider {
-  '--slider-progressbar-background-color': string
-  '--slider-indicator-background-color': string
-  '--slider-indicator-color': string
+declare interface IThemeRange {
+  '--range-progressbar-background-color': string
+  '--range-indicator-background-color': string
+  '--range-indicator-color': string
 }
 
 /**

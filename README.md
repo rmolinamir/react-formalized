@@ -1,8 +1,4 @@
-# Usage
-
-In bash CLI:
-
-`$    git clone https://github.com/rmolinamir/react-png-input`
+# React Plug-N'-Go Prettyform
 
 Afterwards, run the following commands in the root folder:
 

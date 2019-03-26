@@ -21,6 +21,7 @@
   padding: 0;
   width: 100%;
   height: auto;
+  cursor: pointer;
   transition: box-shadow 250ms ease-in, border 0.2s ease;
   /* Aesthetics */
   color: inherit;

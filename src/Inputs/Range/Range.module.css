@@ -23,8 +23,8 @@
   text-align: center;
   border-radius: 4px;
   margin-left: 8px;
-  color: var(--slider-indicator-color, #FFF);
-  background: var(--slider-indicator-background-color, #484848);
+  color: var(--range-indicator-color, #FFF);
+  background: var(--range-indicator-background-color, #484848);
   /* Text overflow. */
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -37,18 +37,18 @@
   left: -5px;
   width: 0;
   height: 0;
-  border-right: 7px solid var(--slider-indicator-background-color, #484848);
+  border-right: 7px solid var(--range-indicator-background-color, #484848);
   border-top: 7px solid transparent;
   border-bottom: 7px solid transparent;
 }
 
-/* Slider */
+/* Range */
 
 .Container {
   position: relative;
   height: 12px;
   display: flex;
-  background: var(--slider-progressbar-background-color, #EBEBEB);
+  background: var(--range-progressbar-background-color, #EBEBEB);
   justify-content: center;
   align-items: center;
   border-radius: 4px;
@@ -105,7 +105,7 @@
 
 /* Mozilla. */
 
-.Slider::-moz-range-thumb {
+.Slider::-moz-slider-thumb {
   appearance: none;
   width: 20px;
   height: 20px;
@@ -115,8 +115,8 @@
   transition: transform ease 200ms;
 }
 
-.Wrapper:hover input[type="range"]::-moz-range-thumb,
-.Wrapper:focus-within input[type="range"]::-moz-range-thumb {
+.Wrapper:hover input[type="range"]::-moz-slider-thumb,
+.Wrapper:focus-within input[type="range"]::-moz-slider-thumb {
   transform: scale(1.1);
 }
 

@@ -14,9 +14,9 @@ export { Input } from './Inputs/Input'
 export { Select } from './Inputs/Select/Select'
 
 // /**
-//  * @function Slider
+//  * @function Range
 //  */
-export { Slider } from './Inputs/Slider/Slider'
+export { Range } from './Inputs/Range/Range'
 
 // /**
 //  * @function CheckboxGroup

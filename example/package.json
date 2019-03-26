@@ -9,7 +9,7 @@
     "react": "file:../node_modules/react",
     "react-dom": "file:../node_modules/react-dom",
     "react-png-button": "^1.0.2",
-    "react-png-input": "file:..",
+    "react-formalized": "file:..",
     "react-png-modal": "^2.0.1",
     "react-scripts": "^2.1.5",
     "react-syntax-highlighter": "^10.2.1",

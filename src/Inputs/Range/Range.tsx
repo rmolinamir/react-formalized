@@ -1,18 +1,18 @@
 import * as React from 'react'
 import { withContext } from 'with-context-react'
 // CSS
-import classes from './Slider.module.css'
+import classes from './Range.module.css'
 // JSX
 import { Context } from '../Context/Context'
 
-export const Slider = withContext((props: ISliderProps) => {
+export const Range = withContext((props: IRangeProps) => {
   /**
-   * Slider setup. Depends if `props.step` exists.
+   * Range setup. Depends if `props.step` exists.
    * If there is a step:
    * - If there is a value, recalculates the `defaultValue` to the nearest step,
-   *   otherwise place it at the step closest to the middle of the slider.
+   *   otherwise place it at the step closest to the middle of the range.
    * If there is no step:
-   * - The `defaultValue` is at the middle of the slider or the value if it exists.
+   * - The `defaultValue` is at the middle of the range or the value if it exists.
    */
   const minValue:number = Number(props.minValue || 0)
   const maxValue:number = Number(props.maxValue || 100)
@@ -77,7 +77,7 @@ export const Slider = withContext((props: ISliderProps) => {
   if (props._context && props._context.theme) {
     CSSVariables = {
       ...props._context.theme.general,
-      ...props._context.theme.slider
+      ...props._context.theme.range
     } as React.CSSProperties
   }
 

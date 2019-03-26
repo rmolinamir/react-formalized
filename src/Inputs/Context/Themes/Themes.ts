@@ -17,10 +17,10 @@ export const defaultTheme: ITheme = {
     '--input-valid-color': '#28A745',
     '--input-invalid-color': '#DC3545'
   },
-  slider: {
-    '--slider-progressbar-background-color': '#EBEBEB',
-    '--slider-indicator-background-color': '#484848',
-    '--slider-indicator-color': '#FFF',
+  range: {
+    '--range-progressbar-background-color': '#EBEBEB',
+    '--range-indicator-background-color': '#484848',
+    '--range-indicator-color': '#FFF',
   },
   checkbox: {
     '--checkbox-color': '#FFF',
@@ -47,10 +47,10 @@ export const darkTheme: ITheme = {
     '--input-valid-color': '#E87C03',
     '--input-invalid-color': '#E87C03'
   },
-  slider: {
-    '--slider-progressbar-background-color': '#2F2F2F',
-    '--slider-indicator-background-color': '#2F2F2F',
-    '--slider-indicator-color': '#FFF',
+  range: {
+    '--range-progressbar-background-color': '#2F2F2F',
+    '--range-indicator-background-color': '#2F2F2F',
+    '--range-indicator-color': '#FFF',
   },
   checkbox: {
     '--checkbox-color': '#FFF',
