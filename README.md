@@ -145,7 +145,7 @@ This component accepts the following props:
 | Props | Type | Default | Definition |
 |:------------------------:|:---------------------:|:--------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 | type | `string` | `'text'` | The input will be rendered based on the respective types previously mentioned. If the type does not match any of the available inputs, a `console.warn` will trigger. |
-| identifier | `string` | Generated string based on props. | The identifier is used to let the Form component assign a namespace for the input values, more info on the Form section. |
+| identifier | `string` | Generated string based on props. | The identifier is used to let the Form component assign a namespace for the input values, essentially to identify the form data. More info on the Form section. |
 | required | `boolean` | `false` | HTML input required attribute. |
 | disabled | `boolean` | `false` | HTML input disabled attribute. Also provides additional styling for the component, to better indicate it's disabled. |
 | validation | *validation `object` | Depends on type and if required. | Validation rules, there are some pre-set rules such as minimum and maximum amount of values, required, email, number, and custom rules. More detailed information above. Will displayed validation messages. |
@@ -212,7 +212,7 @@ It is based on the HTML `<datalist>` element that contains a set of  `<option>` 
 
 | Props | Type | Default | Definition |
 |:-----------------------:|:-----------------------------:|:-----------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-| identifier | `string` | Generated string based on props. | The identifier is used to let the Form component assign a namespace for the input values, more info on the Form section. |
+| identifier | `string` | Generated string based on props. | The identifier is used to let the Form component assign a namespace for the input values, essentially to identify the form data. More info on the Form section. |
 | value | *value | Empty string `('')`. | Input value. |
 | datalist | (*value or *datalist `object`)[] | [] | Based on the HTML `<datalist>` element that contains a set of  `<option>` elements which represent the values available for other controls. Each array item will be an available option, for more information about the value type options, see the paragraphs above for an explanation. |
 | onChange | *onChange `function` | Undefined. | Callback that executes after the input change event is fired. |
@@ -247,6 +247,47 @@ type onChange = (value: number) => void;
 ---
 
 ## Checkbox
+
+Based on the `<input>` elements of type **checkbox** and **radio**. The main difference is that the type will primarily will be styling, looks, and pre-set configurations, but bear in mind that a a `<Checkbox />` component of type **radio** can function as an input type **checkbox** and vice versa. There is also an input of type **bubble** which functions as an input of type **checkbox** by default, but can function as an input type **radio** as well.
+
+The guideline is the following:
+
+- `<Checkbox />` component of type **checkbox** will function as a normal `<input>` element of type **checkbox**, but can be configured otherwise through props.
+- `<Checkbox />` component of type **radio** will function as a normal `<input>` element of type **radio**, but can too be configured otherwise through props.
+- `<Checkbox />` component of type **checkbox** follows the same principles, but by default it's configured as an `<input>` element of type **checkbox**.
+
+To configure a `<Checkbox />` component of type **radio** as a **checkbox** input element you need to pass a prop defined as `multiple` of type boolean, as `true`. Otherwise if you want to configure `<Checkbox />` component of type **checkbox** or **bubble** to work as a **checkbox** input element you need to pass a prop defined as `single` of type boolean, as `true`.
+
+If you pass the `single` prop as `true` and are using more than one set of checkboxes, I recommend also passing the same `name` of type `string` prop to all of the components.
+
+Handling all of these props for multiple `<Checkbox />` components is way easier by using the `<CheckboxGroup />` component, more information about this in its respective section directly below this one.
+
+Note that the Checkbox component `onChange` prop is a function defined as:
+
+```ts
+type onChange = (identifier: string, checked: boolean, value: value) => void
+```
+
+The difference is that the second value is the checked status instead of the value as of the other onChange callbacks. The value, if it exists, will be the third argument. The reason for this change is because `<input>` elements of type **checkbox** or **radio** don't always require values.
+
+The `<Checkbox />` component accepts the following props:
+
+| Props | Type | Default | Definition |
+|:----------:|:--------------------:|:--------------------------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| label | `string` | Undefined. | Similar to a placeholder, it's displayed on the label element tag. |
+| identifier | `string` | Generated string based on props. | The identifier is used to let the Form component assign a namespace for the input values, essentially to identify the form data. More info on the Form section. |
+| checked | `boolean` | `false` | The HTML `defaultChecked` attribute of the input, basically, the initially status. |
+| type | `CSSProperties` | Undefined. | CSS properties for the wrapper fieldset element. |
+| name | `string` | Undefined. | The input's name, to identify the input in the data submitted with the form's data. It's even more important on input elements of type `'radio'` and `'checkbox'` to set up their behavior. |
+| disabled | `boolean` | Undefined. | HTML input disabled attribute. Also provides additional styling for the component, to better indicate it's disabled. |
+| multiple | `boolean` | Depends on type. | Configures the checkbox to behave as an `<input>` of type **checkbox**. Only necessary if the component's type is `'radio'`. |
+| single | `boolean` | Depends on type. | Configures the checkbox to behave as an `<input>` of type **radio**. Only necessary if the component's type is `'checkbox'` or `'bubble'`. |
+| inline | `boolean` | Undefined. | The `<Checkbox />` rendered element is a block element by default, if you pass this prop they'll be rendered as inline elements. |
+| value | *value | Undefined. | Input value. |
+| required | `boolean` | Undefined. | HTML input required attribute. |
+| style | `CSSProperties` | Undefined. | CSS properties for the wrapper fieldset element. |
+| className | `string` | Undefined. | CSS class name string. |
+| onChange | *onChange `function` | Undefined. | Callback that executes after the input change event is fired. Only receives the value as an argument unlike the other `onChange` callbacks. The type definition is above. |
 
 ---
 
