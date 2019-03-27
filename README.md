@@ -2,13 +2,13 @@
 
 > Collection of pre-styled JSX elements based on the HTML Form Elements. Offers an easy way to collect form data and/or input values.
 
-[![NPM](https://img.shields.io/npm/v/react-formalized.svg)](https://www.npmjs.com/package/react-formalized) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)[![gzip size](https://img.shields.io/badge/gzip%20size-14.0kB-brightgreen.svg)](https://unpkg.com/react-formalized@1.0.1/dist/index.js)
+[![NPM](https://img.shields.io/npm/v/react-formalized.svg)](https://www.npmjs.com/package/react-formalized) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) [![gzip size](https://img.shields.io/badge/gzip%20size-14.0kB-brightgreen.svg)](https://unpkg.com/react-formalized@1.0.1/dist/index.js)
 
 ---
 
 ## Introduction
 
-This library is a collection of pre-styled JSX elements based on the common HTML Form Elements. It offers an easy way to collect form data and/or input values, while letting certain HOCs do background work. It is also possible to change CSS themes on the fly by using React `Context` objects and `Providers`, for example changing between light and dark CSS themes globally. The style and animations were inspired by different `<input>` elements from popular websites such as Reddit and Netflix.
+This library is a collection of pre-styled JSX elements based on the common HTML Form Elements. It offers an easy way to collect form data and/or input values, while letting certain HOCs do the heavy work on the background. It is also possible to change CSS themes on the fly by using React `Context` objects and `Providers`, for example changing between light and dark CSS themes globally. The style and animations were inspired by different `<input>` elements from popular websites such as Reddit and Netflix.
 
 ---
 
