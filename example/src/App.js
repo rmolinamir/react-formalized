@@ -149,12 +149,25 @@ const app = (props) => {
               elementConfig={{
                 maxLength: 150
               }} />
+            <Input
+              type='textarea'
+              placeholder='TextArea (2000 characters limit)'
+              elementConfig={{
+                maxLength: 2000
+              }} />
             <SyntaxHighlighter language='javascript' style={atomDark}>{`
 <Input
   type='textarea'
   placeholder='TextArea'
   elementConfig={{
     maxLength: 150
+  }} />
+  
+<Input
+  type='textarea'
+  placeholder='TextArea (2000 characters limit)'
+  elementConfig={{
+    maxLength: 2000
   }} />`}
             </SyntaxHighlighter>
             <Input

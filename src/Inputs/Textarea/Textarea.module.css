@@ -1,12 +1,12 @@
 .TextAreaElement {
   margin: 0;
-  padding-top: 18px;
-  padding-bottom: 24px;
-  /* margin-bottom: -24px; */
+  padding: 18px 12px 24px;
   width: 100%;
   height: auto;
   min-height: 78px;
   resize: vertical;
+  text-overflow: unset;
+  white-space: normal;
   overflow: hidden;
   box-sizing: border-box;
 }
