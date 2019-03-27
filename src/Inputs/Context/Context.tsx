@@ -2,10 +2,6 @@ import * as React from 'react'
 // Pre-set themes
 import { defaultTheme } from './Themes/Themes'
 
-interface IInputContextProps extends ITheme {
-  children: React.ReactChildren
-}
-
 const reducer = (state: ITheme, action: ITheme): ITheme => {
   const { ...newState } = action
   return {
@@ -30,7 +26,7 @@ const initialContext: IInputContext = {
 
 export const Context = React.createContext<IInputContext>(initialContext)
 
-export const Provider = (props: IInputContextProps) => {
+export const Provider = (props: IProviderProps) => {
   const initialState: ITheme = {
     ...defaultTheme,
     ...props

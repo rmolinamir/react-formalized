@@ -1,11 +1,12 @@
 {
   "name": "react-formalized",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Collection of pre-styled JSX elements based on the HTML Form Elements. Offers an easy way to collect form data and/or input values.",
   "author": "rmolinamir",
   "license": "MIT",
   "repository": "rmolinamir/react-formalized",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
   "engines": {
@@ -25,7 +26,6 @@
     "with-context-react": "^1.1.1"
   },
   "peerDependencies": {
-    "prop-types": "^15.5.4",
     "react": "^16.8.0",
     "react-dom": "^16.8.0"
   },

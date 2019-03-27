@@ -7,41 +7,6 @@ import classes from './Checkbox.module.css'
 import { Context } from '../../Context/Context'
 import Icon from '../../../Icon/SVG/SVG'
 
-interface ICheckboxProps {
-  label: string
-  identifier?: string
-  /**
-   * Checkbox input props.
-   */
-  checked?: boolean
-  type?: string
-  name?: string
-  disabled?: boolean
-  multiple?: boolean
-  single?: boolean
-  inline?: boolean
-  value?: value
-  required?: boolean
-  style?: React.CSSProperties
-  className?: string
-  onChange?: onChange
-  /**
-   * CSS theme.
-   */
-  _context: IInputContext
-}
-
-type onChange = (identifier: string, checked: boolean, value: value) => void
-
-interface ICheckboxStyle {
-  type: string
-  body?: string
-  icon?: JSX.Element | null
-  name?: string
-  label?: JSX.Element | string
-  animation?: string
-}
-
 const MyCheckbox = withContext(React.memo((props: ICheckboxProps): JSX.Element => {
   const [bIsChecked, setIsChecked] = useState(props.checked || false)
   const myInput: React.RefObject<HTMLInputElement> = useRef(null)
