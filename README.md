@@ -2,7 +2,7 @@
 
 > Collection of pre-styled JSX elements based on the HTML Form Elements. Offers an easy way to collect form data and/or input values.
 
-[![NPM](https://img.shields.io/npm/v/react-formalized.svg)](https://www.npmjs.com/package/react-formalized) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) [![gzip min file size](https://img.shields.io/badge/gzip%20size-14.0kB-brightgreen.svg)](https://unpkg.com/react-formalized@latest/dist/index.min.js)
+[![NPM](https://img.shields.io/npm/v/react-formalized.svg)](https://www.npmjs.com/package/react-formalized) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) [![gzip size](https://img.shields.io/badge/gzip%20size-14.0kB-brightgreen.svg)](https://unpkg.com/react-formalized@latest/dist/index.es.js)
 
 ---
 
