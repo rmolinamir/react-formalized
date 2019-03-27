@@ -52,7 +52,7 @@ const app = (props) => {
       <div style={{
         margin: '0 36px'
       }}>
-        <h1 className={classes.Title}>React Formalized</h1>
+        <h1 className={classes.Title}>react-formalized</h1>
         <h2 className={classes.Header}>Examples</h2>
         <ul className={classes.List}>
           <li className={classes.Item}><a className={classes.Anchor} href='#elements'>Input Elements</a></li>
@@ -62,7 +62,7 @@ const app = (props) => {
           <li className={classes.Item}><a className={classes.Anchor} href='#checkbox-elements'>Checkbox Elements (Similar to type Checkbox, Radio)</a></li>
           <li className={classes.Item}><a className={classes.Anchor} href='#form-element'>Form Element</a></li>
           <li className={classes.Item}><a className={classes.Anchor} href='#checkbox-form-example'>CheckboxGroup with Form Element example</a></li>
-          <li className={classes.Item}><a className={classes.Anchor} href='#big-modal'>Sign in modal example</a></li>
+          <li className={classes.Item}><a className={classes.Anchor} href='#sign-in-example'>Sign in modal example</a></li>
         </ul>
       </div>
       <div className={classes.Examples}>
@@ -603,7 +603,7 @@ const onSubmitHandler = (event, formState) => {
             </SyntaxHighlighter>
           </Example>
 
-          <Example title='CheckboxGroup with a Form Element Example' id='checkbox-form-example'>
+          <Example title='CheckboxGroup with a Form Element Example' id='sign-in-example'>
             <Modal
               open={bIsModalOpen}
               closeModal={() => setIsModalOpen(false)}>

@@ -24,6 +24,8 @@ npm install --save react-formalized
 
 ### [Showcase hosted on CodeSandbox](https://codesandbox.io/s/6l4w83xqpk)
 
+[![Edit React Formalized](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/6l4w83xqpk?fontsize=14)
+
 #### Input Elements
 
 ![Input Elements](https://i.imgur.com/Pnw7QEo.gif)
