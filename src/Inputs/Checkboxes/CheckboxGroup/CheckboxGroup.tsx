@@ -46,7 +46,7 @@ const MyCheckboxGroup = React.memo((props: ICheckboxGroupProps): JSX.Element => 
 
   const onChangeHandler = (identifier: string, checked: boolean, value: value) => {
     let bIsValid: boolean
-    if (myWrapper && myWrapper.current) {
+    if (myWrapper && myWrapper.current && required) {
       bIsValid = required ? Boolean(myWrapper.current.querySelectorAll('input:checked').length) : true
     } else {
       bIsValid = state.isValid
@@ -78,7 +78,7 @@ const MyCheckboxGroup = React.memo((props: ICheckboxGroupProps): JSX.Element => 
   React.useEffect(() => {
     if (props.onChange) {
       const {isValid, ...checkboxes } = state
-      props.onChange(name || `${displayName}_${type || 'checkbox'}`, checkboxes as any, isValid)
+      props.onChange(name || type || 'checkbox', checkboxes as any, isValid)
     }
   }, [state])
 

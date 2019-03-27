@@ -1,6 +1,6 @@
 # react-formalized
 
-> Collection of pre-styled JSX elements based on the HTML Form Elements. Offers an easy way to collect form and input values.
+> Collection of pre-styled JSX elements based on the HTML Form Elements. Offers an easy way to collect form data and/or input values.
 
 [![NPM](https://img.shields.io/npm/v/react-formalized.svg)](https://www.npmjs.com/package/react-formalized) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
@@ -293,9 +293,111 @@ The `<Checkbox />` component accepts the following props:
 
 ## CheckboxGroup
 
+`<CheckboxGroup />` copies the same props passed to it to all of its children, it can only be used only for the `Checkbox` functional components, everything else will be rendered as **null**. This means that every prop (that `<CheckboxGroup />` supports) passed to `<CheckboxGroup />` will be copied and passed down to the `Checkbox` components. **Keep in mind that any `Checkbox` existing prop will be overwritten**. We can copy and pass the following props:
+
+1. `name`,
+2. `type`,
+3. `style`,
+4. `className`,
+5. `single`,
+6. `required`.
+
+Their type and definitions are obviously the same as the `Checkbox` props, respectively.
+
+**Copying props is not the only benefit that `<CheckboxGroup />` offers though**, by passing the `required` property as `true`, the `<CheckboxGroup />` will monitor if any of its children are `checked`. If true, then the `require` attribute of all of its children `<input>` elements will be removed, to allow the form to be submitted without trouble.
+
+Finally, the `onChange` callback prop is defined as:
+
+```ts
+type onChange = (identifier: string, value: value, valid: boolean) => void;
+```
+
+It executes after any of the `Checkbox` children change, the `value` argument will be the data of every of its `Checkbox` children, identified by their respective `name` attribute props, or a generated fallback.
+
+An example of what the value argument may look like is as follows:
+
+```js
+"favorite-ice-creams": {
+    shouldValidate: true,
+    value: {
+        chocolate: {
+          checked: true,
+          value: "FLAV_01"
+        },
+        vanilla: {
+          checked: true,
+          value: "FLAV_02"
+        },
+        strawberry: {
+          checked: false,
+          value: "FLAV_03"
+        }
+      },
+    bIsInputValid: true
+  },
+  isValid:true
+}
+```
+
+For more information, you may look at the example displayed on the showcase, along with its code snippet.
+
 ---
 
 ## Form
+
+The `<Form />` component works similarly to how `<CheckboxGroup />` works, by keeping track of its **direct** children components' `onChange` events from the `react-formalized` library components (e.g. `<Input />`, `<CheckboxGroup/ >`), and data values. It's really simple to use, almost all of the logic is handled without the need of prior setup. Also, **components that are not part of the `react-formalized` library will still be rendered, but they won't receive any of the functionality that `<Form />` offers**.
+
+I will refer to the form data as the `formState`. There are three ways to access the `formState` and it's simple, either you add an `onChange` callback, an `onSubmit` callback, or both. I think it's safe to say their names are self explanatory when it comes to explaining when do they execute.
+
+Here are the types of `onChange`, `onSubmit`, and the object structure of `formState`:
+
+```ts
+interface IFormState {
+  isValid: boolean
+  [inputName: string]: IInputState
+}
+
+interface IInputState {
+  value: value
+  bIsInputValid: boolean
+  shouldValidate: boolean
+}
+
+type onChange = (state: IFormState) => void;
+
+type onSubmit = (event: React.SyntheticEvent, state: IFormState) => void;
+```
+
+It's worth noting that the `onSubmit` *event* argument is exactly the same as the event argument you would get after submitting a form, for example you are able to prevent its default behavior by running
+`event.preventDefault()`.
+
+Here's an example of what printing `formState` would look on the console:
+
+```js
+"form-state": {
+  isValid: true,
+  email: {
+    bIsInputValid: true,
+    shouldValidate: true,
+    value: "rmolinamir@gmail.com"
+  },
+  password: {
+    bIsInputValid: true,
+    shouldValidate: true,
+    value: "123123"
+  }
+  // ...
+}
+```
+
+That being said, the `<Form />` component accepts the following props:
+
+| Props | Type | Default | Definition |
+|:---------:|:--------------------:|:--------------------------------:|:-------------------------------------------------------------------------------:|
+| onChange | *onChange `function` | Undefined. | Callback that executes after any of the input children change events are fired. |
+| onSubmit | *onSubmit `function` | Generated string based on props. | Callback that executes after the form is submitted. |
+| style | `string` | Undefined. | CSS properties for the `<form>` element. |
+| className | `string` | Undefined. | CSS class name string for the `<form>` element. |
 
 ---
 
@@ -307,6 +409,10 @@ The `<Checkbox />` component accepts the following props:
 
 ---
 
+## Themes
+
+---
+
 ## License
 
-MIT © [author](https://github.com/author)
+MIT © [rmolinamir](https://github.com/rmolinamir)

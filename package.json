@@ -1,7 +1,7 @@
 {
   "name": "react-formalized",
   "version": "1.0.0",
-  "description": "",
+  "description": "Collection of pre-styled JSX elements based on the HTML Form Elements. Offers an easy way to collect form data and/or input values.",
   "author": "rmolinamir",
   "license": "MIT",
   "repository": "rmolinamir/react-formalized",
