@@ -6,6 +6,12 @@
 
 ---
 
+## Introduction
+
+This library is a collection of pre-styled JSX elements based on the common HTML Form Elements. It offers an easy way to collect form data and/or input values, while letting certain HOCs do background work. It is also possible to change CSS themes on the fly by using React `Context` objects and `Providers`, for example changing between light and dark CSS themes globally. The style and animations were inspired by different `<input>` elements from popular websites such as Reddit and Netflix.
+
+---
+
 ## Install
 
 ```bash
