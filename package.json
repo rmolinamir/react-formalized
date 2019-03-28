@@ -1,6 +1,6 @@
 {
   "name": "react-formalized",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Collection of pre-styled JSX elements based on the HTML Form Elements. Offers an easy way to collect form data and/or input values.",
   "author": "rmolinamir",
   "license": "MIT",
@@ -66,5 +66,18 @@
   },
   "files": [
     "dist"
+  ],
+  "keywords": [
+    "react",
+    "png-ui",
+    "form",
+    "input",
+    "select",
+    "checkbox",
+    "radio",
+    "range",
+    "responsive",
+    "library",
+    "component"
   ]
 }
