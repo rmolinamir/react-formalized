@@ -28,10 +28,13 @@
   border-radius: inherit;
   /* Programmatically */
   background-color: var(--input-background-color, #FAFBFC);
+  transition: background-color 250ms ease;
 }
 
-.Wrapper:focus-within .Container,
-.Wrapper:focus-within .List.Open {
+.Wrapper:not(:disabled):hover .Container,
+.Wrapper:not(:disabled):hover .List,
+.Wrapper.Open .Container,
+.Wrapper.Open .List {
   background-color: var(--input-focused-color, #FFF);
 }
 

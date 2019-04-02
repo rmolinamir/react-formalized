@@ -81,7 +81,7 @@ const app = (props) => {
                 maxLength: 10
               }}
               placeholder='Username' />
-            <SyntaxHighlighter language='javascript' style={atomDark}>{`
+            <SyntaxHighlighter language='jsx' style={atomDark}>{`
 <Input
   validation={{
     required: true,
@@ -96,7 +96,7 @@ const app = (props) => {
                 minLength: 3
               }}
               placeholder='Email' />
-            <SyntaxHighlighter language='javascript' style={atomDark}>{`
+            <SyntaxHighlighter language='jsx' style={atomDark}>{`
 <Input
   type='email'
   validation={{
@@ -122,7 +122,7 @@ const app = (props) => {
               }}
               valueType='Password'
               placeholder='Password (with a show/hide toggle)' />
-            <SyntaxHighlighter language='javascript' style={atomDark}>{`
+            <SyntaxHighlighter language='jsx' style={atomDark}>{`
 <Input
   type='password'
   validation={{
@@ -155,7 +155,7 @@ const app = (props) => {
               elementConfig={{
                 maxLength: 2000
               }} />
-            <SyntaxHighlighter language='javascript' style={atomDark}>{`
+            <SyntaxHighlighter language='jsx' style={atomDark}>{`
 <Input
   type='textarea'
   placeholder='TextArea'
@@ -185,7 +185,7 @@ const app = (props) => {
               elementConfig={{
                 maxLength: 150
               }} />
-            <SyntaxHighlighter language='javascript' style={atomDark}>{`
+            <SyntaxHighlighter language='jsx' style={atomDark}>{`
 <Input
   disabled
   validation={{
@@ -222,7 +222,7 @@ const app = (props) => {
               indicator
               step={25}
               value='99' />
-            <SyntaxHighlighter language='javascript' style={atomDark}>{`
+            <SyntaxHighlighter language='jsx' style={atomDark}>{`
 <Range
   minValue='100'
   maxValue='350' />
@@ -272,7 +272,7 @@ const app = (props) => {
                 '',
                 'Option A',
                 'Obtion B']} />
-            <SyntaxHighlighter language='javascript' style={atomDark}>{`
+            <SyntaxHighlighter language='jsx' style={atomDark}>{`
 <Select
   placeholder='Select'
   datalist={[
@@ -308,7 +308,7 @@ const app = (props) => {
             <Numeric />
             <Numeric value={50} />
             <Numeric shouldNotType value={5} />
-            <SyntaxHighlighter language='javascript' style={atomDark}>{`
+            <SyntaxHighlighter language='jsx' style={atomDark}>{`
 <Numeric />
 
 <Numeric value={50} />
@@ -344,7 +344,7 @@ const app = (props) => {
               <Checkbox label='Bubble F' />
               <Checkbox label='Bubble G' />
             </CheckboxGroup>
-            <SyntaxHighlighter language='javascript' style={atomDark}>{`
+            <SyntaxHighlighter language='jsx' style={atomDark}>{`
 /**
 * Default Checkboxes
 */
@@ -449,7 +449,7 @@ const app = (props) => {
                 type='submit'
                 blockButton button='danger'>Sign up</Button>
             </Form>
-            <SyntaxHighlighter language='javascript' style={atomDark}>{`
+            <SyntaxHighlighter language='jsx' style={atomDark}>{`
 const onChangeHandler = (formState) => {
   console.log('app onChangeHandler formState', formState)
 }
@@ -568,7 +568,7 @@ const onSubmitHandler = (event, formState) => {
                 type='submit'
                 blockButton button='danger'>Submit</Button>
             </Form>
-            <SyntaxHighlighter language='javascript' style={atomDark}>{`
+            <SyntaxHighlighter language='jsx' style={atomDark}>{`
 const onChangeHandler = (formState) => {
   console.log('app onChangeHandler formState', formState)
 }
@@ -648,7 +648,7 @@ const onSubmitHandler = (event, formState) => {
                     blockButton button='success'>Sign in</Button>
                 </Form>
               </Provider>
-              <SyntaxHighlighter language='javascript' style={atomDark}>{`
+              <SyntaxHighlighter language='jsx' style={atomDark}>{`
 <Modal
   open={bIsModalOpen}
   closeModal={() => setIsModalOpen(false)}>

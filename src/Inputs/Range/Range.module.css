@@ -18,7 +18,7 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  width: 48px;
+  min-width: 48px;
   height: 100%;
   text-align: center;
   border-radius: 4px;
@@ -28,18 +28,7 @@
   /* Text overflow. */
   white-space: nowrap;
   text-overflow: ellipsis;
-}
-
-.Indicator::before {
-  content: '';
-  position: absolute;
-  top: 8px;
-  left: -5px;
-  width: 0;
-  height: 0;
-  border-right: 7px solid var(--range-indicator-background-color, #484848);
-  border-top: 7px solid transparent;
-  border-bottom: 7px solid transparent;
+  overflow: hidden;
 }
 
 /* Range */
