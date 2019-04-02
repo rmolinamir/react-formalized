@@ -20,9 +20,7 @@ npm install --save react-formalized
 
 ---
 
-## Showcase
-
-### [Showcase hosted on CodeSandbox](https://codesandbox.io/s/6l4w83xqpk)
+## [Showcase](https://www.robertmolina.dev/codelab/react-formalized)
 
 [![Edit React Formalized](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/6l4w83xqpk?fontsize=14)
 
