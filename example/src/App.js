@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 // CSS
 import classes from './App.module.css'
 // JSX
@@ -688,6 +689,10 @@ const onSubmitHandler = (event, formState) => {
       </div>
     </div>
   )
+}
+
+app.propTypes = {
+  _context: PropTypes.object
 }
 
 export default withContext(app, Context, Provider)
