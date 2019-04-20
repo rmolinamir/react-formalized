@@ -1,4 +1,9 @@
 import * as React from 'react'
+// Types
+import {
+  value,
+  ICheckboxGroupProps
+} from '../../../typings'
 // CSS
 import classes from './CheckboxGroup.module.css'
 

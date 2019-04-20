@@ -1,4 +1,13 @@
 import * as React from 'react'
+// Types
+import {
+  IFormProps,
+  IFormState,
+  value,
+  IInputProps,
+  ISelectProps,
+  ICheckboxGroupProps
+} from '../typings'
 
 interface IInputState {
   value: value
@@ -76,7 +85,12 @@ const initialState = (props: IFormProps): IFormState => {
 
 export const Form = React.memo((props: IFormProps): JSX.Element => {
   const [state, dispatch] = React.useReducer(reducer, initialState(props))
-  const { onChange, onSubmit, children } = props
+  const {
+    onChange,
+    onSubmit,
+    children,
+    ...formAttributes
+  } = props
 
   /**
    * `onChangeHandler` is executed whenever any of the input elements' value changes.
@@ -172,8 +186,7 @@ export const Form = React.memo((props: IFormProps): JSX.Element => {
 
   return (
     <form
-      style={props.style}
-      className={props.className}
+      {...formAttributes}
       onSubmit={onSubmitHandler}>
       {childrenWithProps}
     </form>

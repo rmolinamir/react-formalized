@@ -270,7 +270,10 @@ const app = (props) => {
               required
               placeholder='Select (Required, has validity)'
               datalist={[
-                '',
+                {
+                  value: '',
+                  displayValue: 'None'
+                },
                 'Option A',
                 'Obtion B']} />
             <SyntaxHighlighter language='jsx' style={atomDark}>{`
@@ -395,6 +398,7 @@ const app = (props) => {
           <Example title='Form Element' id='form-element'>
             <div className={classes.Divider}>Form:</div>
             <Form
+              target='12312'
               onChange={onChangeHandler}
               onSubmit={onSubmitHandler} >
               <Input
@@ -557,6 +561,10 @@ const onSubmitHandler = (event, formState) => {
 
           <Example title='CheckboxGroup with a Form Element Example' id='checkbox-form-example'>
             <Form
+              target='s'
+              style={{
+                color: 'blue'
+              }}
               onChange={onChangeHandler}
               onSubmit={onSubmitHandler} >
               <div className={classes.Divider}>Which ice cream flavours do you like?</div>

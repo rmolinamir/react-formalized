@@ -1,4 +1,8 @@
 
+// Types
+import {
+  ITheme
+} from '../../../typings'
 
 /**
  * Default theme for CSS variables & theme color.

@@ -1,6 +1,12 @@
 import * as React from 'react'
 import { checkValidity } from './checkValidity'
 import { withContext } from 'with-context-react'
+// Types
+import {
+  IInputState,
+  IInputProps,
+  IInputElementProps
+} from '../typings'
 // CSS
 import classes from './Input.module.css'
 // JSX

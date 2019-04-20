@@ -1,4 +1,10 @@
 import * as React from 'react'
+// Types
+import {
+  ITheme,
+  IInputContext,
+  IProviderProps
+} from '../../typings'
 // Pre-set themes
 import { defaultTheme } from './Themes/Themes'
 

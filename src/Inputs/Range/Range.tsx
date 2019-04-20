@@ -1,5 +1,9 @@
 import * as React from 'react'
 import { withContext } from 'with-context-react'
+// Types
+import {
+  IRangeProps
+} from '../../typings'
 // CSS
 import classes from './Range.module.css'
 // JSX

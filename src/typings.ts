@@ -342,7 +342,6 @@ export interface IFormProps {
   children: React.ReactElement[] | React.ReactElement
 }
 
-
 export interface IFormState {
   children?: React.ReactElement[] | React.ReactElement
   isValid?: boolean

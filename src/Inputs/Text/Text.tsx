@@ -1,4 +1,9 @@
 import * as React from 'react'
+// Types
+import {
+  IInputConfig,
+  IInputElementProps
+} from '../../typings'
 // JSX
 import Icon from '../../Icon/Icon'
 

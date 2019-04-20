@@ -1,3 +1,10 @@
+
+// Types
+import {
+  value,
+  IInputValidation
+} from '../typings'
+
 interface IValidation { 
   status: boolean, 
   message?: string 

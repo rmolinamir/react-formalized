@@ -1,5 +1,10 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
+// Types
+import {
+  IInputConfig,
+  IInputElementProps
+} from '../../typings'
 // CSS
 import classes from './Password.module.css'
 // JSX

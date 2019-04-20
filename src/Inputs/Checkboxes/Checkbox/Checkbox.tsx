@@ -1,6 +1,11 @@
 import * as React from 'react'
 const { useState, useRef } = React
 import { withContext } from 'with-context-react'
+// Types
+import {
+  ICheckboxProps,
+  ICheckboxStyle
+} from '../../../typings'
 // CSS
 import classes from './Checkbox.module.css'
 // JSX

@@ -282,7 +282,6 @@
   border: 1px solid var(--my-highlight-color, #1EA3CC);
   opacity: 1;
   margin: 0 0 18px;
-  padding: 8px 8px 8px 12px;
 }
 
 .Wrapper .List.Open:hover {
@@ -291,14 +290,15 @@
 
 .List li {
   display: block;
-  width: 100%;
+  width: auto;
   height: 100%;
-  transform: all ease 250ms;
+  transition: all ease 200ms;
 }
 
 .Wrapper .List li:hover,
 .Wrapper .List li:focus-within {
-  box-shadow: 0px 1px 0px var(--my-highlight-color, #1EA3CC);
+  padding-left: 4px;
+  background-color: var(--input-background-color, #FAFBFC);
 }
 
 .List button {

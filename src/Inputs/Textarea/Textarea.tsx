@@ -1,6 +1,11 @@
 import * as React from 'react'
 const { useState, useRef, useEffect } = React
 import { isMobile } from '../isMobile'
+// Types
+import {
+  IInputConfig,
+  IInputElementProps
+} from '../../typings'
 // CSS
 import classes from './Textarea.module.css'
 

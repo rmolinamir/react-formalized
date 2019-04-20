@@ -1,6 +1,10 @@
 import * as React from 'react'
 const { useState, useRef } = React
 import { withContext } from 'with-context-react'
+// Types
+import {
+  INumericProps
+} from '../../typings'
 // CSS
 import classes from './Numeric.module.css'
 // JSX

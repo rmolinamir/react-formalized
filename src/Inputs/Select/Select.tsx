@@ -2,6 +2,14 @@ import * as React from 'react'
 const { useRef, useReducer, useEffect, useState } = React
 import { withContext } from 'with-context-react'
 import { isMobile } from '../isMobile'
+// Types
+import {
+  value,
+  IInputProps,
+  ISelectState,
+  ISelectProps,
+  ISelectValue
+} from '../../typings'
 // CSS
 import classes from './Select.module.css'
 // JSX
@@ -27,7 +35,9 @@ enum EReducerHandler {
  */
 const instanceOfISelectValue = (object: any): object is ISelectValue => {
   if (object && object.value) {
-    return 'value' in object;
+    return 'value' in object
+  } else if (object && object.displayValue) {
+    return 'displayValue' in object
   } else {
     return false
   }
@@ -203,11 +213,14 @@ const MySelect = withContext(React.memo((props: ISelectProps) => {
         }
         return (
           <li key={index}>
-            <button 
+            <button
               type='button'
-              onClick={() => setValueHandler(data)} 
-              >
-              {displayValue || data}
+              onClick={() => setValueHandler(data)} >
+              {
+                String(displayValue).toLowerCase() === 'none' ? (
+                  <em>{displayValue || data}</em>
+                ) : displayValue || data
+              }
             </button>
           </li>
         )
@@ -225,7 +238,7 @@ const MySelect = withContext(React.memo((props: ISelectProps) => {
       dispatch({
         handler: EReducerHandler.STATE,
         value: data.value,
-        displayValue: data.displayValue || '' 
+        displayValue: (data.value && data.displayValue) || ''
       })
     } else {
       dispatch({
