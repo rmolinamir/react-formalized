@@ -72,7 +72,7 @@ const MyInput = withContext(React.memo((props: IInputProps) => {
     touched: props.touched || false
   }
   
-  const [state, dispatch] = React.useReducer(reducer, initialState)
+  const [state, dispatch] = React.useReducer<React.Reducer<IInputState, IReducerAction>>(reducer, initialState)
 
   const wrapperClasses: string[] = [props.className || classes.Aesthetics, classes.Wrapper]
   const inputClasses: string[] = [classes.InputElement]
